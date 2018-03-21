@@ -1,0 +1,5 @@
+GW|MasterCard|NTU|Singapore|Male|Passport|Singaporean|67909999|
+Chai|MasterCard|NTU|Singapore|Male|Passport|Singaporean|67909999|
+Goku|MasterCard|SIT|USA|Male|Passport|Singaporean|67909999|
+Vegeta|MasterCard|NTU|Singapore|Male|Passport|Singaporean|67909999|
+Joseph|MasterCard|NTU|Singapore|Male|Passport|Singaporean|67909999|
