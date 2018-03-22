@@ -1,0 +1,3 @@
+Biscuit|Cookie|3.0
+wine|1982 Chateau Lafite|3000.0
+Steak|Wagyu Beef|50.0
