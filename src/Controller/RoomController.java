@@ -24,15 +24,15 @@ public class RoomController {
 			StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
 
 			String  type = star.nextToken().trim();	// first token
-			float  rate = Float.parseFloat(star.nextToken().trim());	// second token
+			// second token
 			int  roomNumber = Integer.parseInt(star.nextToken().trim());
 			String  bedType = star.nextToken().trim();
 			boolean  wifiEnabled = Boolean.valueOf(star.nextToken().trim());
-			boolean  facing = Boolean.valueOf(star.nextToken().trim());
+			String  facing = star.nextToken().trim();
 			String  smoke = star.nextToken().trim();
 			String  status = star.nextToken().trim(); // third token
 			// create Professor object from file data
-			Room r = new Room(RoomFactory.getRoomType(type), rate,roomNumber,bedType,wifiEnabled,facing,smoke,status);
+			Room r = new Room(RoomFactory.getRoomType(type),roomNumber,bedType,wifiEnabled,facing,smoke,status);
 			// add to Professors list
 			alr.add(r) ;
 		}
@@ -47,15 +47,13 @@ public class RoomController {
 				StringBuilder st =  new StringBuilder() ;
 				st.append(r.getType().getType().trim());
 				st.append(SEPARATOR);
-				st.append(r.getRate());
-				st.append(SEPARATOR);
 				st.append(r.getRoomNumber());
 				st.append(SEPARATOR);
 				st.append(r.getBedType());
 				st.append(SEPARATOR);
 				st.append(r.isWifiEnabled());
 				st.append(SEPARATOR);
-				st.append(r.isFacing());
+				st.append(r.getFacing());
 				st.append(SEPARATOR);
 				st.append(r.getSmoke());
 				st.append(SEPARATOR);
@@ -65,15 +63,14 @@ public class RoomController {
 			}
 			textDB.write(FILENAME,alw);
 		}
-		public static int updateRoom(int roomNumber) throws IOException{
+		public static int updateRoom(int roomNumber,String status) throws IOException{
 			int result=0;
 			ArrayList rooms=readRooms();
 
 			for(int i=0;i<rooms.size();i++) {
 				Room r = (Room)rooms.get(i);
 				if(r.getRoomNumber()==roomNumber) {
-					//g.setAddress("SIT");
-					//g.setCountry("USA");
+					r.setStatus(status);
 					rooms.set(i, r);
 					break;
 				}
@@ -89,21 +86,17 @@ public class RoomController {
 		for(int i=0;i<rooms.size();i++) {
 			r = (Room)rooms.get(i);
 			if(r.getRoomNumber()==roomNumber) {
-				/*System.out.println("Name " + g.getName() );
-				System.out.println("Credit Card " + g.getCreditCard() );
-				System.out.println("Address  " + g.getAddress() );
-				System.out.println("Country " + g.getCountry() );
-				System.out.println("Gender " + g.getGender() );
-				System.out.println("Identity " + g.getIdentity() );
-				System.out.println("Nationality " + g.getNationality() );
-				System.out.println("Contact " + g.getContact() );*/
+				System.out.println(r.getType().getType());
+				System.out.println(r.getType().getRate());
 				break;
 			}
 		}
 		return r;
 
 	}
-	public static Room searchRoomAvailability(int roomNumber) throws IOException {
+	public static boolean checkRoomAvailability(int roomNumber) throws IOException {
+		boolean result=false;
+		
 		Room r = new Room();
 		ArrayList rooms=readRooms();
 
@@ -112,11 +105,12 @@ public class RoomController {
 			if(r.getRoomNumber()==roomNumber) {
 				Object o=r.getStatus();
 				if(o.toString().equals("VACANT")) {
+					result=true;
 					break;
 				}
 			}
 		}
-		return r;
+		return result;
 
 	}
 

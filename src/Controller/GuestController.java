@@ -34,11 +34,12 @@ public class GuestController {
 			String  country = star.nextToken().trim();
 			String  gender = star.nextToken().trim();
 			String  identity = star.nextToken().trim();
+			String idNo=star.nextToken().trim();
 			String  nationality = star.nextToken().trim();
-			int  contact = Integer.parseInt(star.nextToken().trim()); // third token
+			String  contact = star.nextToken().trim(); // third token
 			// create Professor object from file data
 			
-			Guest g = new Guest(name, getCreditCardDetails(creditCard),address,country,gender,identity,nationality,contact);
+			Guest g = new Guest(name, getCreditCardDetails(creditCard),address,country,gender,identity,idNo,nationality,contact);
 			// add to Professors list
 			alr.add(g) ;
 		}
@@ -55,7 +56,7 @@ public class GuestController {
 			StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
 
 			String  cardName = star.nextToken().trim();	// first token
-			int  cardNumber = Integer.parseInt(star.nextToken().trim());	// second token
+			String  cardNumber = star.nextToken().trim();	// second token
 			String  billingAddress = star.nextToken().trim();// third token
 			// create Professor object from file data
 			CreditCard card=new CreditCard(cardName,cardNumber,billingAddress);
@@ -77,6 +78,23 @@ public class GuestController {
 		}
 		return c;
 	}
+	public static void saveCreditCards(List al) throws IOException {
+		List alw = new ArrayList() ;// to store Guest data
+
+		for (int i = 0 ; i < al.size() ; i++) {
+			CreditCard c = (CreditCard)al.get(i);
+			StringBuilder st =  new StringBuilder() ;
+			st.append(c.getCardName().trim());
+			st.append(SEPARATOR);
+			st.append(c.getCardNumber());
+			st.append(SEPARATOR);
+			st.append(c.getBillingAddress().trim());
+			st.append(SEPARATOR);
+			
+			alw.add(st.toString()) ;
+		}
+		textDB.write(FILENAME1,alw);
+	}
 
 	// an example of saving
 	public static void saveGuests(List al) throws IOException {
@@ -95,11 +113,13 @@ public class GuestController {
 			st.append(SEPARATOR);
 			st.append(g.getGender().trim());
 			st.append(SEPARATOR);
-			st.append(g.getIdentity().trim());
+			st.append(g.getIdentity());
+			st.append(SEPARATOR);
+			st.append(g.getIdNo());
 			st.append(SEPARATOR);
 			st.append(g.getNationality().trim());
 			st.append(SEPARATOR);
-			st.append(g.getContact());
+			st.append(g.getContact().trim());
 			st.append(SEPARATOR);
 			alw.add(st.toString()) ;
 		}
@@ -127,16 +147,18 @@ public class GuestController {
 		ArrayList guests=readGuests();
 
 		for(int i=0;i<guests.size();i++) {
-			g = (Guest)guests.get(i);
-			if(g.getName().equals(name)) {
-				System.out.println("Name " + g.getName() );
-				System.out.println("Credit Card " + g.getCreditCard() );
-				System.out.println("Address  " + g.getAddress() );
-				System.out.println("Country " + g.getCountry() );
-				System.out.println("Gender " + g.getGender() );
-				System.out.println("Identity " + g.getIdentity() );
-				System.out.println("Nationality " + g.getNationality() );
-				System.out.println("Contact " + g.getContact() );
+			Guest g1 = (Guest)guests.get(i);
+			if(g1.getName().equals(name)) {
+				System.out.println("Name " + g1.getName() );
+				System.out.println("Credit Card " + g1.getCreditCard() );
+				System.out.println("Address  " + g1.getAddress() );
+				System.out.println("Country " + g1.getCountry() );
+				System.out.println("Gender " + g1.getGender() );
+				System.out.println("Identity " + g1.getIdentity() );
+				System.out.println("IdNo " + g1.getIdNo() );
+				System.out.println("Nationality " + g1.getNationality() );
+				System.out.println("Contact " + g1.getContact() );
+				g=g1;
 				break;
 			}
 		}

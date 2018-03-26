@@ -3,10 +3,23 @@ package RoomTypes;
 import Entity.RoomType;
 
 public class DeluxeRoom  implements RoomType{
-	private final double rate=3.00;
+	private double rate;
+	private double weekendRate;
 
 	public double getRate() {
 		return rate;
+	}
+
+	public double getWeekendRate() {
+		return weekendRate;
+	}
+
+	public void setWeekendRate(double weekendRate) {
+		this.weekendRate = weekendRate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
 	}
 
 	@Override

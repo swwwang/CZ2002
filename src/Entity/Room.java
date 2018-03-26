@@ -2,29 +2,27 @@ package Entity;
 
 import Controller.RoomFactory;
 
-//enum Type{Single,Double,Deluxe,VIPSuite}
-enum BedType{Single,Double,Master}
-enum Smoke{Smoking,NonSmoking}
-enum RoomStatus{Vacant,Occupied,Reserved,UnderMaintenance}
+enum BedType{SINGLE,DOUBLE,MASTER}
+enum Smoke{SMOKING,NONSMOKING}
+enum Facing{SEAVIEW,OPENVIEW,CITYVIEW}
+enum RoomStatus{VACANT,OCCUPIED,RESERVED,UNDERMAINTENANCE}
 
 public class Room {
 	private RoomType type;
-	private float rate;
 	private int roomNumber;
 	private BedType bedType;
 	private boolean wifiEnabled;
-	private boolean facing;
+	private Facing facing;
 	private Smoke smoke;
 	private RoomStatus status;
 	
-	public Room(RoomType type, float rate, int roomNumber, String bedType, boolean wifiEnabled, boolean facing,
+	public Room(RoomType type, int roomNumber, String bedType, boolean wifiEnabled, String facing,
 			String smoke, String status) {
 		this.type=type;
-		this.rate=rate;
 		this.roomNumber=roomNumber;
 		this.bedType=BedType.valueOf(bedType);
 		this.wifiEnabled=wifiEnabled;
-		this.facing=facing;
+		this.facing=Facing.valueOf(facing);
 		this.smoke=Smoke.valueOf(smoke);
 		this.status=RoomStatus.valueOf(status);
 	}
@@ -36,12 +34,6 @@ public class Room {
 	}
 	public void setType(RoomType type) {
 		this.type = type;
-	}
-	public float getRate() {
-		return rate;
-	}
-	public void setRate(float rate) {
-		this.rate = rate;
 	}
 	public int getRoomNumber() {
 		return roomNumber;
@@ -61,11 +53,11 @@ public class Room {
 	public void setWifiEnabled(boolean wifiEnabled) {
 		this.wifiEnabled = wifiEnabled;
 	}
-	public boolean isFacing() {
+	public Facing getFacing() {
 		return facing;
 	}
-	public void setFacing(boolean facing) {
-		this.facing = facing;
+	public void setFacing(String facing) {
+		this.facing = Facing.valueOf(facing);
 	}
 	public Smoke getSmoke() {
 		return smoke;
@@ -76,8 +68,8 @@ public class Room {
 	public RoomStatus getStatus() {
 		return status;
 	}
-	public void setStatus(RoomStatus status) {
-		this.status = status;
+	public void setStatus(String status) {
+		this.status = RoomStatus.valueOf(status);
 	}
 	
 

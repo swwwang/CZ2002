@@ -2,13 +2,13 @@ package Entity;
 
 public class CreditCard {
 	private String cardName;
-	private int cardNumber;
+	private String cardNumber;
 	private String billingAddress;
 	
 	public CreditCard() {
 		
 	}
-	public CreditCard(String cardName, int cardNumber, String billingAddress) {
+	public CreditCard(String cardName, String cardNumber, String billingAddress) {
 		this.cardName=cardName;
 		this.cardNumber=cardNumber;
 		this.billingAddress=billingAddress;
@@ -19,10 +19,10 @@ public class CreditCard {
 	public void setCardName(String cardName) {
 		this.cardName = cardName;
 	}
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
-	public void setCardNo(int cardNumber) {
+	public void setCardNo(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 	public String getBillingAddress() {
