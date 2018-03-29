@@ -1,22 +1,24 @@
 package Entity;
 
 import Controller.RoomFactory;
-
 enum BedType{SINGLE,DOUBLE,MASTER}
 enum Smoke{SMOKING,NONSMOKING}
 enum Facing{SEAVIEW,OPENVIEW,CITYVIEW}
 enum RoomStatus{VACANT,OCCUPIED,RESERVED,UNDERMAINTENANCE}
 
 public class Room {
+	
+	
+	
 	private RoomType type;
-	private int roomNumber;
+	private String roomNumber;
 	private BedType bedType;
 	private boolean wifiEnabled;
 	private Facing facing;
 	private Smoke smoke;
 	private RoomStatus status;
 	
-	public Room(RoomType type, int roomNumber, String bedType, boolean wifiEnabled, String facing,
+	public Room(RoomType type, String roomNumber, String bedType, boolean wifiEnabled, String facing,
 			String smoke, String status) {
 		this.type=type;
 		this.roomNumber=roomNumber;
@@ -35,10 +37,10 @@ public class Room {
 	public void setType(RoomType type) {
 		this.type = type;
 	}
-	public int getRoomNumber() {
+	public String getRoomNumber() {
 		return roomNumber;
 	}
-	public void setRoomNumber(int roomNumber) {
+	public void setRoomNumber(String roomNumber) {
 		this.roomNumber = roomNumber;
 	}
 	public BedType getBedType() {

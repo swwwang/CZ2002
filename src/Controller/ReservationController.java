@@ -30,7 +30,7 @@ public class ReservationController {
 
 			int  reservationCode = Integer.parseInt(star.nextToken().trim());	// first token
 			String  guestName = star.nextToken().trim();	// second token
-			int  roomNumber = Integer.parseInt(star.nextToken().trim());
+			String  roomNumber = star.nextToken().trim();
 			String  billing = star.nextToken().trim();
 			LocalDate  checkIn = LocalDate.parse(star.nextToken().trim(), formatter);
 			LocalDate  checkOut = LocalDate.parse(star.nextToken().trim(), formatter);
@@ -136,10 +136,10 @@ public class ReservationController {
 		Scanner sc=new Scanner(System.in);
 		
 		boolean check=true;
-		int roomNo=0;
+		String roomNo= "0";
 		while(check) {
 			System.out.println("Please enter Room Number: ");
-			roomNo=sc.nextInt();
+			roomNo=sc.next();
 			if(!RoomController.checkRoomAvailability(roomNo)) {
 				System.out.println("Room not available!");
 			}

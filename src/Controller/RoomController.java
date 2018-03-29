@@ -25,7 +25,7 @@ public class RoomController {
 
 			String  type = star.nextToken().trim();	// first token
 			// second token
-			int  roomNumber = Integer.parseInt(star.nextToken().trim());
+			String  roomNumber = star.nextToken().trim();
 			String  bedType = star.nextToken().trim();
 			boolean  wifiEnabled = Boolean.valueOf(star.nextToken().trim());
 			String  facing = star.nextToken().trim();
@@ -63,13 +63,13 @@ public class RoomController {
 			}
 			textDB.write(FILENAME,alw);
 		}
-		public static int updateRoom(int roomNumber,String status) throws IOException{
+		public static int updateRoom(String roomNumber,String status) throws IOException{
 			int result=0;
-			ArrayList rooms=readRooms();
+			ArrayList<Room> rooms= readRooms();
 
 			for(int i=0;i<rooms.size();i++) {
 				Room r = (Room)rooms.get(i);
-				if(r.getRoomNumber()==roomNumber) {
+				if(r.getRoomNumber().equals(roomNumber)) {
 					r.setStatus(status);
 					rooms.set(i, r);
 					break;
@@ -79,13 +79,13 @@ public class RoomController {
 
 			return result;
 		}
-	public static Room searchRoom(int roomNumber) throws IOException {
+	public static Room searchRoom(String roomNumber) throws IOException {
 		Room r = new Room();
-		ArrayList rooms=readRooms();
+		ArrayList<Room> rooms= readRooms();
 
 		for(int i=0;i<rooms.size();i++) {
 			r = (Room)rooms.get(i);
-			if(r.getRoomNumber()==roomNumber) {
+			if(r.getRoomNumber().equals(roomNumber)) {
 				System.out.println(r.getType().getType());
 				System.out.println(r.getType().getRate());
 				break;
@@ -94,15 +94,15 @@ public class RoomController {
 		return r;
 
 	}
-	public static boolean checkRoomAvailability(int roomNumber) throws IOException {
+	public static boolean checkRoomAvailability(String roomNumber) throws IOException {
 		boolean result=false;
 		
 		Room r = new Room();
-		ArrayList rooms=readRooms();
+		ArrayList<Room> rooms= readRooms();
 
 		for(int i=0;i<rooms.size();i++) {
 			r = (Room)rooms.get(i);
-			if(r.getRoomNumber()==roomNumber) {
+			if(r.getRoomNumber().equals(roomNumber)) {
 				Object o=r.getStatus();
 				if(o.toString().equals("VACANT")) {
 					result=true;
@@ -113,5 +113,23 @@ public class RoomController {
 		return result;
 
 	}
+	
+	public static List checkAvailableRoom() throws IOException {
+			
+		Room r = new Room();
+		ArrayList<Room> rooms= readRooms();
+		List<String> avail_room = new ArrayList<String>();
+		
+		for(int i = 0; i < rooms.size(); i++) {
+			r = (Room)rooms.get(i);
+			Object o = r.getStatus();
+			if(o.toString().equals("VACANT")) {
+				avail_room.add(r.getRoomNumber());
+			}
+		}
+		
+		return avail_room;
+	}
+	
 
 }
