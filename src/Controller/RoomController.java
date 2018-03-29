@@ -114,7 +114,7 @@ public class RoomController {
 
 	}
 	
-	public static List checkAvailableRoom() throws IOException {
+	public static List checkRoom(String type) throws IOException {
 			
 		Room r = new Room();
 		ArrayList<Room> rooms= readRooms();
@@ -123,13 +123,35 @@ public class RoomController {
 		for(int i = 0; i < rooms.size(); i++) {
 			r = (Room)rooms.get(i);
 			Object o = r.getStatus();
-			if(o.toString().equals("VACANT")) {
-				avail_room.add(r.getRoomNumber());
+			switch(type.toUpperCase()) {
+			case "SINGLE": if(o.toString().equals("VACANT") && r.getType().getType().equals("SINGLE")) {
+								avail_room.add(r.getRoomNumber());
+							}
+							break;
+			case "DOUBLE": if(o.toString().equals("VACANT") && r.getType().getType().equals("DOUBLE")) {
+								avail_room.add(r.getRoomNumber());
+							}
+							break;
+			case "DELUXE": if(o.toString().equals("VACANT") && r.getType().getType().equals("DELUXE")) {
+								avail_room.add(r.getRoomNumber());
+							}
+							break;
+			case "VIPSUITE": if(o.toString().equals("VACANT") && r.getType().getType().equals("VIPSUITE")) {
+								avail_room.add(r.getRoomNumber());
+							}
+							break;
+			case "VACANT": if(o.toString().equals("VACANT")) {
+								avail_room.add(r.getRoomNumber());
+							 }
+							break;
+			case "OCCUPIED": if(o.toString().equals("OCCUPIED")) {
+								avail_room.add(r.getRoomNumber());
+							 }
+							 break;
 			}
 		}
 		
 		return avail_room;
 	}
 	
-
 }

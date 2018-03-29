@@ -1,14 +1,11 @@
 package Entity;
 
-import Controller.RoomFactory;
 enum BedType{SINGLE,DOUBLE,MASTER}
 enum Smoke{SMOKING,NONSMOKING}
 enum Facing{SEAVIEW,OPENVIEW,CITYVIEW}
 enum RoomStatus{VACANT,OCCUPIED,RESERVED,UNDERMAINTENANCE}
 
 public class Room {
-	
-	
 	
 	private RoomType type;
 	private String roomNumber;
@@ -22,11 +19,11 @@ public class Room {
 			String smoke, String status) {
 		this.type=type;
 		this.roomNumber=roomNumber;
-		this.bedType=BedType.valueOf(bedType);
+		this.bedType=BedType.valueOf(bedType.toUpperCase());
 		this.wifiEnabled=wifiEnabled;
-		this.facing=Facing.valueOf(facing);
-		this.smoke=Smoke.valueOf(smoke);
-		this.status=RoomStatus.valueOf(status);
+		this.facing=Facing.valueOf(facing.toUpperCase());
+		this.smoke=Smoke.valueOf(smoke.toUpperCase());
+		this.status=RoomStatus.valueOf(status.toUpperCase());
 	}
 	public Room() {
 		// TODO Auto-generated constructor stub
@@ -59,7 +56,7 @@ public class Room {
 		return facing;
 	}
 	public void setFacing(String facing) {
-		this.facing = Facing.valueOf(facing);
+		this.facing = Facing.valueOf(facing.toUpperCase());
 	}
 	public Smoke getSmoke() {
 		return smoke;
@@ -71,7 +68,7 @@ public class Room {
 		return status;
 	}
 	public void setStatus(String status) {
-		this.status = RoomStatus.valueOf(status);
+		this.status = RoomStatus.valueOf(status.toUpperCase());
 	}
 	
 
