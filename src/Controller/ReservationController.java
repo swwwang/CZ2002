@@ -147,8 +147,8 @@ public class ReservationController {
 				break;
 			}
 		}
-		Room room=RoomController.searchRoom(roomNo);
 		
+		Room room=RoomController.searchRoom(roomNo);
 		System.out.println("Please enter name:");
 		String dummy=sc.nextLine();
 		String name=sc.nextLine();
@@ -243,7 +243,7 @@ public class ReservationController {
 		r.setReservationCode(newCode+1);
 		reservations.add(r);
 		saveReservations(reservations);
-		RoomController.updateRoom(roomNo, "RESERVED");
+		RoomController.updateRoom(roomNo,"Status", "RESERVED");
 		System.out.println("Reservation Created!");
 	}
 

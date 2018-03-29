@@ -63,20 +63,41 @@ public class RoomController {
 			}
 			textDB.write(FILENAME,alw);
 		}
-		public static int updateRoom(String roomNumber,String status) throws IOException{
+		
+		public static int updateRoom(String roomNumber,String catagory, String value) throws IOException{
 			int result=0;
 			ArrayList<Room> rooms= readRooms();
 
 			for(int i=0;i<rooms.size();i++) {
 				Room r = (Room)rooms.get(i);
 				if(r.getRoomNumber().equals(roomNumber)) {
-					r.setStatus(status);
-					rooms.set(i, r);
-					break;
+					
+					switch(catagory.toUpperCase()) {
+					case "STATUS": r.setStatus(value.toUpperCase());
+								   rooms.set(i, r);
+								   result = 1;
+								   break;
+					case "BEDTYPE": r.setBedType(value.toUpperCase());
+					   			   rooms.set(i, r);
+					   			   result = 1;
+					   			   break;
+					case "WIFI": r.setWifiEnabled(Boolean.valueOf(value));
+		   			   				rooms.set(i, r);
+		   			   				result = 1;
+		   			   				break;
+					case "FACING":  r.setFacing(value);
+		   						 	rooms.set(i, r);
+		   						 	result = 1;
+		   						 	break;
+					case "SMOKE":  r.setSmoke(value);;
+					 				rooms.set(i, r);
+					 				result = 1;
+					 				break;
+
+					}
+					saveRooms(rooms);
 				}
 			}
-			saveRooms(rooms);
-
 			return result;
 		}
 	public static Room searchRoom(String roomNumber) throws IOException {
@@ -153,5 +174,13 @@ public class RoomController {
 		
 		return avail_room;
 	}
+	
+//	public static void main(String[] args) throws IOException {
+//		int r = updateRoom("02-03","smoke","NONSMOKING");
+//		if(r == 1) {
+//			System.out.println("Updated!");
+//		}
+//	}
+	
 	
 }

@@ -43,8 +43,8 @@ public class Room {
 	public BedType getBedType() {
 		return bedType;
 	}
-	public void setBedType(BedType bedType) {
-		this.bedType = bedType;
+	public void setBedType(String bedType) {
+		this.bedType = BedType.valueOf(bedType);
 	}
 	public boolean isWifiEnabled() {
 		return wifiEnabled;
@@ -61,8 +61,8 @@ public class Room {
 	public Smoke getSmoke() {
 		return smoke;
 	}
-	public void setSmoke(Smoke smoke) {
-		this.smoke = smoke;
+	public void setSmoke(String smoke) {
+		this.smoke = Smoke.valueOf(smoke);
 	}
 	public RoomStatus getStatus() {
 		return status;
