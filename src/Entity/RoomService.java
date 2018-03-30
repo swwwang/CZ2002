@@ -9,37 +9,45 @@ import Controller.GuestController;
 enum RoomServiceStatus{Confirmed,Preparing,Delivered}
 
 public class RoomService {
-	private ArrayList<Menu> orderedMenu;
+	private Menu orderedMenu;
 	private Guest guest;
 	private LocalDate orderDate;
 	private LocalTime orderTime;
 	private String remarks;
-	private RoomServiceStatus status;
+	private /*RoomServiceStatus*/ String status;
+	private Room room;
 	
 	public RoomService() {
 		
 	}
-	public RoomService(String orderedMenu, String guestName,LocalDate orderDate, LocalTime orderTime, String remarks,
+	public RoomService(Menu orderedMenu, String guestName,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,
 			String status) throws IOException {
 		super();
-		//this.orderedMenu = orderedMenu;
+		this.orderedMenu = orderedMenu;
 		this.guest=GuestController.searchGuest(guestName);
+		this.room = roomNumber;
 		this.orderDate = orderDate;
 		this.orderTime = orderTime;
 		this.remarks = remarks;
-		this.status = RoomServiceStatus.valueOf(status);
+		this.status = status; //RoomServiceStatus.valueOf(status);
 	}
-	public ArrayList<Menu> getOrderedMenu() {
+	public Menu getOrderedMenu() {
 		return orderedMenu;
 	}
-	public void setOrderedMenu(ArrayList<Menu> orderedMenu) {
-		this.orderedMenu = orderedMenu;
+	public void setOrderedMenu(Menu orderedmenu) {
+		this.orderedMenu = orderedmenu;
 	}
 	public Guest getGuest() {
 		return guest;
 	}
 	public void setGuest(Guest guest) {
 		this.guest = guest;
+	}
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 	public LocalDate getOrderDate() {
 		return orderDate;
@@ -59,10 +67,10 @@ public class RoomService {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public RoomServiceStatus getStatus() {
+	public /*RoomServiceStatus*/String getStatus() {
 		return status;
 	}
-	public void setStatus(RoomServiceStatus status) {
+	public void setStatus(/*RoomServiceStatus*/ String status) {
 		this.status = status;
 	}
 

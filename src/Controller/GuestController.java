@@ -149,7 +149,7 @@ public class GuestController {
 		for(int i=0;i<guests.size();i++) {
 			Guest g1 = (Guest)guests.get(i);
 			if(g1.getName().equals(name)) {
-				System.out.println("Name " + g1.getName() );
+				/*System.out.println("Name " + g1.getName() );
 				System.out.println("Credit Card " + g1.getCreditCard() );
 				System.out.println("Address  " + g1.getAddress() );
 				System.out.println("Country " + g1.getCountry() );
@@ -157,7 +157,7 @@ public class GuestController {
 				System.out.println("Identity " + g1.getIdentity() );
 				System.out.println("IdNo " + g1.getIdNo() );
 				System.out.println("Nationality " + g1.getNationality() );
-				System.out.println("Contact " + g1.getContact() );
+				System.out.println("Contact " + g1.getContact() );*/
 				g=g1;
 				break;
 			}

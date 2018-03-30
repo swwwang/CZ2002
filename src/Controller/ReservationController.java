@@ -118,13 +118,13 @@ public class ReservationController {
 
 		return result;
 	}
-	public static Reservation searchReservations(String name) throws IOException{
+	public static Reservation searchReservations(String roomNo) throws IOException{
 		Reservation r=new Reservation();
 		ArrayList reservations=readReservations();
 
 		for(int i=0;i<reservations.size();i++) {
 			Reservation r1 = (Reservation)reservations.get(i);
-			if(r1.getGuest().getName().equals(name)) {
+			if(r1.getRoom().getRoomNumber().equals(roomNo)) {
 				r=r1;
 				break;
 			}

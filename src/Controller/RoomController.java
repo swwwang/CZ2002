@@ -107,8 +107,8 @@ public class RoomController {
 		for(int i=0;i<rooms.size();i++) {
 			r = (Room)rooms.get(i);
 			if(r.getRoomNumber().equals(roomNumber)) {
-				System.out.println(r.getType().getType());
-				System.out.println(r.getType().getRate());
+				//System.out.println(r.getType().getType());
+				//System.out.println(r.getType().getRate());
 				break;
 			}
 		}
@@ -130,6 +130,23 @@ public class RoomController {
 					break;
 				}
 			}
+		}
+		return result;
+
+	}
+
+	public static boolean checkRoomExist(String roomNumber) throws IOException {
+		boolean result=false;
+		
+		Room r = new Room();
+		ArrayList<Room> rooms= readRooms();
+
+		for(int i=0;i<rooms.size();i++) {
+			r = (Room)rooms.get(i);
+			if(r.getRoomNumber().equals(roomNumber)) {
+				result=true;
+				break;
+				}
 		}
 		return result;
 
@@ -173,6 +190,47 @@ public class RoomController {
 		}
 		
 		return avail_room;
+	}
+	
+	public static void printAvailableRoom(String roomType, Boolean ByRoomType) throws IOException {
+
+		Room r = new Room();
+		ArrayList<Room> rooms= readRooms();
+		int total = 0; //total num of room
+		int num = 0; //num of vacant room
+		String vacRoom = ""; //vacant room
+		String occRoom = ""; //occupied room
+		
+		for(int i = 0; i < rooms.size(); i++) {
+			r = (Room)rooms.get(i);
+			Object status = r.getStatus();
+			Object type = r.getType().getType();
+			
+			if(type.toString().equals(roomType) || !ByRoomType) {
+				if(status.toString().equals("VACANT")) {
+					vacRoom += r.getRoomNumber().toString() + ", ";
+					num++;
+				}
+				else {
+					occRoom += r.getRoomNumber().toString() + ", ";
+				}
+				total++;
+			}
+		}
+		
+		//print
+		System.out.println("List of vacant room:");
+		
+		if(ByRoomType){//print by room type occupancy rate 
+			System.out.println(roomType + ": Number" + ": " + num + " out of " + total);
+			System.out.println("Rooms: " + vacRoom);
+		}
+		else {//print by room status
+			System.out.println("Rooms: " + vacRoom);
+			System.out.println("Rooms: " + occRoom);
+		}
+
+
 	}
 	
 //	public static void main(String[] args) throws IOException {

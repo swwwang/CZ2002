@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Controller.GuestController;
+import Controller.PaymentController;
+import Controller.RoomController;
+import Controller.RoomServiceController;
 import Entity.Guest;
 
 public class HotelApplication {
 	public static void main(String args[]) {
 		
-		try {
-			// read file containing Professor records.
+		try {RoomServiceController.newRoomService();
+			/*// read file containing Professor records.
 			ArrayList al = GuestController.readGuests() ;
 			
 			for (int i = 0 ; i < al.size() ; i++) {
@@ -23,9 +26,9 @@ public class HotelApplication {
 					System.out.println("Identity " + g.getIdentity() );
 					System.out.println("Nationality " + g.getNationality() );
 					System.out.println("Contact " + g.getContact() );
-			}
+			}*/
 			//GuestController.updateGuest("Tom");
-			GuestController.searchGuest("Harry");
+			//GuestController.searchGuest("Harry");
 			//Guest g1 = new Guest("Joseph","MasterCard","NTU", "Singapore", "Male", "Passport", "Singaporean", 67909999);
 			// al is an array list containing Professor objs
 			//al.add(g1);
