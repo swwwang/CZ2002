@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -162,19 +163,19 @@ public class RoomController {
 			r = (Room)rooms.get(i);
 			Object o = r.getStatus();
 			switch(type.toUpperCase()) {
-			case "SINGLE": if(o.toString().equals("VACANT") && r.getType().getType().equals("SINGLE")) {
+			case "SINGLE": if(/*o.toString().equals("VACANT") &&*/ r.getType().getType().equals("SINGLE")) {
 								avail_room.add(r.getRoomNumber());
 							}
 							break;
-			case "DOUBLE": if(o.toString().equals("VACANT") && r.getType().getType().equals("DOUBLE")) {
+			case "DOUBLE": if(/*o.toString().equals("VACANT") &&*/  r.getType().getType().equals("DOUBLE")) {
 								avail_room.add(r.getRoomNumber());
 							}
 							break;
-			case "DELUXE": if(o.toString().equals("VACANT") && r.getType().getType().equals("DELUXE")) {
+			case "DELUXE": if(/*o.toString().equals("VACANT") &&*/ r.getType().getType().equals("DELUXE")) {
 								avail_room.add(r.getRoomNumber());
 							}
 							break;
-			case "VIPSUITE": if(o.toString().equals("VACANT") && r.getType().getType().equals("VIPSUITE")) {
+			case "VIPSUITE": if(/*o.toString().equals("VACANT") &&*/  r.getType().getType().equals("VIPSUITE")) {
 								avail_room.add(r.getRoomNumber());
 							}
 							break;
@@ -192,45 +193,46 @@ public class RoomController {
 		return avail_room;
 	}
 	
-	public static void printAvailableRoom(String roomType, Boolean ByRoomType) throws IOException {
-
-		Room r = new Room();
-		ArrayList<Room> rooms= readRooms();
-		int total = 0; //total num of room
-		int num = 0; //num of vacant room
-		String vacRoom = ""; //vacant room
-		String occRoom = ""; //occupied room
-		
-		for(int i = 0; i < rooms.size(); i++) {
-			r = (Room)rooms.get(i);
-			Object status = r.getStatus();
-			Object type = r.getType().getType();
+	public static void printAvailableRoom(Boolean ByRoomType) throws IOException {
+		System.out.println("List of vacant room:");
+		//print by room type occupancy rate
+		if(ByRoomType) {
+			List <String> roomType = new ArrayList();
+			roomType.addAll(Arrays.asList("SINGLE","DOUBLE","DELUXE","VIPSUITE"));
+			List vacant = checkRoom("VACANT");
 			
-			if(type.toString().equals(roomType) || !ByRoomType) {
-				if(status.toString().equals("VACANT")) {
-					vacRoom += r.getRoomNumber().toString() + ", ";
-					num++;
+			for(int i = 0; i < roomType.size(); i++) {
+				int num = 0;
+				int total = 0;
+				String print = "";
+				List roomList = checkRoom(roomType.get(i));
+				for(total = 0; total< roomList.size(); total++){
+					if(vacant.contains(roomList.get(total))) {
+						print += roomList.get(total) + " ";
+						num++;
+					}
 				}
-				else {
-					occRoom += r.getRoomNumber().toString() + ", ";
-				}
-				total++;
+				System.out.println(roomType.get(i) + ": Number" + ": " + num + " out of " + total);
+				System.out.println("Rooms: " + print);
 			}
 		}
-		
-		//print
-		System.out.println("List of vacant room:");
-		
-		if(ByRoomType){//print by room type occupancy rate 
-			System.out.println(roomType + ": Number" + ": " + num + " out of " + total);
-			System.out.println("Rooms: " + vacRoom);
+		//print by room status
+		else{
+			List vacant = 	checkRoom("VACANT");
+			List occupied = checkRoom("OCCUPIED");
+			
+			System.out.println("Vacant:");
+			System.out.print("	Rooms:");
+			for(int i = 0; i < vacant.size(); i++) {
+				System.out.print(" " + vacant.get(i));
+			}
+			
+			System.out.println("\n\nOccupied:");
+			System.out.print("	Rooms:");
+			for(int i = 0; i < occupied.size(); i++) {
+				System.out.print(" " + occupied.get(i));
+			}
 		}
-		else {//print by room status
-			System.out.println("Rooms: " + vacRoom);
-			System.out.println("Rooms: " + occRoom);
-		}
-
-
 	}
 	
 //	public static void main(String[] args) throws IOException {

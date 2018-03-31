@@ -112,22 +112,36 @@ public class RoomServiceController {
 		ArrayList al = readMenus();
 		
 		System.out.println("No.	Name		Description		Price");
-		System.out.println("===========================================");
+		System.out.println("=======================================================");
+		String space = "";
 		for (int i = 0 ; i < al.size() ; i++) {
-			Menu m = (Menu)al.get(i);//got alignment issues here. next time then fix... - QJ
-			System.out.println(i + 1 + ".	" + m.getName() + "		" + m.getDescription() + "	" + m.getPrice());
+			Menu m = (Menu)al.get(i);
+			
+			//to fix alignment. 
+			if(m.getDescription().length() > 13) {
+				space = "	";
+			}
+			else if (m.getDescription().length() < 9){
+				space = "			";
+			}
+			else {
+				space = "		";
+			}
+			
+			System.out.println(i + 1 + ".	" + m.getName() + "		" + m.getDescription() + space + m.getPrice());
 		}
 
 		//get OrderMenu number
 		int OrderMenuNum = 0;
 		while(true) {
 			System.out.println("\nPlease enter type of room service (1 to " + al.size() + "):  ");
-			OrderMenuNum = sc.nextInt();
-			if(OrderMenuNum < 1 || OrderMenuNum > al.size()) {
-				System.out.println("Choose a room service between 1 to " + al.size() + "!");
-			}
-			else {
+			
+			if(sc.hasNextInt() && (OrderMenuNum = sc.nextInt()) > 0 && OrderMenuNum < (al.size()+1)){
 				break;
+	        }
+			else {
+				sc.nextLine();
+				System.out.println("Choose a room service between 1 to " + al.size()  + "!");
 			}
 		}
 		
@@ -156,13 +170,34 @@ public class RoomServiceController {
 		Guest guest = RS.getGuest();
 		
 		//get date and time
-		System.out.println("Please enter date (dd/mm/yyyy): ");
-		String dummy=sc.nextLine();
-		LocalDate roomSerDate =LocalDate.parse(sc.nextLine(), formatter);
+		LocalDate roomSerDate;
+		int dummyint = 0;
+		while(true)
+		{
+			try {
+				System.out.println("Please enter date (dd/mm/yyyy): ");
+				if(dummyint == 0) {
+					dummyint = 1;
+					String dummy=sc.nextLine();
+				}
+				roomSerDate =LocalDate.parse(sc.nextLine(), formatter);
+				break;
+			} catch(Exception e) {
+				System.out.println("Enter a valid date!");
+			}
+		}
 		
-		System.out.println("Please enter time (hh:mm AM/PM): ");
-		LocalTime roomSerTime =LocalTime.parse(sc.nextLine(),f2);
-		
+		LocalTime roomSerTime;
+		while(true)
+		{
+			try {
+				System.out.println("Please enter time (hh:mm AM/PM): ");
+				roomSerTime =LocalTime.parse(sc.nextLine(),f2);
+				break;
+			} catch(Exception e) {
+				System.out.println("Enter a valid time!");
+			}
+		}
 
 		RoomService r=new RoomService();
 		r.setOrderedMenu(orderedmenu);

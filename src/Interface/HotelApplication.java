@@ -12,7 +12,7 @@ import Entity.Guest;
 public class HotelApplication {
 	public static void main(String args[]) {
 		
-		try {RoomServiceController.newRoomService();
+		try {PaymentController.printBill();
 			/*// read file containing Professor records.
 			ArrayList al = GuestController.readGuests() ;
 			
