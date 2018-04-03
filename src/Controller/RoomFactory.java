@@ -101,6 +101,7 @@ public class RoomFactory {
 			}
 			textDB.write(FILENAME,alw);
 		}
+		
 		public static int updateRoomRate(String roomType,double rate,double weekendRate) throws IOException{
 			int result=0;
 			ArrayList rooms=readRoomRates();

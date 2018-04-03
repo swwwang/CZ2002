@@ -1,10 +1,12 @@
 package Controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.Scanner;
 
 import Entity.Guest;
 import Entity.Reservation;
@@ -63,6 +65,124 @@ public class RoomController {
 				alw.add(st.toString()) ;
 			}
 			textDB.write(FILENAME,alw);
+		}
+		
+		public static Room createRoom() throws IOException{
+			   int type_sel,bed_sel,wifi_sel,facing_sel,smoke_sel,status_sel;
+			   Scanner sc = new Scanner(System.in);
+			   Room r = new Room();
+			   do {
+				   System.out.println("Room Types");
+				   System.out.println("1. SingleRoom");
+				   System.out.println("2. DoubleRoom ");
+				   System.out.println("3. DeluxeRoom");
+				   System.out.println("4. VIPRoom");
+				   System.out.println("Please enter the number of your selected room type:");
+				   type_sel = sc.nextInt();   
+				   switch(type_sel) {
+				   		case 1: r.setType(RoomFactory.getRoomType("SINGLE"));
+				   		break;
+				   		case 2: r.setType(RoomFactory.getRoomType("DOUBLE"));
+	   		   		   	break;
+				   		case 3: r.setType(RoomFactory.getRoomType("DELUXE"));
+	   		   		   	break;
+				   		case 4: r.setType(RoomFactory.getRoomType("VIPSUITE"));
+				   		break;
+				   		default: System.out.println("Please select the valid room type again!");
+				   }
+			   }while(type_sel != 1 && type_sel != 2 && type_sel != 3 && type_sel != 4);
+			   
+			   System.out.println("Please Enter the room number:");
+			   String number = sc.next();
+			   r.setRoomNumber(number);
+			   do {
+				   System.out.println("Bed Types");
+				   System.out.println("1. Single");
+				   System.out.println("2. Double");
+				   System.out.println("3. Master");
+				   System.out.println("Please enter the number of your selected bed type:");
+				   bed_sel = sc.nextInt();
+				   switch(bed_sel) {
+				   case 1: r.setBedType("SINGLE");
+				   		   break;
+				   case 2: r.setBedType("DOUBLE");
+		   		   		   break;
+				   case 3: r.setBedType("MASTER");
+		   		   		   break;
+				   default: System.out.println("Please select the valid bed type again!");
+				   }
+			  }while(bed_sel != 1 && bed_sel != 2 && bed_sel != 3);
+				   
+			   do {
+				   System.out.println("WIFI Enabled?");
+				   System.out.println("1. true");
+				   System.out.println("2. false");
+				   System.out.println("Please enter the number of your selected choice:");
+				   wifi_sel = sc.nextInt();
+				   switch(wifi_sel) {
+				   case 1: r.setWifiEnabled(true);
+				   		   break;
+				   case 2: r.setWifiEnabled(false);
+		   		   		   break;
+				   default: System.out.println("Please select the valid choice again!");
+				   }
+			   }while(wifi_sel != 1 && wifi_sel != 2);
+			   
+			   do {
+				   System.out.println("Facing Type:");
+				   System.out.println("1. Sea-View");
+				   System.out.println("2. Open-View");
+				   System.out.println("3. City-View");
+				   System.out.println("Please enter the number of your selected facing type:");
+				   facing_sel = sc.nextInt();
+				   switch(facing_sel) {
+				   case 1: r.setFacing("SEAVIEW");
+				   		   break;
+				   case 2: r.setFacing("OPENVIEW");
+		   		   		   break;
+				   case 3: r.setFacing("CITYVIEW");
+		   		   		   break;
+				   default: System.out.println("Please select the valid facing type again!");
+				   }
+			  }while(facing_sel != 1 && facing_sel != 2 && facing_sel != 3);
+			   
+			   do {
+				   System.out.println("Smoking Allowed?");
+				   System.out.println("1. Yes");
+				   System.out.println("2. No");
+				   System.out.println("Please enter the number of your selected choice:");
+				   smoke_sel = sc.nextInt();
+				   switch(smoke_sel) {
+				   case 1: r.setSmoke("SMOKING");
+				   		   break;
+				   case 2: r.setSmoke("NONSMOKING");
+		   		   		   break;
+				   default: System.out.println("Please select the valid choice again!");
+				   }
+			   }while(smoke_sel != 1 && smoke_sel != 2);
+			   
+			   do {
+				   System.out.println("Room Satus:");
+				   System.out.println("1. Vacant");
+				   System.out.println("2. Occupied");
+				   System.out.println("3. Reserved");
+				   System.out.println("4. Under Maintence");
+				   System.out.println("Please enter the number of your selected Room Status:");
+				   status_sel = sc.nextInt();
+				   switch(status_sel) {
+				   case 1: r.setStatus("VACANT");
+				   		   break;
+				   case 2: r.setStatus("OCCUPIED");
+		   		   		   break;
+				   case 3: r.setStatus("RESERVED");
+		   		   		   break;
+				   case 4: r.setStatus("UNDERMAINTENANCE");
+   		   		   			break;	   
+				   default: System.out.println("Please select the valid Room Status again!");
+				   }
+			  }while(status_sel != 1 && status_sel != 2 && status_sel != 3 && status_sel != 4);
+			   
+			   return r;
 		}
 		
 		public static int updateRoom(String roomNumber,String catagory, String value) throws IOException{
