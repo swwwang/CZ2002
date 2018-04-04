@@ -82,23 +82,4 @@ public class Menu {
 		}
 	}
 	
-	public void createItem(String name, String description, float price) throws IOException
-	{
-		FileWriter out = new FileWriter(FILENAME,true);
-		StringBuilder st =  new StringBuilder() ;
-		MenuItem item = new MenuItem(name, description,price); //create new object from user input
-		st.append(item.getName().trim());
-		st.append(SEPARATOR);
-		st.append(item.getDescription().trim());
-		st.append(SEPARATOR);
-		st.append(item.getPrice()); //create string to write to file
-		try {
-			out.write(st.toString() + "\n"); //append the string to the end of file
-		}
-		finally {
-			out.close();
-		}
-		noOfItems++;
-	}
-	
 }
