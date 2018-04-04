@@ -9,7 +9,7 @@ import Controller.GuestController;
 enum RoomServiceStatus{Confirmed,Preparing,Delivered}
 
 public class RoomService {
-	private Menu orderedMenu;
+	private MenuItem orderedMenu;
 	private Guest guest;
 	private LocalDate orderDate;
 	private LocalTime orderTime;
@@ -20,7 +20,7 @@ public class RoomService {
 	public RoomService() {
 		
 	}
-	public RoomService(Menu orderedMenu, String guestName,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,
+	public RoomService(MenuItem orderedMenu, String guestName,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,
 			String status) throws IOException {
 		super();
 		this.orderedMenu = orderedMenu;
@@ -31,10 +31,10 @@ public class RoomService {
 		this.remarks = remarks;
 		this.status = status; //RoomServiceStatus.valueOf(status);
 	}
-	public Menu getOrderedMenu() {
+	public MenuItem getOrderedMenu() {
 		return orderedMenu;
 	}
-	public void setOrderedMenu(Menu orderedmenu) {
+	public void setOrderedMenu(MenuItem orderedmenu) {
 		this.orderedMenu = orderedmenu;
 	}
 	public Guest getGuest() {
