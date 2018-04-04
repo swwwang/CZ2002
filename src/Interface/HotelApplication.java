@@ -17,7 +17,7 @@ import Entity.MenuItem;
 
 
 public class HotelApplication {
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 		//System.out.println("");
 		Scanner sc = new Scanner(System.in);
 		int admin_choice, system_choice, guest_choice;
