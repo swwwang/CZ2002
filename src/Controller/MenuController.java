@@ -56,15 +56,35 @@ public class MenuController {
 	{
 		Menu menu1 = new Menu();
 		menu1.updateItem(((MenuItem) change).getName(), ((MenuItem) change).getDescription(), ((MenuItem) change).getPrice(), index);
-		
-		menu1.saveMenu();
+		ArrayList list = menu1.getMenu();
+		saveMenu(list);
 	}
 	public static void removeItem(int index) throws IOException
 	{
-		Menu menu1 = new Menu();
-		menu1.removeItem(index);
-		menu1.saveMenu();
+		ArrayList list = readMenu();
+		list.remove(index);
+		saveMenu(list);
 	}
-
+	public static void saveMenu(ArrayList list) throws IOException
+	{
+		FileWriter out = new FileWriter(FILENAME,false);
+		try
+		{
+			for (int i = 0; i < list.size(); i++)
+			{
+				StringBuilder st =  new StringBuilder() ;
+				MenuItem item = (MenuItem)list.get(i);
+				st.append(item.getName().trim());
+				st.append(SEPARATOR);
+				st.append(item.getDescription().trim());
+				st.append(SEPARATOR);
+				st.append(item.getPrice()); //create string to write to file
+				out.write(st.toString() + "\n");
+			}
+		}
+		finally {
+			out.close();
+		}
+	}
 	
 }

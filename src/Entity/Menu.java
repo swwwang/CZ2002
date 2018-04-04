@@ -59,26 +59,6 @@ public class Menu {
 		menuItems.remove(index);
 		noOfItems--;
 	}
-	public void saveMenu() throws IOException
-	{
-		FileWriter out = new FileWriter(FILENAME,false);
-		try
-		{
-			for (int i = 0; i < noOfItems; i++)
-			{
-				StringBuilder st =  new StringBuilder() ;
-				MenuItem item = (MenuItem)menuItems.get(i);
-				st.append(item.getName().trim());
-				st.append(SEPARATOR);
-				st.append(item.getDescription().trim());
-				st.append(SEPARATOR);
-				st.append(item.getPrice()); //create string to write to file
-				out.write(st.toString() + "\n");
-			}
-		}
-		finally {
-			out.close();
-		}
-	}
+
 	
 }
