@@ -59,7 +59,6 @@ public class Menu {
 		menuItems.remove(index);
 		noOfItems--;
 	}
-	
 	public void saveMenu() throws IOException
 	{
 		FileWriter out = new FileWriter(FILENAME,false);

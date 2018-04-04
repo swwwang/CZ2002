@@ -11,6 +11,7 @@ import Controller.PaymentController;
 import Controller.RoomController;
 import Controller.RoomFactory;
 import Controller.RoomServiceController;
+import Entity.MenuItem;
 
 
 
@@ -183,7 +184,50 @@ public class HotelApplication {
 										}while(!update_room.toUpperCase().equals("N"));
 										break;
 								case 3:
+									System.out.print("Input Name: ");
+									String name = sc.next(); //getting name
+									System.out.print("Input Description: ");
+									String description = sc.next(); //getting description
+									System.out.print("Input Price: ");
+									float price = sc.nextFloat(); //getting the price
+									MenuController.createItem(name, description, price);
+									
 								case 4:
+									ArrayList menu1 = MenuController.readMenu();
+									for (int i = 0 ; i < menu1.size() ; i++) 
+									{
+										MenuItem item = (MenuItem)menu1.get(i);
+										System.out.println((i+1) + ".) " + item.getName());
+									}
+									int itemChoice = sc.nextInt();
+									MenuItem item = (MenuItem)menu1.get(itemChoice-1);
+									System.out.println("1.) Name: " + item.getName());
+									System.out.println("2.) Description: " + item.getDescription());
+									System.out.printf("3.) Price: S$%.2f\n", item.getPrice());
+									int fieldChoice = sc.nextInt();
+									switch(fieldChoice)
+									{
+									case 1://editing name 
+										System.out.println("Current Name: " + item.getName());
+										System.out.print("Input New Name: ");
+										name = sc.next(); //getting new name
+										item.setName(name); //editing the name of the object
+										break;
+									case 2://editing description
+										System.out.println("Current Description: " + item.getDescription());
+										System.out.print("Input New Description: ");
+										description = sc.next(); //getting new description
+										item.setDescription(description); //editing the description of the object
+										break;
+									case 3://editing price
+										System.out.println("Current Price: S$" + item.getPrice());
+										System.out.print("Input New Price: ");
+										price = sc.nextFloat(); //getting the new price
+										item.setPrice(price); //editing the price of the object
+										break;
+									}
+									
+									break;
 								case 5:
 								case 6:
 								case 7: System.out.println("Back to the Main Menu");
