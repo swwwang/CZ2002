@@ -6,33 +6,33 @@ import java.time.LocalTime;
 import Controller.GuestController;
 import Controller.RoomController;
 
-enum ReservationStatus{CONFIRMED,INWAITLIST,CHECKEDIN,EXPIRED}
+enum ReservationStatus{CONFIRMED,INWAITLIST,CHECKEDIN,CHECKEDOUT,EXPIRED}
 
 public class Reservation {
 	private int reservationCode;
 	private Guest guest;
-	private Room room;
+	private ReservationRoom reservationRoom;
 	private String billing;
 	private LocalDate checkIn;
 	private LocalDate checkOut;
 	private int noAdults;
 	private int noChildren;
-	private LocalTime scheduled;
+	private LocalTime scheduledTime;
 	private boolean walkIn;
 	private ReservationStatus status;
 	
-	public Reservation(int reservationCode, Guest guestName, Room roomNumber, String billing, LocalDate checkIn,
-			LocalDate checkOut, int noAdults,int noChildren, LocalTime scheduled,boolean walkIn,String reservationStatus ) throws IOException {
+	public Reservation(int reservationCode, Guest guestName, ReservationRoom reservationRoom, String billing, LocalDate checkIn,
+			LocalDate checkOut, int noAdults,int noChildren, LocalTime scheduledTime,boolean walkIn,String reservationStatus ) throws IOException {
 		// TODO Auto-generated constructor stub
 		this.reservationCode=reservationCode;
 		this.guest=guestName;
-		this.room=roomNumber;
+		this.reservationRoom=reservationRoom;
 		this.billing=billing;
 		this.checkIn=checkIn;
 		this.checkOut=checkOut;
 		this.noAdults=noAdults;
 		this.noChildren=noChildren;
-		this.scheduled=scheduled;
+		this.scheduledTime=scheduledTime;
 		this.walkIn=walkIn;
 		this.status=ReservationStatus.valueOf(reservationStatus.toUpperCase());
 	}
@@ -51,11 +51,12 @@ public class Reservation {
 	public void setGuest(Guest guest) {
 		this.guest = guest;
 	}
-	public Room getRoom() {
-		return room;
+	
+	public ReservationRoom getReservationRoom() {
+		return reservationRoom;
 	}
-	public void setRoom(Room room) {
-		this.room = room;
+	public void setReservationRoom(ReservationRoom reservationRoom) {
+		this.reservationRoom = reservationRoom;
 	}
 	public String getBilling() {
 		return billing;
@@ -93,11 +94,11 @@ public class Reservation {
 	public void setStatus(String status) {
 		this.status = ReservationStatus.valueOf(status.toUpperCase());
 	}
-	public LocalTime getScheduled() {
-		return scheduled;
+	public LocalTime getScheduledTime() {
+		return scheduledTime;
 	}
-	public void setScheduled(LocalTime scheduled) {
-		this.scheduled = scheduled;
+	public void setScheduledTime(LocalTime scheduled) {
+		this.scheduledTime = scheduled;
 	}
 	public boolean isWalkIn() {
 		return walkIn;
