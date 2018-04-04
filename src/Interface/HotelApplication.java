@@ -8,6 +8,7 @@ import java.util.Scanner;
 import Controller.GuestController;
 import Controller.MenuController;
 import Controller.PaymentController;
+import Controller.ReservationController;
 import Controller.RoomController;
 import Controller.RoomFactory;
 import Controller.RoomServiceController;
@@ -20,7 +21,7 @@ public class HotelApplication {
 		//System.out.println("");
 		Scanner sc = new Scanner(System.in);
 		int admin_choice, system_choice, guest_choice;
-
+		ReservationController.checkExpiredReservations();
 		do {
 			System.out.println("Hotel Reservation and Payment System");
 			System.out.println("**************************************");
@@ -249,11 +250,11 @@ public class HotelApplication {
 						guest_choice = sc.nextInt();
 						
 						switch(guest_choice) {
-							case 1:
-							case 2:
-							case 3:
+							case 1: ReservationController.createReservation(true);
+							case 2: ReservationController.checkIn();
+							case 3: ReservationController.createReservation(false);
 							case 4:
-							case 5:
+							case 5: PaymentController.printBill();
 							case 6: System.out.println("Back to the Main Menu");
 									break;
 							default: System.out.println("Invalid Choice! Please enter again!");

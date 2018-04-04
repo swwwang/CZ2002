@@ -13,88 +13,157 @@ import Entity.*;
 
 public class ReservationController {
 	public static final String FILENAME = "reservation.txt";
+	public static final String FILENAME1 = "reservationRoom.txt";
 	public static final String SEPARATOR = "|";
 	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 	public static final DateTimeFormatter f2 = DateTimeFormatter.ofPattern("hh:mm a");
 
-	// an example of reading
+	//Get the whole list of data in the textfile
 	public static ArrayList readReservations() throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME);
-		ArrayList alr = new ArrayList() ;// to store Professors data
+		ArrayList alr = new ArrayList() ;// to store data
 
 		for (int i = 0 ; i < stringArray.size() ; i++) {
 			String st = (String)stringArray.get(i);
 			// get individual 'fields' of the string separated by SEPARATOR
 			StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
 
-			int  reservationCode = Integer.parseInt(star.nextToken().trim());	// first token
-			String  guestName = star.nextToken().trim();	// second token
-			String  roomNumber = star.nextToken().trim();
+			int  reservationCode = Integer.parseInt(star.nextToken().trim());	
+			String  guestID = star.nextToken().trim();
 			String  billing = star.nextToken().trim();
 			LocalDate  checkIn = LocalDate.parse(star.nextToken().trim(), formatter);
 			LocalDate  checkOut = LocalDate.parse(star.nextToken().trim(), formatter);
 			int  noAdults = Integer.parseInt(star.nextToken().trim());
 			int  noChildren= Integer.parseInt(star.nextToken().trim());
-			LocalTime scheduled=LocalTime.parse(star.nextToken().trim(),f2);
+			LocalTime scheduledTime=LocalTime.parse(star.nextToken().trim(),f2);
 			boolean  walkIn = Boolean.valueOf(star.nextToken().trim());
 			String reservationStatus=star.nextToken().trim();
-			
-			// create Professor object from file data
-			Reservation r = new Reservation(reservationCode, GuestController.searchGuest(guestName),RoomController.searchRoom(roomNumber),billing,checkIn,checkOut,noAdults,noChildren,scheduled,walkIn,reservationStatus);
-			// add to Professors list
+
+			// create Reservation object from file data
+			Reservation r = new Reservation(reservationCode, GuestController.searchGuest(guestID),getReservationRoomDetails(reservationCode),billing,checkIn,checkOut,noAdults,noChildren,scheduledTime,walkIn,reservationStatus);
+			// add to Reservation list
 			alr.add(r) ;
 		}
 		return alr ;
 	}
 
-	// an example of saving
+	// save data to textfile
 	public static void saveReservations(List al) throws IOException {
-		List alw = new ArrayList() ;// to store Guest data
+		List alw = new ArrayList() ;// to store Reservation data
 
 		for (int i = 0 ; i < al.size() ; i++) {
 			Reservation r = (Reservation)al.get(i);
 			StringBuilder st =  new StringBuilder() ;
 			st.append(r.getReservationCode());
 			st.append(SEPARATOR);
-			st.append(r.getGuest().getName().trim());
-			st.append(SEPARATOR);
-			st.append(r.getRoom().getRoomNumber());
+			st.append(r.getGuest().getIdNo().trim());
 			st.append(SEPARATOR);
 			st.append(r.getBilling().trim());
 			st.append(SEPARATOR);
 			st.append(r.getCheckIn().format(formatter));
 			st.append(SEPARATOR);
-			if(r.getCheckOut()!=null) {
-				st.append(r.getCheckOut().format(formatter));
-				st.append(SEPARATOR);
-			}
-			else {
-				st.append(r.getCheckOut());
-				st.append(SEPARATOR);
-			}
+			st.append(r.getCheckOut().format(formatter));
+			st.append(SEPARATOR);
 			st.append(r.getNoAdults());
 			st.append(SEPARATOR);
 			st.append(r.getNoChildren());
 			st.append(SEPARATOR);
-			st.append(r.getScheduled().format(f2));
+			st.append(r.getScheduledTime().format(f2));
 			st.append(SEPARATOR);
 			st.append(r.isWalkIn());
 			st.append(SEPARATOR);
 			st.append(r.getStatus());
 			st.append(SEPARATOR);
-			
+
 			alw.add(st.toString()) ;
 		}
 		textDB.write(FILENAME,alw);
 	}
-	public static int updateReservation(String name) throws IOException{
+	
+	//read rooms under a reservation code in the textfile
+	public static ArrayList readReservationRoom() throws IOException {
+		// read String from text file
+		ArrayList stringArray = (ArrayList)textDB.read(FILENAME1);
+		ArrayList alr = new ArrayList() ;// to store Reservation Room data
+		ArrayList<Room> rooms=new ArrayList<Room>();
+
+		for (int i = 0 ; i < stringArray.size() ; i++) {
+			String st = (String)stringArray.get(i);
+			// get individual 'fields' of the string separated by SEPARATOR
+			StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
+
+			int  reservationCode = Integer.parseInt(star.nextToken().trim());
+			int  noOfRooms = Integer.parseInt(star.nextToken().trim());
+			
+			//get the room objects and store it into an arraylist
+			for(int c=0;c<noOfRooms;c++) {
+				String  roomNumber = star.nextToken().trim();	
+				Room r=RoomController.searchRoom(roomNumber);
+				rooms.add(r);
+			}
+
+			// create ReservationRoom object from file data
+			ReservationRoom rr=new ReservationRoom(reservationCode,noOfRooms,rooms);
+			// add to ReservationRoom list
+			alr.add(rr) ;
+		}
+		return alr ;
+	}
+	
+	//Get specific ReservationRoom object from Reservation Code
+	private static ReservationRoom getReservationRoomDetails(int reservationCode) throws IOException {
+		// TODO Auto-generated method stub
+		ReservationRoom r=new ReservationRoom();
+		ArrayList rr=readReservationRoom();
+
+		for(int i=0;i<rr.size();i++) {
+			r = (ReservationRoom)rr.get(i);
+			if(r.getReservationCode()==reservationCode) {
+				break;
+			}
+		}
+		return r;
+		
+	}
+	
+	//Save Reservation Room to the textfile
+	public static void saveReservationRoom(List al) throws IOException {
+		List alw = new ArrayList() ;// to store ReservationRoom data
+
+		for (int i = 0 ; i < al.size() ; i++) {
+			ReservationRoom rr = (ReservationRoom)al.get(i);
+			StringBuilder st =  new StringBuilder() ;
+			st.append(rr.getReservationCode());
+			st.append(SEPARATOR);
+			st.append(rr.getNoOfRooms());
+			st.append(SEPARATOR);
+			for(int c=0;c<rr.getNoOfRooms();c++) {
+				st.append(rr.getRooms().get(c).getRoomNumber());
+				st.append(SEPARATOR);
+			}
+
+
+			alw.add(st.toString()) ;
+		}
+		textDB.write(FILENAME1,alw);
+	}
+	
+	//Update Reservation Status inside the textfile
+	public static int updateReservation(String guestID,String status,LocalDate date) throws IOException{
 		int result=0;
 		ArrayList reservations=readReservations();
 
 		for(int i=0;i<reservations.size();i++) {
 			Reservation r = (Reservation)reservations.get(i);
-			if(r.getGuest().getName().equals(name)) {
+			if(r.getGuest().getIdNo().equals(guestID)&&!r.getStatus().equals("CHECKEDOUT")) {
+				r.setStatus(status);
+				if(status.equals("CHECKEDIN")) {
+					r.setCheckIn(LocalDate.now());
+				}
+				if(status.equals("CHECKEDOUT")) {
+					r.setCheckOut(date);
+				}
 				reservations.set(i, r);
 				break;
 			}
@@ -103,13 +172,15 @@ public class ReservationController {
 
 		return result;
 	}
-	public static int removeReservation(String name) throws IOException{
+	
+	//Remove the reservation from the textfile
+	public static int removeReservation(String guestID) throws IOException{
 		int result=0;
 		ArrayList reservations=readReservations();
 
 		for(int i=0;i<reservations.size();i++) {
 			Reservation r = (Reservation)reservations.get(i);
-			if(r.getGuest().getName().equals(name)) {
+			if(r.getGuest().getIdNo().equals(guestID)&&!r.getStatus().equals("CHECKEDOUT")) {
 				reservations.remove(i);
 				break;
 			}
@@ -118,133 +189,249 @@ public class ReservationController {
 
 		return result;
 	}
-	public static Reservation searchReservations(String roomNo) throws IOException{
+	
+	//Search for reservation using guest ID
+	public static Reservation searchReservations(String guestID) throws IOException{
 		Reservation r=new Reservation();
 		ArrayList reservations=readReservations();
 
 		for(int i=0;i<reservations.size();i++) {
 			Reservation r1 = (Reservation)reservations.get(i);
-			if(r1.getRoom().getRoomNumber().equals(roomNo)) {
-				r=r1;
-				break;
+			if(r1.getGuest().getIdNo().equals(guestID)) {
+				if(r1.getStatus().equals("CONFIRMED")||r1.getStatus().equals("CHECKEDIN")) {
+					r=r1;
+					break;
+				}
 			}
 		}
 		return r;
 	}
-	public static void createReservation() throws IOException {
+	
+	//Create new reservation for both walk-in and non walk-in
+	public static void createReservation(boolean isWalkIn) throws IOException {
 		Guest g;
 		Scanner sc=new Scanner(System.in);
-		
-		boolean check=true;
+
+		ArrayList<Room> rooms=new ArrayList<Room>();
+
+		String roomType="";
 		String roomNo= "0";
-		while(check) {
+
+		//Print out available rooms
+		System.out.println("Show by Room Type? (True/False): ");
+		roomType=sc.nextLine();
+		RoomController.printAvailableRoom(Boolean.valueOf(roomType));
+
+		//Get number of rooms to be reserved
+		System.out.println("Please enter number of Rooms: ");
+		int noOfRooms=sc.nextInt();
+		String dummy=sc.nextLine();
+		
+		//get the selected room and add it into arraylist
+		while(noOfRooms>0){
 			System.out.println("Please enter Room Number: ");
-			roomNo=sc.next();
+			roomNo=sc.nextLine();
 			if(!RoomController.checkRoomAvailability(roomNo)) {
 				System.out.println("Room not available!");
 			}
 			else {
-				break;
+				Room room=RoomController.searchRoom(roomNo);
+				rooms.add(room);
+				noOfRooms--;
 			}
 		}
-		
-		Room room=RoomController.searchRoom(roomNo);
+
+		//check for existing guest
 		System.out.println("Please enter name:");
-		String dummy=sc.nextLine();
 		String name=sc.nextLine();
 		
-		g=GuestController.searchGuest(name);
+		System.out.println("Please enter ID number:");
+		String id=sc.nextLine();
+
+		g=GuestController.searchGuest(id);
 		if(g.getName()!=null) {
-			System.out.println("Guest Exists");
+			if(g.getName().equals(name)) {
+				System.out.println("Guest Exists");
+				System.out.println();
+			}
 		}
 		else {
+			//Create new guest if not found
 			System.out.println("Guest not found");
-			System.out.println("Please enter identity (Driving License/Passport):");
-			String identity=sc.nextLine();
-			if(identity.equals("Driving License")) {
-				identity="DrivingLicense";
-			}
-			System.out.println("Please enter ID No:");
-			String idNo=sc.nextLine();
-			System.out.println("Please enter Address:");
-			String address=sc.nextLine();
-			System.out.println("Please enter contact (8 digits):");
-			String contact=sc.nextLine();
-			System.out.println("Please enter Gender (M/F):");
-			String gender=sc.nextLine();
-			System.out.println("Please enter Nationality:");
-			String nationality=sc.nextLine();
-			System.out.println("Please enter Country:");
-			String country=sc.nextLine();
-			System.out.println("Add a credit card? Y/N");
-			String yesNo=sc.nextLine();
-			CreditCard c=new CreditCard();
-			if(yesNo.toUpperCase().equals("Y")) {
-				System.out.println("Please enter Credit Card Name:");
-				String creditName=sc.nextLine();
-				System.out.println("Please enter Credit Card Number (16 digits):");
-				String creditNumber=sc.nextLine();
-				System.out.println("Please enter Credit Card Billing Address:");
-				String creditAddress=sc.nextLine();
-				c=new CreditCard(creditName,creditNumber,creditAddress);
-				ArrayList creditCards=GuestController.readCreditCards();
-				creditCards.add(c);
-				GuestController.saveCreditCards(creditCards);
-			}
-			g=new Guest();
-			g.setName(name);
-			g.setIdentity(identity.toUpperCase());
-			g.setIdNo(idNo);
-			g.setAddress(address);
-			g.setContact(contact);
-			g.setCountry(country);
-			g.setGender(gender);
-			g.setNationality(nationality);
-			g.setCreditCard(c);
-			ArrayList guests=GuestController.readGuests();
-			guests.add(g);
-			GuestController.saveGuests(guests);
+			System.out.println();
+			g=GuestController.createGuest(name);
 
 		}
-		
+
+		//Get number of adults
 		System.out.println("Please enter Number of Adults: ");
 		int noAdults=sc.nextInt();
-		
+
+		//Get number of children
 		System.out.println("Please enter Number of Children: ");
 		int noChildren=sc.nextInt();
-		
-		System.out.println("Please enter Check In Date (dd/mm/yyyy): ");
 		dummy=sc.nextLine();
-		LocalDate checkIn=LocalDate.parse(sc.nextLine(), formatter);
 		
-		System.out.println("Please enter Scheduled Check In Time (hh:mm AM/PM): ");
-		LocalTime scheduled=LocalTime.parse(sc.nextLine(),f2);
+		//set date and time to current date and time
+		LocalDate scheduledDate=LocalDate.now();
+		LocalTime scheduledTime=LocalTime.now();
 		
+		//if non walk-in ask for date and time
+		if(!isWalkIn) {
+			System.out.println("Please enter Scheduled Check In Date (dd/mm/yyyy): ");
+			
+			scheduledDate=LocalDate.parse(sc.nextLine(), formatter);
+
+			System.out.println("Please enter Scheduled Check In Time (hh:mm AM/PM): ");
+			scheduledTime=LocalTime.parse(sc.nextLine(),f2);
+		}
+		
+		//Get the payment method
 		System.out.println("Pay by (Credit Card/Cash)? ");
 		String billing=sc.nextLine();
-		
+
+		//Create Reservation object from gathered data
 		Reservation r=new Reservation();
 		r.setGuest(g);
 		r.setNoAdults(noAdults);
 		r.setNoChildren(noChildren);
-		r.setRoom(room);
 		r.setBilling(billing);
-		r.setCheckIn(checkIn);
+		if(!isWalkIn) {
+			r.setCheckIn(scheduledDate);
+			r.setStatus("Confirmed");
+		}
+		else {
+			r.setCheckIn(LocalDate.now());
+			r.setStatus("CheckedIn");
+			r.setWalkIn(true);
+		}
 		r.setCheckOut(LocalDate.MAX);
-		r.setScheduled(scheduled);
-		r.setStatus("Confirmed");
+		r.setScheduledTime(scheduledTime);
+		
 
 		ArrayList reservations=readReservations();
+		ArrayList reservationRooms=readReservationRoom();
+		
+		//Generate new Reservation Code
 		int newCode=0;
 		if(reservations.size()!=0){
 			newCode=((Reservation) reservations.get(reservations.size()-1)).getReservationCode();
-			
 		}
+		
+		//Saving new data into textfiles
+		ReservationRoom rr=new ReservationRoom(newCode+1,rooms.size(),rooms);
 		r.setReservationCode(newCode+1);
+		r.setReservationRoom(rr);
 		reservations.add(r);
 		saveReservations(reservations);
-		RoomController.updateRoom(roomNo,"Status", "RESERVED");
+		reservationRooms.add(rr);
+		saveReservationRoom(reservationRooms);
+		
+		//Updating room status
+		if(!isWalkIn) {
+			for(int i=0;i<rooms.size();i++) {
+				RoomController.updateRoom(rooms.get(i).getRoomNumber(),"STATUS","RESERVED");
+			}
+		}
+		else {
+			for(int i=0;i<rooms.size();i++) {
+				RoomController.updateRoom(rooms.get(i).getRoomNumber(),"STATUS","OCCUPIED");
+			}
+		}
 		System.out.println("Reservation Created!");
+		System.out.println();
+		
+		//print receipt
+		printReservationReceipt(r);
 	}
+	
+	//printing out reservation receipt
+	public static void printReservationReceipt(Reservation r) {
+		System.out.print("Guest Name: ");
+		System.out.println(r.getGuest().getName());
+		System.out.print("Room Number: ");
+		for(int i=0;i<r.getReservationRoom().getNoOfRooms();i++) {
+			System.out.print("|");
+			System.out.print(r.getReservationRoom().getRooms().get(i).getRoomNumber());
+			System.out.print("|");
+		}
+		System.out.println();
+		System.out.print("Check In Date: ");
+		System.out.println(r.getCheckIn().format(formatter));
+		System.out.print("Scheduled Check In Time: ");
+		System.out.println(r.getScheduledTime().format(f2));
+		System.out.print("Status: ");
+		System.out.println(r.getStatus());
+	}
+	
+	//check in for non walk-in
+	public static void checkIn() throws IOException {
+		Scanner sc=new Scanner(System.in);
+		
+		while(true) {
+			System.out.println("Please enter Guest ID: ");
+			String guestID=sc.nextLine();
+			
+			Reservation r=searchReservations(guestID);
+			
+			if(r.getReservationCode()<=0) {
+				System.out.println("Reservation not found!");
+				System.out.println("Try Again? (Y/N): ");
+				String ans=sc.nextLine();
+				if(ans.equalsIgnoreCase("N")){
+					return;
+				}
+			}
+			else {
+				if(r.getStatus().equals("CONFIRMED")) {
+					updateReservation(guestID,"CHECKEDIN",null);
+					for(int i=0;i<r.getReservationRoom().getRooms().size();i++) {
+						RoomController.updateRoom(r.getReservationRoom().getRooms().get(i).getRoomNumber(),"STATUS","OCCUPIED");
+					}
+					System.out.println("Checked In Successfully!");
+					break;
+				}
+			}
+		}
+		
+	}
+	//check out
+	public static void checkOut(String guestID,LocalDate checkOutDate) throws IOException {
+		Reservation r=searchReservations(guestID);
+		
+		updateReservation(guestID,"CHECKEDOUT",checkOutDate);
+		for(int i=0;i<r.getReservationRoom().getRooms().size();i++) {
+			RoomController.updateRoom(r.getReservationRoom().getRooms().get(i).getRoomNumber(),"STATUS","VACANT");
+		}
+		
+	}
+	
+	//check if reservations is expired and update accordingly
+	public static void checkExpiredReservations() throws IOException {
+		
+		ArrayList reservations=readReservations();
+
+		for(int i=0;i<reservations.size();i++) {
+			Reservation r1 = (Reservation)reservations.get(i);
+			if(r1.getStatus().equals("CONFIRMED")) {
+				LocalDate nowDate=LocalDate.now();
+				LocalTime nowTime=LocalTime.now();
+				
+				LocalDate checkInDate=r1.getCheckIn();
+				LocalTime scheduledTime=r1.getScheduledTime();
+				
+				if(checkInDate.isEqual(nowDate)&&scheduledTime.plusHours(1).isBefore(nowTime)) {
+					r1.setStatus("EXPIRED");
+					for(int c=0;c<r1.getReservationRoom().getRooms().size();c++) {
+						RoomController.updateRoom(r1.getReservationRoom().getRooms().get(c).getRoomNumber(),"STATUS","VACANT");
+					}
+					reservations.set(i, r1);
+				}
+				
+			}
+		}
+		saveReservations(reservations);
+	}
+	
 
 }

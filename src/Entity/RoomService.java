@@ -20,11 +20,11 @@ public class RoomService {
 	public RoomService() {
 		
 	}
-	public RoomService(MenuItem orderedMenu, String guestName,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,
+	public RoomService(MenuItem orderedMenu, String guestID,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,
 			String status) throws IOException {
 		super();
 		this.orderedMenu = orderedMenu;
-		this.guest=GuestController.searchGuest(guestName);
+		this.guest=GuestController.searchGuest(guestID);
 		this.room = roomNumber;
 		this.orderDate = orderDate;
 		this.orderTime = orderTime;

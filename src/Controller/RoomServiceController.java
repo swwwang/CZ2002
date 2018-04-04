@@ -34,14 +34,14 @@ public class RoomServiceController {
 			StringTokenizer star = new StringTokenizer(st , SEPARATOR);	
 			
 			String  orderedMenu = star.nextToken().trim();
-			String guestName=star.nextToken().trim();
+			String guestID=star.nextToken().trim();
 			String  roomNumber = star.nextToken().trim();
 			LocalDate  orderDate = LocalDate.parse(star.nextToken().trim(), formatter);	
 			LocalTime  orderTime = LocalTime.parse(star.nextToken().trim(), f2);
 			String  remarks = star.nextToken().trim();
 			String  status = star.nextToken().trim();
 
-			RoomService rs = new RoomService(MenuController.searchMenu(orderedMenu), guestName,RoomController.searchRoom(roomNumber), orderDate,orderTime,remarks,status);
+			RoomService rs = new RoomService(MenuController.searchMenu(orderedMenu), guestID,RoomController.searchRoom(roomNumber), orderDate,orderTime,remarks,status);
 
 			alr.add(rs) ;
 		}
@@ -57,7 +57,7 @@ public class RoomServiceController {
 
 			st.append(rs.getOrderedMenu().getName());
 			st.append(SEPARATOR);
-			st.append(rs.getGuest().getName().trim());
+			st.append(rs.getGuest().getIdNo().trim());
 			st.append(SEPARATOR);
 			st.append(rs.getRoom().getRoomNumber());
 			st.append(SEPARATOR);

@@ -1,6 +1,7 @@
 package Entity;
 
 public class CreditCard {
+	private String guestID;
 	private String cardName;
 	private String cardNumber;
 	private String billingAddress;
@@ -8,10 +9,18 @@ public class CreditCard {
 	public CreditCard() {
 		
 	}
-	public CreditCard(String cardName, String cardNumber, String billingAddress) {
+	public CreditCard(String guestID,String cardName, String cardNumber, String billingAddress) {
+		this.guestID=guestID;
 		this.cardName=cardName;
 		this.cardNumber=cardNumber;
 		this.billingAddress=billingAddress;
+	}
+	
+	public String getGuestID() {
+		return guestID;
+	}
+	public void setGuestID(String guestID) {
+		this.guestID = guestID;
 	}
 	public String getCardName() {
 		return cardName;

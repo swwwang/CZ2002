@@ -10,7 +10,6 @@ public class Guest {
 	private String gender;
 	private Identity identity;
 	private String idNo;
-	
 	private String nationality;
 	private String contact;
 	
