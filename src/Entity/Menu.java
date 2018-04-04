@@ -21,7 +21,8 @@ public class Menu {
 	public Menu() throws IOException
 	{
 		menuItems = new ArrayList();
-		ArrayList al = (ArrayList)textDB.read(FILENAME);
+		noOfItems = 0;
+		ArrayList al = (ArrayList)textDB.read(FILENAME); //list of string from file
 		for (int i = 0 ; i < al.size() ; i++) {
 			String st = (String)al.get(i);
 			// get individual 'fields' of the string separated by SEPARATOR
@@ -33,8 +34,8 @@ public class Menu {
 			MenuItem item = new MenuItem(name, description,price);
 			// add to menuItems list
 			menuItems.add(item);
+			noOfItems++;
 		}
-		noOfItems = menuItems.size();
 	}
 	
 	public int getNoOfItems()
