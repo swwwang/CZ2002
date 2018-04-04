@@ -5,6 +5,9 @@ public class MenuItem {
 	private String description;
 	private float price;
 	
+	public MenuItem() {
+		
+	}
 	public MenuItem(String name, String description, float price) {
 		super();
 		this.name = name;
