@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Entity.Guest;
 import Entity.Reservation;
 import Entity.Room;
 import Entity.RoomService;
@@ -41,12 +42,26 @@ public class PaymentController {
 		}*/
 
 		//get date and time
-		System.out.println("Please enter Guest ID: ");
-		String guestID=sc.nextLine();
-		Reservation res = ReservationController.searchReservations(guestID);
-		long days = 0;
-
+		String guestID = new String();
+		Reservation res = new Reservation();
+		while(true)
+		{
+			System.out.println("Please enter Guest ID: ");
+			guestID=sc.nextLine();
+			if ((GuestController.searchGuest(guestID.toUpperCase())).getIdNo() == null)
+				System.out.println("Enter a valid guest ID!");
+			else
+			{
+					res = ReservationController.searchReservations(guestID);
+					if (res.getCheckOut() ==null)
+						System.out.println("No reservation found!");
+					else
+						break;
+				
+			}
+		}
 		
+		long days = 0;
 		LocalDate roomOutDate;
 		
 		while(true)
