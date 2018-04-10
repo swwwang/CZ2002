@@ -12,12 +12,36 @@ import java.util.StringTokenizer;
 
 import Controller.textDB;
 
+/**
+ * Represents the room service menu of the hotel
+ * The menu can have multiple items
+ * @author Kaw Teck Lin
+ * @version 1.0
+ * @since 2018-04-01
+ */
 public class Menu {
+	/**
+	 * The number of items in the menu 
+	 */
 	private int noOfItems;
+	/**
+	 * The list of items in the menu
+	 */
 	private ArrayList menuItems;
+	/**
+	 * The filename for saving the entire room service Menu
+	 */
 	public static final String FILENAME = "menu.txt";
+	/**
+	 * The separator for separating fields to be saved into the file
+	 */
 	public static final String SEPARATOR = "|";
 	
+	/**
+	 * Creates a new Menu
+	 * The Menu is read from the file
+	 * @throws IOException
+	 */
 	public Menu() throws IOException
 	{
 		menuItems = new ArrayList();
@@ -38,23 +62,47 @@ public class Menu {
 		}
 	}
 	
+	/**
+	 * Gets the number of items in this Menu
+	 * @return number of items in this Menu
+	 */
 	public int getNoOfItems()
 	{
 		return noOfItems;
 	}
+	/**
+	 * Gets the item at the index given
+	 * @param index the index of the item to get
+	 * @return the item at the index given of this Menu
+	 */
 	public Object getItem(int index)
 	{
 		return menuItems.get(index);
 	}
+	/**
+	 * Gets the list of items in this Menu
+	 * @return the list of items in this Menu
+	 */
 	public ArrayList getMenu()
 	{
 		return menuItems;
 	}
+	/**
+	 * Updates the item at the index given with new fields given
+	 * @param name this Menu item's new name
+	 * @param description this Menu item's new description
+	 * @param price this Menu item's new price
+	 * @param index index of item to update in this Menu
+	 */
 	public void updateItem(String name, String description, float price, int index)
 	{
 		MenuItem item = new MenuItem(name, description,price);
 		menuItems.set(index, item);
 	}
+	/**
+	 * Removes the item of this Menu at the index given
+	 * @param index the index of the item to remove from this Menu
+	 */
 	public void removeItem(int index)
 	{
 		menuItems.remove(index);

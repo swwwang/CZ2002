@@ -12,17 +12,39 @@ import java.util.StringTokenizer;
 
 import Entity.Menu;
 import Entity.MenuItem;
-
+/**
+  Represents the controller for using the Menu class
+  @author Kaw Teck Lin
+  @version 1.0
+  @since 2018-04-01
+ */
 public class MenuController {
 
+	/**
+	 * The filename for saving the entire room service Menu
+	 */
 	public static final String FILENAME = "menu.txt";
+	/**
+	 * The separator for separating fields to be saved into the file
+	 */
 	public static final String SEPARATOR = "|";
 
+	/**
+	 * Reads the entire menu from the file
+	 * @return the entire room service Menu
+	 * @throws IOException
+	 */
 	public static ArrayList readMenu() throws IOException {
 		Menu menu1 = new Menu();
 		return menu1.getMenu();
 	}
 
+	/**
+	 * Searches for the details of the menu item through the name
+	 * @param name the name of the menu item
+	 * @return the menu item object found through the name
+	 * @throws IOException
+	 */
 	public static MenuItem searchMenu(String name) throws IOException {
 		MenuItem m = new MenuItem();
 		ArrayList menu1 = readMenu();
@@ -36,41 +58,44 @@ public class MenuController {
 		return m;
 	}
 
+	/**
+	 * Creates a new menu item with the name, description and price given
+	 * @param name Name of the menu item created
+	 * @param description Description of the menu item created
+	 * @param price Price of the menu item created
+	 * @throws IOException
+	 */
 	public static void createItem(String name, String description, float price) throws IOException {
 		FileWriter out = new FileWriter(FILENAME, true);
 		StringBuilder st = new StringBuilder();
-		MenuItem item = new MenuItem(name, description, price); // create new object from user input
-		st.append(item.getName().trim());
+		st.append(name.trim());
 		st.append(SEPARATOR);
-		st.append(item.getDescription().trim());
+		st.append(description.trim());
 		st.append(SEPARATOR);
-		st.append(item.getPrice()); // create string to write to file
+		st.append(price); // create string to write to file
 		try {
 			out.write(st.toString() + "\n"); // append the string to the end of file
 		} finally {
 			out.close();
 		}
 	}
-	// public static void updateMenu(Object change, int index) throws IOException
-	// {
-	// Menu menu1 = new Menu();
-	// menu1.updateItem(((MenuItem) change).getName(), ((MenuItem)
-	// change).getDescription(), ((MenuItem) change).getPrice(), index);
-	// ArrayList list = menu1.getMenu();
-	// saveMenu(list);
-	// }
-
+	
+	/**
+	 * Updates the menu item
+	 * @throws IOException
+	 */
 	public static void updateMenu() throws IOException {
 		Scanner sc = new Scanner(System.in);
 		String cont;
 		System.out.println("Menu item lists:");
 		ArrayList menu1 = MenuController.readMenu();
-		for (int i = 0; i < menu1.size(); i++) {
+		for (int i = 0; i < menu1.size(); i++) //displaying all the menu items for user to choose
+		{ 
 			MenuItem item = (MenuItem) menu1.get(i);
 			System.out.println((i + 1) + ".) " + item.getName());
 		}
 		System.out.println("Please enter the number of menu item that you want to update:");
-		int itemChoice = sc.nextInt();
+		int itemChoice = sc.nextInt(); //getting the item to update
 		do {
 			MenuItem item = (MenuItem) menu1.get(itemChoice - 1);
 			System.out.println("This is your selected menu item.");
@@ -112,12 +137,22 @@ public class MenuController {
 		saveMenu(menu1);
 	}
 
+	/**
+	 * Removes an item from the menu at the index given
+	 * @param index The index of the item to remove from the menu
+	 * @throws IOException
+	 */
 	public static void removeItem(int index) throws IOException {
 		ArrayList list = readMenu();
 		list.remove(index);
 		saveMenu(list);
 	}
 
+	/**
+	 * Saves the entire Menu into the file
+	 * @param list The list of menu items to be saved into the file
+	 * @throws IOException
+	 */
 	public static void saveMenu(ArrayList list) throws IOException {
 		FileWriter out = new FileWriter(FILENAME, false);
 		try {
