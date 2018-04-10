@@ -516,7 +516,7 @@ public class RoomController {
 				List roomList = checkRoom(roomType.get(i));
 				for (total = 0; total < roomList.size(); total++) {
 					if (vacant.contains(roomList.get(total))) {
-						print += roomList.get(total) + " ";
+						print += roomList.get(total) + " | ";
 						num++;
 					}
 				}
@@ -535,25 +535,25 @@ public class RoomController {
 			System.out.println("Vacant:");
 			System.out.print("	Rooms:");
 			for (int i = 0; i < vacant.size(); i++) {
-				System.out.print(" " + vacant.get(i));
+				System.out.print(" | " + vacant.get(i));
 			}
 
 			System.out.println("\n\nOccupied:");
 			System.out.print("	Rooms:");
 			for (int i = 0; i < occupied.size(); i++) {
-				System.out.print(" " + occupied.get(i));
+				System.out.print(" | " + occupied.get(i));
 			}
 			
 			System.out.println("\n\nReserved:");
 			System.out.print("	Rooms:");
 			for (int i = 0; i < reserved.size(); i++) {
-				System.out.print(" " + occupied.get(i));
+				System.out.print(" | " + occupied.get(i));
 			}
 			
 			System.out.println("\n\n UnderMaintenance:");
 			System.out.print("	Rooms:");
 			for (int i = 0; i < undermaintenance.size(); i++) {
-				System.out.print(" " + occupied.get(i));
+				System.out.print(" | " + occupied.get(i));
 			}
 			
 			System.out.println();

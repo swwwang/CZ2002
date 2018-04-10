@@ -43,35 +43,40 @@ public class PaymentController {
 
 		//get date and time
 		String guestID = new String();
+		String guestName=new String();
 		Reservation res = new Reservation();
 		while(true)
 		{
+			System.out.println("Please enter Guest Name: ");
+			guestName=sc.nextLine();
 			System.out.println("Please enter Guest ID: ");
 			guestID=sc.nextLine();
-			if ((GuestController.searchGuest(guestID.toUpperCase())).getIdNo() == null)
+			if ((GuestController.searchGuest(guestName,guestID.toUpperCase())).getIdNo() == null)
 				System.out.println("Enter a valid guest ID!");
 			else
 			{
-					res = ReservationController.searchReservations(guestID);
-					if (res.getCheckOut() ==null)
-						System.out.println("No reservation found!");
-					else
-						break;
-				
+				res = ReservationController.searchReservations(guestID);
+				if (res.getGuest() ==null) {
+					System.out.println("No reservation found!");
+					return;
+				}
+				else
+					break;
+
 			}
 		}
-		
+
 		long days = 0;
 		LocalDate roomOutDate;
-		
+
 		while(true)
 		{
 			try {
 				System.out.println("Please enter check out date (dd/mm/yyyy): ");
-				
+
 				roomOutDate =LocalDate.parse(sc.nextLine(), formatter);
 				days = res.getCheckIn().until(roomOutDate, ChronoUnit.DAYS);//Calculate no. of days
-				
+
 				if(days == 0) {
 					days = 1;
 					break;
@@ -135,7 +140,7 @@ public class PaymentController {
 		System.out.println("Walk in?: " + res.isWalkIn() );
 
 		//print bill heading
-		System.out.println("\nType		Item		Price	Date & TimeStamp"); 
+		System.out.println("\nType		Item		         Price	        Date & TimeStamp"); 
 		System.out.println("======================================================="); 
 
 		//print room bill
@@ -144,12 +149,12 @@ public class PaymentController {
 			Room room = RoomController.searchRoom(res.getReservationRoom().getRooms().get(i).getRoomNumber());
 			System.out.println("Room		" + 
 					room.getType().getType() + " ROOM	"  +
-					room.getType().getRate() * days + "	"  +
+					String.format( "%.2f", room.getType().getRate() * days)+ "	"  +
 					res.getCheckIn().format(formatter) + " " + res.getScheduledTime().format(f2));
 			totalPrice = room.getType().getRate() * days;
-			
+
 			//print room service bill
-			
+
 			ArrayList al = RoomServiceController.searchRoomServices(room.getRoomNumber());
 			for(int s=0;s<al.size();s++) {
 				RoomService rs = (RoomService)al.get(s);
@@ -164,23 +169,24 @@ public class PaymentController {
 				}
 			}
 		}
-		
+
 		//calculate tax and discount (taxable price is calculated after discount)
 		double discountPrice = totalPrice * (discount/100);
 		totalPrice = totalPrice - discountPrice;
 		System.out.println(	"Discount	" + 
 				"-" + discount + "%		" +
-				"-" + discountPrice + "		" + 
-				"nil" + " " +  "nil"); 
+				"-" + String.format( "%.2f", discountPrice ) + "		        " + 
+				"Nil"); 
 
 		double taxPrice = totalPrice * (tax/100);
 		totalPrice = totalPrice + taxPrice;
 		System.out.println(	"tax		" + 
-				tax + "%		"  +
-				taxPrice + "		" + 
-				"nil" + " " +  "nil"); 
-
-		System.out.println("Total: " + totalPrice);
+				tax + "%		        "  +
+				String.format( "%.2f", taxPrice ) + "		        " + 
+				"Nil"); 
+		
+		System.out.println();
+		System.out.println("Total: $" + String.format( "%.2f", totalPrice ));
 
 		while(true)
 		{

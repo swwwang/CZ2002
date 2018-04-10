@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import Controller.GuestController;
 
-enum RoomServiceStatus{Confirmed,Preparing,Delivered}
+enum RoomServiceStatus{CONFIRMED,PREPARING,DELIVERED}
 
 public class RoomService {
 	private MenuItem orderedMenu;
@@ -14,13 +14,14 @@ public class RoomService {
 	private LocalDate orderDate;
 	private LocalTime orderTime;
 	private String remarks;
-	private /*RoomServiceStatus*/ String status;
+	private String paid;
+	private RoomServiceStatus status;
 	private Room room;
 	
 	public RoomService() {
 		
 	}
-	public RoomService(MenuItem orderedMenu, String guestID,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,
+	public RoomService(MenuItem orderedMenu, String guestID,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,String paid,
 			String status) throws IOException {
 		super();
 		this.orderedMenu = orderedMenu;
@@ -28,8 +29,9 @@ public class RoomService {
 		this.room = roomNumber;
 		this.orderDate = orderDate;
 		this.orderTime = orderTime;
+		this.paid=paid;
 		this.remarks = remarks;
-		this.status = status; //RoomServiceStatus.valueOf(status);
+		this.status = RoomServiceStatus.valueOf(status.toUpperCase()); //RoomServiceStatus.valueOf(status);
 	}
 	public MenuItem getOrderedMenu() {
 		return orderedMenu;
@@ -67,11 +69,17 @@ public class RoomService {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public /*RoomServiceStatus*/String getStatus() {
-		return status;
+	public String getPaid() {
+		return paid;
 	}
-	public void setStatus(/*RoomServiceStatus*/ String status) {
-		this.status = status;
+	public void setPaid(String paid) {
+		this.paid = paid;
+	}
+	public String getStatus() {
+		return status.toString();
+	}
+	public void setStatus(String status) {
+		this.status = RoomServiceStatus.valueOf(status.toUpperCase());
 	}
 
 }

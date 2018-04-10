@@ -147,10 +147,12 @@ public class HotelApplication {
 					System.out.println("3. Make a reservation");
 					System.out.println("4. Order a room service");
 					System.out.println("5. CheckOut");
-					System.out.println("6.Exit");
+					System.out.println("6. Update Guest Information");
+					System.out.println("7. Remove a reservation");
+					System.out.println("8.Exit");
 					System.out.println("Please enter the number of the option that you want to select:");
 					guest_choice = sc.nextInt();
-
+					String dummy="";
 					switch (guest_choice) {
 					case 1:
 						ReservationController.createReservation(true);
@@ -168,12 +170,39 @@ public class HotelApplication {
 						PaymentController.printBill();
 						break;
 					case 6:
+						dummy=sc.nextLine();
+						System.out.println("Enter Guest Name: ");
+						String guestName=sc.nextLine();
+						
+						System.out.print("Enter Guest ID: ");
+						String guestID=sc.nextLine();
+						
+						if((GuestController.searchGuest(guestName, guestID)).getName()!=null) {
+							System.out.println("Guest Exist!");
+							GuestController.updateGuest(guestName, guestID);
+						}
+						else {
+							System.out.println("Guest does not Exist!");
+						}
+						break;
+					case 7:
+						dummy=sc.nextLine();
+						System.out.println("Enter Guest ID: ");
+						if(ReservationController.removeReservation(sc.nextLine())==1) {
+							System.out.println("Reservation Removed!");
+						}
+						else {
+							System.out.println("Reservation Failed to be Removed!");
+						}
+						break;
+						
+					case 8:
 						System.out.println("Back to the Main Menu");
 						break;
 					default:
 						System.out.println("Invalid Choice! Please enter again!");
 					}
-				} while (guest_choice != 6);
+				} while (guest_choice != 8);
 				break;
 
 			case 3:

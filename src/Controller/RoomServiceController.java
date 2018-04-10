@@ -39,9 +39,10 @@ public class RoomServiceController {
 			LocalDate  orderDate = LocalDate.parse(star.nextToken().trim(), formatter);	
 			LocalTime  orderTime = LocalTime.parse(star.nextToken().trim(), f2);
 			String  remarks = star.nextToken().trim();
+			String paid= star.nextToken().trim();
 			String  status = star.nextToken().trim();
 
-			RoomService rs = new RoomService(MenuController.searchMenu(orderedMenu), guestID,RoomController.searchRoom(roomNumber), orderDate,orderTime,remarks,status);
+			RoomService rs = new RoomService(MenuController.searchMenu(orderedMenu), guestID,RoomController.searchRoom(roomNumber), orderDate,orderTime,remarks,paid,status);
 
 			alr.add(rs) ;
 		}
@@ -59,15 +60,17 @@ public class RoomServiceController {
 			st.append(SEPARATOR);
 			st.append(rs.getGuest().getIdNo().trim());
 			st.append(SEPARATOR);
-			st.append(rs.getRoom().getRoomNumber());
+			st.append(rs.getRoom().getRoomNumber().trim());
 			st.append(SEPARATOR);
 			st.append(rs.getOrderDate().format(formatter));
 			st.append(SEPARATOR);
 			st.append(rs.getOrderTime().format(f2));
 			st.append(SEPARATOR);
-			st.append(rs.getRemarks());
+			st.append(rs.getRemarks().trim());
 			st.append(SEPARATOR);
-			st.append(rs.getStatus());
+			st.append(rs.getPaid().trim());
+			st.append(SEPARATOR);
+			st.append(rs.getStatus().trim());
 			st.append(SEPARATOR);
 			
 			alw.add(st.toString()) ;
@@ -167,7 +170,8 @@ public class RoomServiceController {
 		Room room=RoomController.searchRoom(roomNo);
 		
 		//get guest (from roomNo)
-		Reservation RS = ReservationController.searchReservations(roomNo);
+		
+		Reservation RS = ReservationController.getGuestID(roomNo);
 		Guest guest = RS.getGuest();
 		
 		//get date and time
@@ -199,14 +203,22 @@ public class RoomServiceController {
 				System.out.println("Enter a valid time!");
 			}
 		}
-
+		String choice="";
+		String request="Nil";
+		System.out.println("Any special request? (Y/N)");
+		choice=sc.nextLine();
+		if(choice.equalsIgnoreCase("Y")) {
+			System.out.println("Please enter request: ");
+			request=sc.nextLine();
+		}
 		RoomService r=new RoomService();
 		r.setOrderedMenu(orderedmenu);
 		r.setGuest(guest);
 		r.setRoom(room);
 		r.setOrderDate(roomSerDate);
 		r.setOrderTime(roomSerTime);
-		r.setRemarks("UNPAID");
+		r.setRemarks(request);
+		r.setPaid("UNPAID");
 		r.setStatus("CONFIRMED");
 
 		ArrayList roomService= readRoomServices();
