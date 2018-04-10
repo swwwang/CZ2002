@@ -61,7 +61,7 @@ public class MenuItem {
 	}
 	/**
 	 * Changes the description of this Menu Item
-	 * @param name This Menu Item's new description
+	 * @param description This Menu Item's new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -75,7 +75,7 @@ public class MenuItem {
 	}
 	/**
 	 * Changes the price of this Menu Item
-	 * @param name This Menu Item's new price
+	 * @param price This Menu Item's new price
 	 */
 	public void setPrice(float price) {
 		this.price = price;
