@@ -194,18 +194,23 @@ public class GuestController {
 					case "1":
 						System.out.println("Enter new Name: ");
 						g.setName(sc.nextLine());
+						break;
 					case "2":
 						g.setCreditCard(createCreditCard(guestID));
 						updateCreditCard(g.getCreditCard());
+						break;
 					case "3":
 						System.out.println("Enter new Address: ");
 						g.setAddress(sc.nextLine());
+						break;
 					case "4":
 						System.out.println("Enter new Country: ");
 						g.setCountry(sc.nextLine());
+						break;
 					case "5":
 						System.out.println("Enter Gender (M/F): ");
 						g.setGender(sc.nextLine());
+						break;
 					/*case "6":
 						System.out.println("Enter new Identity Type (Driving License/Passport): ");
 						g.setIdentity(sc.nextLine());
@@ -215,9 +220,11 @@ public class GuestController {
 					case "6":
 						System.out.println("Enter new Nationality");
 						g.setNationality(sc.nextLine());
+						break;
 					case "7":
 						System.out.println("Enter new Contact No :");
 						g.setContact(sc.nextLine());
+						break;
 					default:
 						System.out.println("Invalid Choice!");
 					}
