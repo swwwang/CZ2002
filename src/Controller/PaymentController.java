@@ -140,8 +140,8 @@ public class PaymentController {
 		System.out.println("Walk in?: " + res.isWalkIn() );
 
 		//print bill heading
-		System.out.println("\nType		Item		         Price	        Date & TimeStamp"); 
-		System.out.println("======================================================="); 
+		System.out.println("\nType            Item            Price     Date & TimeStamp"); 
+		System.out.println("============================================================="); 
 
 		//print room bill
 		double totalPrice=0;
@@ -149,7 +149,7 @@ public class PaymentController {
 			Room room = RoomController.searchRoom(res.getReservationRoom().getRooms().get(i).getRoomNumber());
 			System.out.println("Room		" + 
 					room.getType().getType() + " ROOM	"  +
-					String.format( "%.2f", room.getType().getRate() * days)+ "	"  +
+					String.format( "%-10.2f", room.getType().getRate() * days)+
 					res.getCheckIn().format(formatter) + " " + res.getScheduledTime().format(f2));
 			totalPrice = room.getType().getRate() * days;
 
@@ -159,12 +159,12 @@ public class PaymentController {
 			for(int s=0;s<al.size();s++) {
 				RoomService rs = (RoomService)al.get(s);
 
-				if(rs.getRemarks().equals("UNPAID"))
+				if(rs.getPaid().equals("UNPAID"))
 				{
 					System.out.println(	"Room Service	"+
 							rs.getOrderedMenu().getName() + "		" + 
-							rs.getOrderedMenu().getPrice() + "	" +
-							rs.getOrderDate() + " " + rs.getOrderTime());
+							String.format("%-10.2f",rs.getOrderedMenu().getPrice()) +
+							rs.getOrderDate().format(formatter) + " " + rs.getOrderTime().format(f2));
 					totalPrice += rs.getOrderedMenu().getPrice();
 				}
 			}
@@ -175,15 +175,13 @@ public class PaymentController {
 		totalPrice = totalPrice - discountPrice;
 		System.out.println(	"Discount	" + 
 				"-" + discount + "%		" +
-				"-" + String.format( "%.2f", discountPrice ) + "		        " + 
-				"Nil"); 
+				"-" + String.format( "%-9.2f%19s", discountPrice, "Nil" )); 
 
 		double taxPrice = totalPrice * (tax/100);
 		totalPrice = totalPrice + taxPrice;
 		System.out.println(	"tax		" + 
-				tax + "%		        "  +
-				String.format( "%.2f", taxPrice ) + "		        " + 
-				"Nil"); 
+				tax + "%		"  +
+				String.format( "%-10.2f%19s", taxPrice, "Nil" )); 
 		
 		System.out.println();
 		System.out.println("Total: $" + String.format( "%.2f", totalPrice ));

@@ -192,7 +192,7 @@ public class HotelApplication {
 							System.out.println("Reservation Removed!");
 						}
 						else {
-							System.out.println("Reservation Failed to be Removed!");
+							System.out.println("No Reservation Found!");
 						}
 						break;
 						

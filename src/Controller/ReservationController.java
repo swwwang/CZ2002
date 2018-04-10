@@ -199,18 +199,27 @@ public class ReservationController {
 	public static int removeReservation(String guestID) throws IOException{
 		int result=0;
 		ArrayList reservations=readReservations();
+		ArrayList reservationRoom = readReservationRoom();
+		ArrayList<Room> rooms=new ArrayList<Room>();
 
 		for(int i=0;i<reservations.size();i++) {
 			Reservation r = (Reservation)reservations.get(i);
 			if(r.getGuest().getIdNo().equals(guestID)) {
 				if(r.getStatus().equals("CONFIRMED")||r.getStatus().equals("INWAITLIST")) {
 					reservations.remove(i);
+					ReservationRoom rr = (ReservationRoom)reservationRoom.get(i);
+					rooms = rr.getRooms();
+					reservationRoom.remove(i);
+					for(int j=0;j<rooms.size();j++) {
+						RoomController.updateRoom(rooms.get(j).getRoomNumber(),"STATUS","VACANT");
+					}
 					result=1;
 					break;
 				}
 			}
 		}
 		saveReservations(reservations);
+		saveReservationRoom(reservationRoom);
 
 		return result;
 	}
@@ -278,8 +287,20 @@ public class ReservationController {
 			}
 			else {
 				Room room=RoomController.searchRoom(roomNo);
-				rooms.add(room);
-				noOfRooms--;
+				for(int i =0;i<rooms.size();i++)
+				{
+					Room r = (Room)rooms.get(i);
+					if(room.getRoomNumber().equals(r.getRoomNumber()))
+					{
+						room = null;
+						System.out.println("Room already selected!");
+					}
+				}
+				if(room != null)
+				{
+					rooms.add(room);
+					noOfRooms--;
+				}
 			}
 		}
 
@@ -346,6 +367,7 @@ public class ReservationController {
 		System.out.println("Pay by (Credit Card/Cash)? ");
 		String billing=sc.nextLine();
 		if(billing.equalsIgnoreCase("Credit Card")) {
+			billing = "Credit Card";
 			if(g.getCreditCard().getCardName()==null) {
 				System.out.println("No credit card available!");
 				System.out.println("Add a credit card? (Y/N): ");
@@ -445,7 +467,7 @@ public class ReservationController {
 
 			Reservation r=searchReservations(guestID);
 
-			if(r.getReservationCode()<=0) {
+			if(r.getReservationCode()<=0||r.getStatus().equals("CHECKEDIN")) {
 				System.out.println("Reservation not found!");
 				System.out.println("Try Again? (Y/N): ");
 				String ans=sc.nextLine();

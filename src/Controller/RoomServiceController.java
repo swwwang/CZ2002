@@ -112,27 +112,39 @@ public class RoomServiceController {
 		Guest g;
 		Scanner sc=new Scanner(System.in);
 
+		//get room
+		String roomNo;
+		Room room;
+		while(true) {
+			System.out.println("Please enter Room Number(XX-XX): ");
+			roomNo=sc.next();
+			if(!RoomController.checkRoomExist(roomNo)) {
+				System.out.println("Enter a valid room!");
+			}
+			else {
+				room=RoomController.searchRoom(roomNo);
+				Object o = room.getStatus();
+				if (!o.toString().equals("OCCUPIED"))
+					System.out.println("Room is vacant!");
+				else
+					break;
+			}
+		}
+						
+		//get guest (from roomNo)
+		Reservation RS = ReservationController.getGuestID(roomNo);
+		Guest guest = RS.getGuest();		
+		
 		//display Order Menu
 		ArrayList al = MenuController.readMenu();
 		
-		System.out.println("No.	Name		Description		Price");
-		System.out.println("=======================================================");
+		System.out.println("No.     Name            Description                   Price");
+		System.out.println("==============================================================");
 		String space = "";
 		for (int i = 0 ; i < al.size() ; i++) {
 			MenuItem m = (MenuItem)al.get(i);
 			
-			//to fix alignment. 
-			if(m.getDescription().length() > 13) {
-				space = "	";
-			}
-			else if (m.getDescription().length() < 9){
-				space = "			";
-			}
-			else {
-				space = "		";
-			}
-			
-			System.out.println(i + 1 + ".	" + m.getName() + "		" + m.getDescription() + space + m.getPrice());
+			System.out.printf("%d.	%-16s%-30s%-8.2f\n",i+1, m.getName(), m.getDescription(), m.getPrice());
 		}
 
 		//get OrderMenu number
@@ -151,28 +163,6 @@ public class RoomServiceController {
 		
 		//get orderedmenu (from OrderMenuNum)
 		MenuItem orderedmenu = (MenuItem)al.get(OrderMenuNum - 1);
-		
-		//get room
-		String roomNo;
-		while(true) {
-			System.out.println("Please enter Room Number: ");
-			roomNo=sc.next();
-			if(!RoomController.checkRoomExist(roomNo)) {
-				System.out.println("Enter a valid room!");
-			}
-			else if(RoomController.checkRoomAvailability(roomNo)) {
-				System.out.println("Room is vacant!");
-			}
-			else {
-				break;
-			}
-		}
-		Room room=RoomController.searchRoom(roomNo);
-		
-		//get guest (from roomNo)
-		
-		Reservation RS = ReservationController.getGuestID(roomNo);
-		Guest guest = RS.getGuest();
 		
 		//get date and time
 		LocalDate roomSerDate;
