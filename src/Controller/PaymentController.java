@@ -167,7 +167,7 @@ public class PaymentController {
 			for(int s=0;s<al.size();s++) {
 				RoomService rs = (RoomService)al.get(s);
 
-				if(rs.getPaid().equals("UNPAID"))
+				if(rs.getPaid().equals("UNPAID") && rs.getStatus().toString() == "DELIVERED")
 				{
 					System.out.println(	"Room Service	"+
 							rs.getOrderedMenu().getName() + "		" + 
