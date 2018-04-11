@@ -10,7 +10,6 @@ enum RoomServiceStatus{CONFIRMED,PREPARING,DELIVERED}
 
 public class RoomService {
 	private MenuItem orderedMenu;
-	private Guest guest;
 	private LocalDate orderDate;
 	private LocalTime orderTime;
 	private String remarks;
@@ -21,11 +20,10 @@ public class RoomService {
 	public RoomService() {
 		
 	}
-	public RoomService(MenuItem orderedMenu, String guestID,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,String paid,
+	public RoomService(MenuItem orderedMenu,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,String paid,
 			String status) throws IOException {
 		super();
 		this.orderedMenu = orderedMenu;
-		this.guest=GuestController.searchGuest(guestID);
 		this.room = roomNumber;
 		this.orderDate = orderDate;
 		this.orderTime = orderTime;
@@ -38,12 +36,6 @@ public class RoomService {
 	}
 	public void setOrderedMenu(MenuItem orderedmenu) {
 		this.orderedMenu = orderedmenu;
-	}
-	public Guest getGuest() {
-		return guest;
-	}
-	public void setGuest(Guest guest) {
-		this.guest = guest;
 	}
 	public Room getRoom() {
 		return room;

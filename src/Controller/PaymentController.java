@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 import Entity.Guest;
@@ -26,22 +27,7 @@ public class PaymentController {
 		Scanner sc = new Scanner(System.in);
 		String roomNo;
 
-		//get room
-		/*while(true) {
-			System.out.println("Please enter Room Number: ");
-			roomNo=sc.next();
-			if(!RoomController.checkRoomExist(roomNo)) {
-				System.out.println("Enter a valid room!");
-			}
-			else if(RoomController.checkRoomAvailability(roomNo)) {
-				System.out.println("Room is vacant!");
-			}
-			else {
-				break;
-			}
-		}*/
-
-		//get date and time
+		//get guest
 		String guestID = new String();
 		String guestName=new String();
 		Reservation res = new Reservation();
@@ -66,6 +52,7 @@ public class PaymentController {
 			}
 		}
 
+		//get date
 		long days = 0;
 		LocalDate roomOutDate;
 
@@ -91,7 +78,20 @@ public class PaymentController {
 				System.out.println("Enter a valid date!");
 			}
 		}
-
+		
+		//get number of weekends
+		LocalDate startCal = res.getCheckIn();
+		int weekendNum = 0;
+	    do {
+	         if (	 startCal.getDayOfWeek().toString() == "SUNDAY" || 
+	        		 startCal.getDayOfWeek().toString() == "SATURDAY") {
+	             weekendNum++;
+	         }
+	         startCal = startCal.plusDays(1);
+	     } while (startCal.until(roomOutDate, ChronoUnit.DAYS) >= 0);
+	    
+	    
+		//get time
 		LocalTime roomOutTime;
 		while(true)
 		{
@@ -143,18 +143,26 @@ public class PaymentController {
 		System.out.println("\nType            Item            Price     Date & TimeStamp"); 
 		System.out.println("============================================================="); 
 
-		//print room bill
+		
 		double totalPrice=0;
 		for(int i=0;i<res.getReservationRoom().getNoOfRooms();i++) {
+			//print room bill
 			Room room = RoomController.searchRoom(res.getReservationRoom().getRooms().get(i).getRoomNumber());
 			System.out.println("Room		" + 
 					room.getType().getType() + " ROOM	"  +
-					String.format( "%-10.2f", room.getType().getRate() * days)+
+					String.format( "%-10.2f", room.getType().getRate() * (days - weekendNum))+
 					res.getCheckIn().format(formatter) + " " + res.getScheduledTime().format(f2));
-			totalPrice = room.getType().getRate() * days;
-
+			
+			if(weekendNum != 0) {
+				System.out.println("Room (Weekend)	" + 
+						room.getType().getType() + " ROOM	"  +
+						String.format( "%-10.2f", room.getType().getWeekendRate() * (weekendNum))+
+						res.getCheckIn().format(formatter) + " " + res.getScheduledTime().format(f2));
+			}
+			
+			totalPrice += room.getType().getRate() * (days - weekendNum) + room.getType().getWeekendRate() * weekendNum;
+			
 			//print room service bill
-
 			ArrayList al = RoomServiceController.searchRoomServices(room.getRoomNumber());
 			for(int s=0;s<al.size();s++) {
 				RoomService rs = (RoomService)al.get(s);
