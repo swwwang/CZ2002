@@ -211,12 +211,6 @@ public class GuestController {
 						System.out.println("Enter Gender (M/F): ");
 						g.setGender(sc.nextLine());
 						break;
-					/*case "6":
-						System.out.println("Enter new Identity Type (Driving License/Passport): ");
-						g.setIdentity(sc.nextLine());
-					case "7":
-						System.out.println("Enter new ID No :");
-						g.setIdNo(sc.nextLine());*/
 					case "6":
 						System.out.println("Enter new Nationality");
 						g.setNationality(sc.nextLine());

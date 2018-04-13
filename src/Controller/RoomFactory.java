@@ -11,10 +11,30 @@ import RoomTypes.DoubleRoom;
 import RoomTypes.SingleRoom;
 import RoomTypes.VIPRoom;
 
+
+/**
+Represents the controller for types of Room
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
 public class RoomFactory {
+	/**
+	 * The filename for file that have all the RoomTypes
+	 */
 	public static final String FILENAME = "roomType.txt";
+	/**
+	 * The separator for separating fields to be saved into the file
+	 */
 	public static final String SEPARATOR = "|";
 	
+	
+	/**
+	 * Gets specific room type information
+	 * @param roomType type of the room
+	 * @return	type of the room
+	 * @throws IOException
+	 */
 	public static RoomType getRoomType(String roomType) throws IOException{
 		ArrayList rooms;
 		if(roomType == null){
@@ -42,10 +62,15 @@ public class RoomFactory {
 
 		return null;
 	}
+	/**
+	 * Gets rates of the rooms based on their type
+	 * @return list of type of the rooms with rate included
+	 * @throws IOException
+	 */
 	public static ArrayList readRoomRates() throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME);
-		ArrayList alr = new ArrayList() ;// to store Professors data
+		ArrayList alr = new ArrayList() ;
 
 		for (int i = 0 ; i < stringArray.size() ; i++) {
 			String st = (String)stringArray.get(i);
@@ -56,7 +81,7 @@ public class RoomFactory {
 			double  rate = Double.parseDouble(star.nextToken().trim());
 			double  weekendRate = Double.parseDouble(star.nextToken().trim());
 			
-			// create Professor object from file data
+			
 			RoomType r = null;
 			if(type.equalsIgnoreCase("SINGLE")){
 				r= new SingleRoom();
@@ -78,12 +103,16 @@ public class RoomFactory {
 				r.setRate(rate);
 				r.setWeekendRate(weekendRate);
 			}
-			// add to Professors list
+			
 			alr.add(r) ;
 		}
 		return alr ;
 	}
-	// an example of saving
+	/**
+	 * Add a new room type and new room rate into the roomType.txt
+	 * @param al list of types of new rooms with included rates
+	 * @throws IOException
+	 */
 		public static void saveRoomRates(List al) throws IOException {
 			List alw = new ArrayList() ;// to store Guest data
 
@@ -102,8 +131,14 @@ public class RoomFactory {
 			textDB.write(FILENAME,alw);
 		}
 		
-		public static int updateRoomRate(String roomType,double rate,double weekendRate) throws IOException{
-			int result=0;
+		/**
+		 * Update the rate of the existing room type.
+		 * @param roomType    Type of the room
+		 * @param rate 	      new rate of the room
+		 * @param weekendRate new weekend rate of the room
+		 * @throws IOException
+		 */
+		public static void updateRoomRate(String roomType,double rate,double weekendRate) throws IOException{
 			ArrayList rooms=readRoomRates();
 
 			for(int i=0;i<rooms.size();i++) {
@@ -116,8 +151,6 @@ public class RoomFactory {
 				}
 			}
 			saveRoomRates(rooms);
-
-			return result;
 		}
 	
 }

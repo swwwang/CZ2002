@@ -64,8 +64,8 @@ public class Room {
 	public void setSmoke(String smoke) {
 		this.smoke = Smoke.valueOf(smoke);
 	}
-	public RoomStatus getStatus() {
-		return status;
+	public String getStatus() {
+		return status.toString(); 
 	}
 	public void setStatus(String status) {
 		this.status = RoomStatus.valueOf(status.toUpperCase());
