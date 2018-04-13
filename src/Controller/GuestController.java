@@ -12,12 +12,32 @@ import java.util.StringTokenizer;
 import Entity.CreditCard;
 import Entity.Guest;
 
+
+/**
+Represents the controller for using the Room class
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
 public class GuestController {
+	/**
+	 * The filename that stores all the created guests
+	 */
 	public static final String FILENAME = "guest.txt";
+	/**
+	 * The filename that stores all the credit cards of guests
+	 */
 	public static final String FILENAME1 = "creditCard.txt";
+	/**
+	 * The separator for separating fields to be saved into the file
+	 */
 	public static final String SEPARATOR = "|";
 
-	//Get the whole list of data in the textfile
+	/**
+	 * Read all the guests from guest lists
+	 * @return the entire guest lists
+	 * @throws IOException
+	 */
 	public static ArrayList readGuests() throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME);
@@ -46,7 +66,11 @@ public class GuestController {
 		return alr ;
 	}
 
-	//get credit cards info from textfile
+	/**
+	 * read all the credit cards from credit card lists
+	 * @return all credit card details
+	 * @throws IOException
+	 */
 	public static ArrayList readCreditCards() throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME1);
@@ -72,6 +96,13 @@ public class GuestController {
 	}
 
 	//get credit card object from cardName
+	/**
+	 * Get all the detailed information from the credit card
+	 * @param cardName name on the card
+	 * @param guestID  id of the guest 
+	 * @return a credit card
+	 * @throws IOException
+	 */
 	private static CreditCard getCreditCardDetails(String cardName,String guestID) throws IOException {
 		// TODO Auto-generated method stub
 		CreditCard c=new CreditCard();
@@ -85,7 +116,11 @@ public class GuestController {
 		}
 		return c;
 	}
-	//update credit card int textfile
+	/**
+	 * update the information on the credit card 
+	 * @param c credit card
+	 * @throws IOException
+	 */
 	public static void updateCreditCard(CreditCard c) throws IOException {
 		CreditCard c1=new CreditCard();
 		ArrayList cards=readCreditCards();
@@ -99,7 +134,12 @@ public class GuestController {
 		}
 		saveCreditCards(cards);
 	}
-	//create new credit card in textfile
+	/**
+	 * create a new credit card 
+	 * @param guestID ID of the guest 
+	 * @return Credit Card
+	 * @throws IOException
+	 */
 	public static CreditCard createCreditCard(String guestID) throws IOException {
 		Scanner sc=new Scanner(System.in);
 
@@ -117,7 +157,11 @@ public class GuestController {
 		return c;
 	}
 
-	//save credit card data to textfile
+	/**
+	 * Save all the credit cards in the file
+	 * @param al list of credit cards
+	 * @throws IOException
+	 */
 	public static void saveCreditCards(List al) throws IOException {
 		List alw = new ArrayList() ;// to store data
 
@@ -138,7 +182,11 @@ public class GuestController {
 		textDB.write(FILENAME1,alw);
 	}
 
-	// saving guests data to textfile
+	/**
+	 * Save all the guests in the file
+	 * @param al list of guest lists
+	 * @throws IOException
+	 */
 	public static void saveGuests(List al) throws IOException {
 		List alw = new ArrayList() ;// to store Guest data
 
@@ -166,7 +214,13 @@ public class GuestController {
 		textDB.write(FILENAME,alw);
 	}
 
-	//update guest details based on name and id
+	/**
+	 * update information of guest based on the name and id
+	 * @param name 	  name of the guest
+	 * @param guestID id of the guest
+	 * @return 		  return result=1 if update is successful, or else return result=0
+	 * @throws IOException
+	 */
 	public static int updateGuest(String name,String guestID) throws IOException{
 		Scanner sc=new Scanner(System.in);
 		int result=0;
@@ -233,7 +287,13 @@ public class GuestController {
 		return result;
 	}
 
-	//search for guest using name
+	/**
+	 * Search for guest using name and guest id
+	 * @param name name of the guest
+	 * @param id   id of the guest
+	 * @return 	   Guest
+	 * @throws IOException
+	 */
 	public static Guest searchGuest(String name,String id) throws IOException{
 		Guest g = new Guest();
 		ArrayList guests=readGuests();
@@ -247,7 +307,12 @@ public class GuestController {
 		}
 		return g;
 	}
-	//search for guest using id
+	/**
+	 * Search for guest using guest id
+	 * @param id id of the guest
+	 * @return   Guest
+	 * @throws IOException
+	 */
 	public static Guest searchGuest(String id) throws IOException{
 		Guest g = new Guest();
 		ArrayList guests=readGuests();
@@ -262,7 +327,11 @@ public class GuestController {
 		return g;
 	}
 
-	//create a new guest if not found in textfile
+	/**
+	 * Create a guest if not found in the file
+	 * @return Guest
+	 * @throws IOException
+	 */
 	public static Guest createGuest() throws IOException {
 		Scanner sc=new Scanner(System.in);
 		
