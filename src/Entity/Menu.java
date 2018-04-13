@@ -15,7 +15,7 @@ import Controller.textDB;
 /**
  * Represents the room service menu of the hotel
  * The menu can have multiple items
- * @author Kaw Teck Lin
+ * @author TeamFour
  * @version 1.0
  * @since 2018-04-01
  */

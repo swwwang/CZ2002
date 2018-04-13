@@ -17,13 +17,39 @@ import Entity.Reservation;
 import Entity.Room;
 import Entity.RoomService;
 
+/**
+Represents the controller for using the RoomService class
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
 public class RoomServiceController {
+	/**
+	 * The filename that stores the all room services
+	 */
 	public static final String FILENAME = "roomService.txt";
+	/**
+	 * The filename that stores the menu of available room services
+	 */
 	public static final String FILENAME1 = "menu.txt";
+	/**
+	 * The separator for separating fields to be saved into the file
+	 */
 	public static final String SEPARATOR = "|";
+	/**
+	 * The formatter for date
+	 */
 	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+	/**
+	 * The formatter for time
+	 */
 	public static final DateTimeFormatter f2 = DateTimeFormatter.ofPattern("hh:mm a");
 	
+	/**
+	 * Get all room services from roomService.txt and return a list of room services
+	 * @return List of room services
+	 * @throws IOException
+	 */
 	public static ArrayList readRoomServices() throws IOException {
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME);
 		ArrayList alr = new ArrayList() ;
@@ -47,7 +73,12 @@ public class RoomServiceController {
 		}
 		return alr ;
 	}
-
+	
+	/**
+	 * Save the list of room services in the roomService.txt
+	 * @param al List of room services
+	 * @throws IOException
+	 */
 	public static void saveRoomsServices(List al) throws IOException {
 		List alw = new ArrayList() ;
 
@@ -74,6 +105,12 @@ public class RoomServiceController {
 		}
 		textDB.write(FILENAME,alw);
 	}
+	/**
+	 * Update the list of Room Services ordered by a room based on the room number
+	 * @param roomNo RoomNumber of the room
+	 * @return       if it is successfully updated, it will return 1 else it will return 0
+	 * @throws IOException
+	 */
 	public static int updateRoomService(String roomNo) throws IOException{
 		int result=0;
 		ArrayList roomServices = readRoomServices();
@@ -90,6 +127,12 @@ public class RoomServiceController {
 		return result;
 	}
 
+	/**
+	 * Get the list of Room Services ordered by a room based on the room number
+	 * @param roomNo RoomNumber of the room
+	 * @return       List of Room Services
+	 * @throws IOException
+	 */
 	public static ArrayList searchRoomServices(String roomNo) throws IOException {
 		RoomService rs = new RoomService();
 		ArrayList<RoomService> rsReturn = new ArrayList<RoomService>();
@@ -105,6 +148,10 @@ public class RoomServiceController {
 
 	}
 	
+	/**
+	 * Create a new room service
+	 * @throws IOException
+	 */
 	public static void newRoomService() throws IOException {
 		Scanner sc=new Scanner(System.in);
 
@@ -211,7 +258,12 @@ public class RoomServiceController {
 		System.out.println("Room Service Added!");
 	}
 
-	
+	/**
+	 * Display the lists of room services ordered by the a room based on the room number
+	 * @param roomNo  Room Number
+	 * @return		  Number of unpaid room services
+	 * @throws IOException
+	 */
 	public static int displayRoomsService(String roomNo) throws IOException {
 		System.out.println("\nNo.	Item            Price     Date & TimeStamp	Status		Remarks"); 
 		System.out.println("================================================================================="); 
@@ -235,6 +287,10 @@ public class RoomServiceController {
 		
 		return rsNum;
 	}
+	/**
+	 * Updated the status of the ordered room services
+	 * @throws IOException
+	 */
 	public static void changeRoomServiceStatus() throws IOException{
 		Scanner sc=new Scanner(System.in);
 

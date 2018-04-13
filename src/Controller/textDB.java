@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+Represents the controller for read and write operation to textfiles
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
 public class textDB {
 	/** Write fixed content to the given file. */
 	public static void write(String fileName,List data) throws IOException  {

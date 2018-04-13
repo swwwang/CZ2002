@@ -14,7 +14,18 @@ import Controller.RoomFactory;
 import Controller.RoomServiceController;
 import Entity.MenuItem;
 
+/**
+Represents the main user interface
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
 public class HotelApplication {
+	/**
+	 * The main user interface of the Hotel Reservation and Payment System
+	 * @param args String arguments
+	 * @throws IOException
+	 */
 	public static void main(String args[]) throws IOException {
 		// System.out.println("");
 		Scanner sc = new Scanner(System.in);

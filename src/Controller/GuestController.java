@@ -14,7 +14,7 @@ import Entity.Guest;
 
 
 /**
-Represents the controller for using the Room class
+Represents the controller for using the Guest class
 @author TeamFour
 @version 1.0
 @since 2018-04-01

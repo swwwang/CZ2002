@@ -94,7 +94,7 @@ public class RoomController {
 	
 	/**
 	 * Creates a new Room.
-	 * @return  a new room
+	 * @return  A new room
 	 * @throws IOException
 	 */
 	public static Room createRoom() throws IOException {
@@ -242,9 +242,9 @@ public class RoomController {
 	/**
 	 * Update the properties of the room
 	 * @param roomNumber RoomNumber of the room
-	 * @param catagory   category of the room
+	 * @param catagory   Category of the room
 	 * @param value 	 The new value that will replace the existing value
-	 * @return 			 if it is successfully updated, this method will return 1 else it will return 0
+	 * @return 			 If it is successfully updated, this method will return 1 else it will return 0
 	 * @throws IOException
 	 */
 	public static int updateRoom(String roomNumber, String catagory, String value) throws IOException {
@@ -503,8 +503,8 @@ public class RoomController {
 	
 	/**
 	 * Lists all the rooms of the same condition
-	 * @param type condition of the room
-	 * @return lists of rooms with same condition      
+	 * @param type Condition of the room
+	 * @return     Lists of rooms with same condition      
 	 * @throws IOException
 	 */
 	public static List checkRoom(String type) throws IOException {

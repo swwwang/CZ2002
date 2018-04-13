@@ -16,13 +16,38 @@ import Entity.Reservation;
 import Entity.Room;
 import Entity.RoomService;
 
+/**
+Represents the controller for using the RoomService class
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
 public class PaymentController {
+	/**
+	 * The filename that stores the all room services
+	 */
 	public static final String FILENAME = "roomService.txt";
+	/**
+	 * The filename that stores the all reservations
+	 */
 	public static final String FILENAME1 = "reservation.txt";
+	/**
+	 * The separator for separating fields to be saved into the file
+	 */
 	public static final String SEPARATOR = "|";
+	/**
+	 * The formatter for date
+	 */
 	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+	/**
+	 * The formatter for time
+	 */
 	public static final DateTimeFormatter f2 = DateTimeFormatter.ofPattern("hh:mm a");
-
+	/**
+	 * Calculate the bill based on the number of stays by the guest, and ordered room services and 
+	 * apply tax and promotion rate to total bill and print out the final bill
+	 * @throws IOException
+	 */
 	public static void printBill ()  throws IOException {
 		Scanner sc = new Scanner(System.in);
 		String roomNo;

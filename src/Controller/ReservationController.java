@@ -11,14 +11,40 @@ import java.util.StringTokenizer;
 
 import Entity.*;
 
+/**
+Represents the controller for using the Reservation class
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
+
 public class ReservationController {
+	/**
+	 * The filename that stores the all reservations' information
+	 */
 	public static final String FILENAME = "reservation.txt";
+	/**
+	 * The filename that stores the number of rooms reserved and reserved room numbers
+	 */
 	public static final String FILENAME1 = "reservationRoom.txt";
+	/**
+	 * The separator for separating fields to be saved into the file
+	 */
 	public static final String SEPARATOR = "|";
+	/**
+	 * The formatter for date
+	 */
 	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+	/**
+	 * The formatter for time
+	 */
 	public static final DateTimeFormatter f2 = DateTimeFormatter.ofPattern("hh:mm a");
 
-	//Get the whole list of data in the textfile
+	/**
+	 * Get all the reservations from reservation.txt and return a list of reservations
+	 * @return List of reservations
+	 * @throws IOException
+	 */
 	public static ArrayList readReservations() throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME);
@@ -48,7 +74,11 @@ public class ReservationController {
 		return alr ;
 	}
 
-	// save data to textfile
+	/**
+	 * Save the list of reservations in the reservation.txt
+	 * @param al List of reservations
+	 * @throws IOException
+	 */
 	public static void saveReservations(List al) throws IOException {
 		List alw = new ArrayList() ;// to store Reservation data
 
@@ -81,7 +111,11 @@ public class ReservationController {
 		textDB.write(FILENAME,alw);
 	}
 
-	//read rooms under a reservation code in the textfile
+	/**
+	 * Get rooms under a reservation code from the reservationRoom.txt and return lists of reserved rooms
+	 * @return Lists of reserved rooms
+	 * @throws IOException
+	 */
 	public static ArrayList readReservationRoom() throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME1);
@@ -112,7 +146,12 @@ public class ReservationController {
 		return alr ;
 	}
 
-	//Get specific ReservationRoom object from Reservation Code
+	/**
+	 * Get specific ReservationRoom based on Reservation Code from reservationRoom.txt
+	 * @param reservationCode Reservation Code
+	 * @return 				  Reserved room
+	 * @throws IOException
+	 */
 	public static ReservationRoom getReservationRoomDetails(int reservationCode) throws IOException {
 		// TODO Auto-generated method stub
 		ReservationRoom r=new ReservationRoom();
@@ -127,7 +166,12 @@ public class ReservationController {
 		return r;
 
 	}
-	//Get guest id from Room Number
+	/**
+	 * Get a reservation based on the room number from reservationRoom.txt
+	 * @param roomNo  Room Number
+	 * @return		  Reservation
+	 * @throws IOException
+	 */
 	public static Reservation getGuestID(String roomNo) throws IOException {
 		// TODO Auto-generated method stub
 		ReservationRoom r=new ReservationRoom();
@@ -149,7 +193,11 @@ public class ReservationController {
 
 	}
 
-	//Save Reservation Room to the textfile
+	/**
+	 * Save ReservationRoom to the reservationRoom.txt file
+	 * @param al List of ReservationRooms
+	 * @throws IOException
+	 */
 	public static void saveReservationRoom(List al) throws IOException {
 		List alw = new ArrayList() ;// to store ReservationRoom data
 
@@ -171,7 +219,14 @@ public class ReservationController {
 		textDB.write(FILENAME1,alw);
 	}
 
-	//Update Reservation Status inside the textfile
+	/**
+	 * Update Reservation Status of the selected reservation
+	 * @param guestID ID of the guest
+	 * @param status  Status of the reservation
+	 * @param date    Current Date
+	 * @return        If it is successfully updated, the method will return 1, else it will return 0
+	 * @throws IOException
+	 */
 	public static int updateReservation(String guestID,String status,LocalDate date) throws IOException{
 		int result=0;
 		ArrayList reservations=readReservations();
@@ -187,6 +242,7 @@ public class ReservationController {
 					r.setCheckOut(date);
 				}
 				reservations.set(i, r);
+				result = 1;
 				break;
 			}
 		}
@@ -195,7 +251,12 @@ public class ReservationController {
 		return result;
 	}
 
-	//Remove the reservation from the textfile
+	/**
+	 * Remove the selected reservation from the reservation.txt file
+	 * @param guestID ID of the Guest
+	 * @return        If it is successfully updated, the method will return 1, else it will return 0
+	 * @throws IOException
+	 */
 	public static int removeReservation(String guestID) throws IOException{
 		int result=0;
 		ArrayList reservations=readReservations();
@@ -224,7 +285,12 @@ public class ReservationController {
 		return result;
 	}
 
-	//Search for reservation using guest ID
+	/**
+	 * Search for reservation using guest ID from the reservation.txt file
+	 * @param guestID ID of the Guest
+	 * @return		  Reservation
+	 * @throws IOException
+	 */
 	public static Reservation searchReservations(String guestID) throws IOException{
 		Reservation r=new Reservation();
 		ArrayList reservations=readReservations();
@@ -240,7 +306,12 @@ public class ReservationController {
 		}
 		return r;
 	}
-	//Search for reservation using reservation code
+	/**
+	 * Search for reservation using reservation code from the reservation.txt file
+	 * @param code Reservation Code
+	 * @return	   Reservation
+	 * @throws IOException
+	 */
 	public static Reservation searchReservationsByCode(int code) throws IOException{
 		Reservation r=new Reservation();
 		ArrayList reservations=readReservations();
@@ -257,7 +328,11 @@ public class ReservationController {
 		return r;
 	}
 
-	//Create new reservation for both walk-in and non walk-in
+	/**
+	 * Create new reservation for both walk-in and non walk-in
+	 * @param isWalkIn  Boolean value true for walk-in and false for non walk-in
+	 * @throws IOException
+	 */
 	public static void createReservation(boolean isWalkIn) throws IOException {
 		Guest g=new Guest();
 		Scanner sc=new Scanner(System.in);
@@ -437,7 +512,10 @@ public class ReservationController {
 		printReservationReceipt(r);
 	}
 
-	//printing out reservation receipt
+	/**
+	 * Print out reservation receipt
+	 * @param r Reservation
+	 */
 	public static void printReservationReceipt(Reservation r) {
 		System.out.print("Guest Name: ");
 		System.out.println(r.getGuest().getName());
@@ -457,7 +535,10 @@ public class ReservationController {
 		System.out.println();
 	}
 
-	//check in for non walk-in
+	/**
+	 * Check in method for non walk-in
+	 * @throws IOException
+	 */
 	public static void checkIn() throws IOException {
 		Scanner sc=new Scanner(System.in);
 
@@ -494,7 +575,12 @@ public class ReservationController {
 		}
 
 	}
-	//check out
+	/**
+	 * Check out method to update status of reservation and room
+	 * @param guestID      ID of the guest
+	 * @param checkOutDate Local Date
+	 * @throws IOException
+	 */
 	public static void checkOut(String guestID,LocalDate checkOutDate) throws IOException {
 		Reservation r=searchReservations(guestID);
 
@@ -505,7 +591,10 @@ public class ReservationController {
 
 	}
 
-	//check if reservations is expired and update accordingly
+	/**
+	 * Check if reservation is expired and update status accordingly
+	 * @throws IOException
+	 */
 	public static void checkExpiredReservations() throws IOException {
 
 		ArrayList reservations=readReservations();

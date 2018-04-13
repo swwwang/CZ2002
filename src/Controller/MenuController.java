@@ -14,14 +14,14 @@ import Entity.Menu;
 import Entity.MenuItem;
 /**
   Represents the controller for using the Menu class
-  @author Kaw Teck Lin
+  @author TeamFour
   @version 1.0
   @since 2018-04-01
  */
 public class MenuController {
 
 	/**
-	 * The filename for saving the entire room service Menu
+	 * The filename that stores the entire room service Menu
 	 */
 	public static final String FILENAME = "menu.txt";
 	/**
