@@ -103,7 +103,7 @@ public class GuestController {
 	 * @return a credit card
 	 * @throws IOException
 	 */
-	private static CreditCard getCreditCardDetails(String cardName,String guestID) throws IOException {
+	public static CreditCard getCreditCardDetails(String cardName,String guestID) throws IOException {
 		// TODO Auto-generated method stub
 		CreditCard c=new CreditCard();
 		ArrayList cards=readCreditCards();
@@ -129,34 +129,13 @@ public class GuestController {
 			c1=(CreditCard)cards.get(i);
 			if(c1.getGuestID().equals(c.getGuestID())) {
 				cards.set(i, c);
+				printCreditCard(c);
 				break;
 			}
 		}
 		saveCreditCards(cards);
 	}
-	/**
-	 * create a new credit card 
-	 * @param guestID ID of the guest 
-	 * @return Credit Card
-	 * @throws IOException
-	 */
-	public static CreditCard createCreditCard(String guestID) throws IOException {
-		Scanner sc=new Scanner(System.in);
-
-		System.out.println("Please enter Credit Card Name:");
-		String creditName=sc.nextLine();
-
-		System.out.println("Please enter Credit Card Number (16 digits):");
-		String creditNumber=sc.nextLine();
-
-		System.out.println("Please enter Credit Card Billing Address:");
-		String creditAddress=sc.nextLine();
-
-		CreditCard c=new CreditCard(guestID,creditName,creditNumber,creditAddress);
-
-		return c;
-	}
-
+	
 	/**
 	 * Save all the credit cards in the file
 	 * @param al list of credit cards
@@ -180,6 +159,20 @@ public class GuestController {
 			alw.add(st.toString()) ;
 		}
 		textDB.write(FILENAME1,alw);
+	}
+	/**
+	 * Print Credit Card details
+	 * @param c Credit Card object to be printed
+	 */
+	public static void printCreditCard(CreditCard c) {
+		System.out.println("-Printing Credit Card-");
+		System.out.print("Credit Card Name: ");
+		System.out.println(c.getCardName());
+		System.out.print("Credit Card No : ");
+		System.out.println(c.getCardNumber());
+		System.out.print("Credit Card Biling Address: ");
+		System.out.println(c.getBillingAddress());
+		System.out.println();
 	}
 
 	/**
@@ -212,79 +205,6 @@ public class GuestController {
 			alw.add(st.toString()) ;
 		}
 		textDB.write(FILENAME,alw);
-	}
-
-	/**
-	 * update information of guest based on the name and id
-	 * @param name 	  name of the guest
-	 * @param guestID id of the guest
-	 * @return 		  return result=1 if update is successful, or else return result=0
-	 * @throws IOException
-	 */
-	public static int updateGuest(String name,String guestID) throws IOException{
-		Scanner sc=new Scanner(System.in);
-		int result=0;
-		ArrayList guests=readGuests();
-
-		for(int i=0;i<guests.size();i++) {
-			Guest g = (Guest)guests.get(i);
-			String choice="";
-			if(g.getName().equals(name)&&g.getIdNo().equals(guestID)) {
-				do {
-					System.out.println("What do you want to update?");
-					System.out.println("1. Name");
-					System.out.println("2. Credit Card");
-					System.out.println("3. Address");
-					System.out.println("4. Country");
-					System.out.println("5. Gender");
-					//System.out.println("6. Identity Type");
-					//System.out.println("7. Identity Number");
-					System.out.println("6. Nationality");
-					System.out.println("7. Contact");
-					System.out.println("8. Exit");
-					System.out.println("Please enter the number of the option that you want to select:");
-					choice=sc.nextLine();
-					switch (choice) {
-					case "1":
-						System.out.println("Enter new Name: ");
-						g.setName(sc.nextLine());
-						break;
-					case "2":
-						g.setCreditCard(createCreditCard(guestID));
-						updateCreditCard(g.getCreditCard());
-						break;
-					case "3":
-						System.out.println("Enter new Address: ");
-						g.setAddress(sc.nextLine());
-						break;
-					case "4":
-						System.out.println("Enter new Country: ");
-						g.setCountry(sc.nextLine());
-						break;
-					case "5":
-						System.out.println("Enter Gender (M/F): ");
-						g.setGender(sc.nextLine());
-						break;
-					case "6":
-						System.out.println("Enter new Nationality");
-						g.setNationality(sc.nextLine());
-						break;
-					case "7":
-						System.out.println("Enter new Contact No :");
-						g.setContact(sc.nextLine());
-						break;
-					default:
-						System.out.println("Invalid Choice!");
-					}
-				}while(!choice.equalsIgnoreCase("8"));
-				guests.set(i, g);
-				result=1;
-				break;
-			}
-		}
-		saveGuests(guests);
-
-		return result;
 	}
 
 	/**
@@ -326,72 +246,38 @@ public class GuestController {
 		}
 		return g;
 	}
-
 	/**
-	 * Create a guest if not found in the file
-	 * @return Guest
-	 * @throws IOException
+	 * Print Guest details
+	 * @param g Guest object to be printed
 	 */
-	public static Guest createGuest() throws IOException {
-		Scanner sc=new Scanner(System.in);
+	public static void printGuest(Guest g) {
 		
-		System.out.println("-Creating New Guest-");
-		System.out.println("Please enter Name: ");
-		String name=sc.nextLine();
+		System.out.print("Guest Name: ");
+		System.out.println(g.getName());
 		
-		System.out.println("Please enter identity (Driving License/Passport):");
-		String identity=sc.nextLine();
-		if(identity.equals("Driving License")) {
-			identity="DrivingLicense";
-		}
-		System.out.println("Please enter ID No:");
-		String idNo=sc.nextLine();
-
-		System.out.println("Please enter Address:");
-		String address=sc.nextLine();
-
-		System.out.println("Please enter contact (8 digits):");
-		String contact=sc.nextLine();
-
-		System.out.println("Please enter Gender (M/F):");
-		String gender=sc.nextLine();
-
-		System.out.println("Please enter Nationality:");
-		String nationality=sc.nextLine();
-
-		System.out.println("Please enter Country:");
-		String country=sc.nextLine();
-
-		System.out.println("Add a credit card? Y/N");
-		String yesNo=sc.nextLine();
-
-		CreditCard c=new CreditCard();
-
-		if(yesNo.toUpperCase().equals("Y")) {
-			c=createCreditCard(idNo);
-			ArrayList creditCards=readCreditCards();
-			creditCards.add(c);
-			saveCreditCards(creditCards);
-		}
-
-		Guest g=new Guest();
-		g.setName(name);
-		g.setIdentity(identity.toUpperCase());
-		g.setIdNo(idNo);
-		g.setAddress(address);
-		g.setContact(contact);
-		g.setCountry(country);
-		g.setGender(gender);
-		g.setNationality(nationality);
-		g.setCreditCard(c);
-		ArrayList guests=readGuests();
-		guests.add(g);
-
-		saveGuests(guests);
-
-		return g;
+		System.out.print("ID No: ");
+		System.out.println(g.getIdNo());
+		
+		System.out.print("Identity Type: ");
+		System.out.println(g.getIdentity());
+		
+		System.out.print("Gender: ");
+		System.out.println(g.getGender());
+		
+		System.out.print("Contact No: ");
+		System.out.println(g.getContact());
+		
+		System.out.print("Country: ");
+		System.out.println(g.getCountry());
+		
+		System.out.print("Nationality: ");
+		System.out.println(g.getNationality());
+		
+		System.out.print("Address: ");
+		System.out.println(g.getAddress());
+		
+		System.out.println();
+		printCreditCard(g.getCreditCard());
+		
 	}
-
-
-
 }
