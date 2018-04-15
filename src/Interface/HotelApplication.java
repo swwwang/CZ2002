@@ -40,11 +40,11 @@ public class HotelApplication {
 			admin_choice = sc.nextInt();
 			switch (admin_choice) {
 			case 1:
-				RoomInterface.main(null);
+				HotelAdminInterface.main(null);
 				break;
 
 			case 2:
-				ReservationInterface.main(null);
+				GuestAdminInterface.main(null);
 				break;
 
 			case 3:

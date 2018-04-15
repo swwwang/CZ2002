@@ -16,7 +16,13 @@ import Entity.Reservation;
 import Entity.ReservationRoom;
 import Entity.Room;
 
-public class ReservationInterface {
+/**
+Represents the interface for Guest Administration System
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
+public class GuestAdminInterface {
 	/**
 	 * The formatter for date
 	 */
@@ -26,6 +32,11 @@ public class ReservationInterface {
 	 */
 	public static final DateTimeFormatter f2 = DateTimeFormatter.ofPattern("hh:mm a");
 
+	/**
+	 * The interface for Guest Administration System
+	 * @param args String Value
+	 * @throws IOException
+	 */
 	public static void main(String args[]) throws IOException {
 		Scanner sc=new Scanner(System.in);
 		int guest_choice=0;
@@ -40,7 +51,7 @@ public class ReservationInterface {
 			System.out.println("7. Update Guest Information");
 			System.out.println("8. Remove a reservation");
 			System.out.println("9. Print all reservation");
-			System.out.println("10.Exit");
+			System.out.println("10. Exit");
 			System.out.println("Please enter the number of the option that you want to select:");
 			guest_choice = sc.nextInt();
 			String dummy="";

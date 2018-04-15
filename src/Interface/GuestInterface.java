@@ -8,11 +8,14 @@ import Controller.GuestController;
 import Entity.CreditCard;
 import Entity.Guest;
 
+/**
+Represents the interface to accept user input for guest information
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
 public class GuestInterface {
-	public static void main(String args[]) {
 
-
-	}
 	/**
 	 * Search for guest and print out the details
 	 * @throws IOException

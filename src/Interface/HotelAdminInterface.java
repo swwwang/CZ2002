@@ -12,7 +12,18 @@ import Controller.RoomServiceController;
 import Entity.MenuItem;
 import Entity.Room;
 
-public class RoomInterface {
+/**
+Represents the interface for Hotel Administration System
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+*/
+public class HotelAdminInterface {
+	/**
+	 * The interface for hotel administration system
+	 * @param args String Value
+	 * @throws IOException
+	 */
 	public static void main(String args[]) throws IOException {
 		Scanner sc=new Scanner(System.in);
 		int system_choice=0;
@@ -107,7 +118,7 @@ public class RoomInterface {
 			default:
 				System.out.println("Invalid Choice! Please enter again!");
 			}
-		} while (system_choice != 7);
+		} while (system_choice != 8);
 	}
 	/**
 	 * Creates a new Room.

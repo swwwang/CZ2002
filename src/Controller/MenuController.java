@@ -79,6 +79,11 @@ public class MenuController {
 			out.close();
 		}
 	}
+	
+	/**
+	 * Prints the name, price and description of a menu item
+	 * @param m MenuItem
+	 */
 	public static void printMenuItem(MenuItem m) {
 		System.out.println("-Printing Menu Item-");
 		System.out.print("Menu Name: ");
