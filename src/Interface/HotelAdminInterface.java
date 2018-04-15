@@ -127,6 +127,7 @@ public class HotelAdminInterface {
 	 */
 	public static Room createRoom() throws IOException {
 		int type_sel, bed_sel, wifi_sel, facing_sel, smoke_sel, status_sel;
+		String number;
 		Scanner sc = new Scanner(System.in);
 		Room r = new Room();
 		do {
@@ -153,11 +154,12 @@ public class HotelAdminInterface {
 			default:
 				System.out.println("Please select the valid room type again!");
 			}
-		} while (type_sel != 1 && type_sel != 2 && type_sel != 3 && type_sel != 4);
+		} while (type_sel <=0 || type_sel >= 5);
 
 		System.out.println("Please Enter the room number:");
-		String number = sc.next();
+		number = sc.next();
 		r.setRoomNumber(number);
+		
 		do {
 			System.out.println("Bed Types");
 			System.out.println("1. Single");
@@ -178,7 +180,7 @@ public class HotelAdminInterface {
 			default:
 				System.out.println("Please select the valid bed type again!");
 			}
-		} while (bed_sel != 1 && bed_sel != 2 && bed_sel != 3);
+		} while (bed_sel <= 0 || bed_sel >= 4);
 
 		do {
 			System.out.println("WIFI Enabled?");
@@ -218,7 +220,7 @@ public class HotelAdminInterface {
 			default:
 				System.out.println("Please select the valid facing type again!");
 			}
-		} while (facing_sel != 1 && facing_sel != 2 && facing_sel != 3);
+		} while (facing_sel <= 0 || facing_sel >= 4);
 
 		do {
 			System.out.println("Smoking Allowed?");
@@ -236,7 +238,7 @@ public class HotelAdminInterface {
 			default:
 				System.out.println("Please select the valid choice again!");
 			}
-		} while (smoke_sel != 1 && smoke_sel != 2);
+		} while (smoke_sel != 1 || smoke_sel != 2);
 
 		do {
 			System.out.println("Room Satus:");
@@ -262,7 +264,7 @@ public class HotelAdminInterface {
 			default:
 				System.out.println("Please select the valid Room Status again!");
 			}
-		} while (status_sel != 1 && status_sel != 2 && status_sel != 3 && status_sel != 4);
+		} while (status_sel <= 0 || status_sel >= 5);
 
 		return r;
 	}
@@ -311,7 +313,7 @@ public class HotelAdminInterface {
 						default:
 							System.out.println("Please select the valid Room Status again!");
 						}
-					} while (status_sel != 1 && status_sel != 2 && status_sel != 3 && status_sel != 4);
+					} while (status_sel <=0 || status_sel >= 5);
 					break;
 				case 2:
 					do {
@@ -334,7 +336,7 @@ public class HotelAdminInterface {
 						default:
 							System.out.println("Please select the valid bed type again!");
 						}
-					} while (bed_sel != 1 && bed_sel != 2 && bed_sel != 3);
+					} while (bed_sel <= 0 || bed_sel >= 4);
 					break;
 				case 3:
 					do {
@@ -376,7 +378,7 @@ public class HotelAdminInterface {
 						default:
 							System.out.println("Please select the valid facing type again!");
 						}
-					} while (facing_sel != 1 && facing_sel != 2 && facing_sel != 3);
+					} while (facing_sel <= 0 || facing_sel >= 4);
 					break;
 				case 5:
 					do {
@@ -400,7 +402,7 @@ public class HotelAdminInterface {
 				default:
 					System.out.println("Please select the valid category again!");
 				}
-			} while (cat_sel != 1 && cat_sel != 2 && cat_sel != 3 && cat_sel != 4 && cat_sel != 5);
+			} while (cat_sel <= 0 || cat_sel >= 6);
 			System.out.println("You have successfully updated the room information!!!!");
 			System.out.println("Do you want to update Other Catergory?(Y/N):");
 			other_cat = sc.next();

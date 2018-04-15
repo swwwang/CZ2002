@@ -4,3 +4,5 @@ U16724425D|DRIVINGLICENSE|dsa|Sample Address|Country|M|Country|12345678|
 12345|PASSPORT|JR|Hougang|Korea|M|Korean|87654321|
 1|PASSPORT|a|a|a|m|a|1|
 E12345L|PASSPORT|Sean|Hougang|Singapore|M|Singaporean|12345678|
+12|DRIVINGLICENSE|BB|Osaka|Japan|M|Japan|12345678|
+123|DRIVINGLICENSE|ABAB|Somewhere|Nowhere|M|Nowhere|12345678|

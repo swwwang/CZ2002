@@ -349,7 +349,7 @@ public class GuestAdminInterface {
 				RoomController.updateRoom(rooms.get(i).getRoomNumber(),"STATUS","OCCUPIED");
 			}
 		}
-		System.out.println("Reservation Created!");
+		System.out.println("Checked in successfully!");
 		System.out.println();
 
 		//print receipt

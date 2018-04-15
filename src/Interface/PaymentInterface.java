@@ -56,7 +56,7 @@ public class PaymentInterface {
 			System.out.println("Please enter Guest ID: ");
 			guestID=sc.nextLine();
 			if ((GuestController.searchGuest(guestName,guestID.toUpperCase())).getIdNo() == null)
-				System.out.println("Enter a valid guest ID!");
+				System.out.println("Enter a valid guest Name & ID!");
 			else
 			{
 				ArrayList<Reservation> r=ReservationController.searchReservations(guestID);
@@ -191,10 +191,7 @@ public class PaymentInterface {
 
 				if(rs.getPaid().equals("UNPAID") && rs.getStatus().toString() == "DELIVERED")
 				{
-					System.out.println(	"Room Service	"+
-							rs.getOrderedMenu().getName() + "		" + 
-							String.format("%-10.2f",rs.getOrderedMenu().getPrice()) +
-							rs.getOrderDate().format(formatter) + " " + rs.getOrderTime().format(f2));
+					System.out.printf("Room Service    %-16s%-10.2f%s %s\n", rs.getOrderedMenu().getName(), rs.getOrderedMenu().getPrice(), rs.getOrderDate().format(formatter), rs.getOrderTime().format(f2));
 					totalPrice += rs.getOrderedMenu().getPrice();
 				}
 			}

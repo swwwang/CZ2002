@@ -2,3 +2,5 @@ Biscuit|Cookie|3.0
 Wine|1982 Chateau Lafite|3000.0
 Steak|Wagyu Beef|100.0
 Milo|Milo Dinosaur|2.0
+Soft|Coke|3.0
+Tonkatsu|Pork Cutlet|8.0

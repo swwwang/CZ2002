@@ -118,7 +118,7 @@ public class RoomServiceController {
 		for(int i=0;i<roomServices.size();i++) {
 			RoomService rs = (RoomService)roomServices.get(i);
 			if(rs.getRoom().getRoomNumber().equals(roomNo)) {
-				rs.setRemarks("PAID");
+				rs.setPaid("PAID");
 				roomServices.set(i, rs);
 			}
 		}
@@ -155,23 +155,20 @@ public class RoomServiceController {
 	 * @throws IOException
 	 */
 	public static int displayRoomsService(String roomNo) throws IOException {
-		System.out.println("\nNo.	Item            Price     Date & TimeStamp	Status		Remarks"); 
-		System.out.println("================================================================================="); 
+		System.out.println("\nNo.  Item            Price     Date & TimeStamp      Status      Remarks"); 
+		System.out.println("==================================================================================="); 
 		
 		ArrayList al = RoomServiceController.searchRoomServices(roomNo);
 		int rsNum = 0;
-		for(rsNum=0;rsNum<al.size();rsNum++) {
+		for(int i = 0; i < al.size(); i++) {
 			RoomService rs = (RoomService)al.get(rsNum);
 
 			if(rs.getPaid().equals("UNPAID"))
 			{
-				System.out.println(	(rsNum+1) + ".	"+
-						rs.getOrderedMenu().getName() + "		" + 
-						String.format("%-10.2f",rs.getOrderedMenu().getPrice()) +
-						rs.getOrderDate().format(formatter) + " " + rs.getOrderTime().format(f2) + "	" +
-						rs.getStatus() + "	" +
-						rs.getRemarks()
-						);
+				System.out.printf("%-5d%-16s%-10.2f%s %s   %-12s%-16s\n", (rsNum+1), rs.getOrderedMenu().getName(), 
+						rs.getOrderedMenu().getPrice(), rs.getOrderDate().format(formatter), rs.getOrderTime().format(f2),
+						rs.getStatus(), rs.getRemarks());
+				rsNum++;
 			}
 		}
 		

@@ -47,7 +47,7 @@ public class GuestInterface {
 	 */
 	public static int updateGuest() throws IOException{
 		Scanner sc=new Scanner(System.in);
-		
+		String dummy="";
 		int result=0;
 		ArrayList guests=GuestController.readGuests();
 		
@@ -59,7 +59,7 @@ public class GuestInterface {
 
 		for(int i=0;i<guests.size();i++) {
 			Guest g = (Guest)guests.get(i);
-			String choice="";
+			int choice=0;
 			if(g.getName().equals(guestName)&&g.getIdNo().equals(guestID)) {
 				do {
 					System.out.println("What do you want to update?");
@@ -72,40 +72,43 @@ public class GuestInterface {
 					System.out.println("7. Contact");
 					System.out.println("8. Exit");
 					System.out.println("Please enter the number of the option that you want to select:");
-					choice=sc.nextLine();
+					choice=sc.nextInt();
+					dummy=sc.nextLine();
 					switch (choice) {
-					case "1":
+					case 1:
 						System.out.println("Enter new Name: ");
 						g.setName(sc.nextLine());
 						break;
-					case "2":
+					case 2:
 						g.setCreditCard(createCreditCard(guestID));
 						GuestController.updateCreditCard(g.getCreditCard());
 						break;
-					case "3":
+					case 3:
 						System.out.println("Enter new Address: ");
 						g.setAddress(sc.nextLine());
 						break;
-					case "4":
+					case 4:
 						System.out.println("Enter new Country: ");
 						g.setCountry(sc.nextLine());
 						break;
-					case "5":
+					case 5:
 						System.out.println("Enter Gender (M/F): ");
 						g.setGender(sc.nextLine());
 						break;
-					case "6":
+					case 6:
 						System.out.println("Enter new Nationality");
 						g.setNationality(sc.nextLine());
 						break;
-					case "7":
+					case 7:
 						System.out.println("Enter new Contact No :");
 						g.setContact(sc.nextLine());
+						break;
+					case 8:
 						break;
 					default:
 						System.out.println("Invalid Choice!");
 					}
-				}while(!choice.equalsIgnoreCase("8"));
+				}while(choice != 8);
 				guests.set(i, g);
 				result=1;
 				break;

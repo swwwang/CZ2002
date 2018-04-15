@@ -239,14 +239,14 @@ public class ReservationController {
 
 		for(int i=0;i<reservations.size();i++) {
 			Reservation r = (Reservation)reservations.get(i);
-			if(r.getGuest().getIdNo().equals(guestID)) {
-				if(r.getStatus().equals("CONFIRMED")||r.getStatus().equals("INWAITLIST")) {
-					reservations.remove(i);
-					ReservationRoom rr = (ReservationRoom)reservationRoom.get(i);
+			if(r.getGuest().getIdNo().equals(guestID)) { //finds the Reservation by the same guestID
+				if(r.getStatus().equals("CONFIRMED")||r.getStatus().equals("INWAITLIST")) { //Reservation that is still in the system
+					reservations.remove(i); //removes the reservation from the file
+					ReservationRoom rr = (ReservationRoom)reservationRoom.get(i); //gets the list of rooms reserved in this reservations
 					rooms = rr.getRooms();
-					reservationRoom.remove(i);
+					reservationRoom.remove(i); //remove the room list from the file
 					for(int j=0;j<rooms.size();j++) {
-						RoomController.updateRoom(rooms.get(j).getRoomNumber(),"STATUS","VACANT");
+						RoomController.updateRoom(rooms.get(j).getRoomNumber(),"STATUS","VACANT"); //changing room status from RESERVED back to VACANT
 					}
 					result=1;
 					System.out.println();

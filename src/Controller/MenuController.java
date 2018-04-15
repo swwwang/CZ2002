@@ -88,10 +88,10 @@ public class MenuController {
 		System.out.println("-Printing Menu Item-");
 		System.out.print("Menu Name: ");
 		System.out.println(m.getName());
-		System.out.print("Menu Price: ");
-		System.out.println("$"+m.getPrice());
 		System.out.print("Description: ");
 		System.out.println(m.getDescription());
+		System.out.print("Menu Price: ");
+		System.out.printf("$%.2f\n", m.getPrice());
 		System.out.println();
 	}
 	

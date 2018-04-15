@@ -232,48 +232,8 @@ public class RoomController {
 		for (int i = 0; i < rooms.size(); i++) {
 			r = (Room) rooms.get(i);
 			Object o = r.getStatus();
-			switch (type.toUpperCase()) {
-			case "SINGLE":
-				if ( r.getType().getType().equals("SINGLE")) {
-					avail_room.add(r.getRoomNumber());
-				}
-				break;
-			case "DOUBLE":
-				if ( r.getType().getType().equals("DOUBLE")) {
-					avail_room.add(r.getRoomNumber());
-				}
-				break;
-			case "DELUXE":
-				if ( r.getType().getType().equals("DELUXE")) {
-					avail_room.add(r.getRoomNumber());
-				}
-				break;
-			case "VIPSUITE":
-				if ( r.getType().getType().equals("VIPSUITE")) {
-					avail_room.add(r.getRoomNumber());
-				}
-				break;
-			case "VACANT":
-				if (o.toString().equals("VACANT")) {
-					avail_room.add(r.getRoomNumber());
-				}
-				break;
-			case "OCCUPIED":
-				if (o.toString().equals("OCCUPIED")) {
-					avail_room.add(r.getRoomNumber());
-				}
-				break;
-			case "RESERVED":
-				if (o.toString().equals("RESERVED")) {
-					avail_room.add(r.getRoomNumber());
-				}
-				break;
-			case "UNDERMAINTENANCE":
-				if (o.toString().equals("UNDERMAINTENANCE")) {
-					avail_room.add(r.getRoomNumber());
-				}
-				break;
-			}
+			if (r.getType().getType().equals(type.toUpperCase())||o.toString().equals(type.toUpperCase()))
+				avail_room.add(r.getRoomNumber());
 		}
 
 		return avail_room;
@@ -331,13 +291,13 @@ public class RoomController {
 			System.out.println("\n\nReserved:");
 			System.out.print("	Rooms:");
 			for (int i = 0; i < reserved.size(); i++) {
-				System.out.print(" | " + occupied.get(i));
+				System.out.print(" | " + reserved.get(i));
 			}
 			
 			System.out.println("\n\n UnderMaintenance:");
 			System.out.print("	Rooms:");
 			for (int i = 0; i < undermaintenance.size(); i++) {
-				System.out.print(" | " + occupied.get(i));
+				System.out.print(" | " + undermaintenance.get(i));
 			}
 			
 			System.out.println();

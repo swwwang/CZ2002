@@ -37,7 +37,7 @@ public class RoomServiceInterface {
 		String roomNo;
 		Room room;
 		while(true) {
-			System.out.println("Please enter Room Number(XX-XX): ");
+			System.out.println("Please enter Room Number: ");
 			roomNo=sc.next();
 			if(!RoomController.checkRoomExist(roomNo)) {
 				System.out.println("Enter a valid room!");
@@ -203,7 +203,7 @@ public class RoomServiceInterface {
 
 		for(int i=0;i<roomServices.size();i++) {
 			RoomService rs = (RoomService)roomServices.get(i);
-			if(rs.getPaid().equals("UNPAID")){
+			if(rs.getPaid().equals("UNPAID") && rs.getRoom().getRoomNumber().equals(roomNo)){
 				rsRoom--;
 			}
 			
@@ -249,13 +249,21 @@ public class RoomServiceInterface {
 		String cont;
 		System.out.println("Menu item lists:");
 		ArrayList menu1 = MenuController.readMenu();
+		int itemChoice = 0;
 		for (int i = 0; i < menu1.size(); i++) //displaying all the menu items for user to choose
 		{ 
 			MenuItem item = (MenuItem) menu1.get(i);
 			System.out.println((i + 1) + ".) " + item.getName());
 		}
-		System.out.println("Please enter the number of menu item that you want to update:");
-		int itemChoice = sc.nextInt(); //getting the item to update
+		while(true)
+		{
+			System.out.println("Please enter the number of menu item that you want to update:");
+			itemChoice = sc.nextInt(); //getting the item to update
+			if (itemChoice <=0 || itemChoice > menu1.size())
+				System.out.println("Please enter a valid choice!");
+			else
+				break;
+		}
 		do {
 			MenuItem item = (MenuItem) menu1.get(itemChoice - 1);
 			System.out.println("This is your selected menu item.");
@@ -288,7 +296,7 @@ public class RoomServiceInterface {
 				default:
 					System.out.println("Invalid Choice! Please Try again!");
 				}
-			} while (fieldChoice != 1 && fieldChoice != 2 && fieldChoice != 3);
+			} while (fieldChoice <= 0 || fieldChoice > 3);
 			System.out.println("You have successfully updated the menu item!!!");
 			MenuController.printMenuItem(item);
 			System.out.println("Do you want to update other category?(Y/N)");
@@ -311,8 +319,15 @@ public class RoomServiceInterface {
 				MenuItem item = (MenuItem) menu1.get(i);
 				System.out.println((i + 1) + ".) " + item.getName());
 			}
-			System.out.println("Please enter the number of the menu item that you want to delete:");
-			delete = sc.nextInt();
+			while(true)
+			{
+				System.out.println("Please enter the number of the menu item that you want to delete:");
+				delete = sc.nextInt();
+				if (delete <=0 || delete > menu1.size())
+					System.out.println("Please enter a valid choice!");
+				else
+					break;
+			}
 			MenuController.removeItem(delete - 1);
 			System.out.println("Item Deleted!");
 			System.out.println("Do you want to delete another menu item?(Y/N)");
