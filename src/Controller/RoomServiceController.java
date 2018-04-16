@@ -118,7 +118,12 @@ public class RoomServiceController {
 		for(int i=0;i<roomServices.size();i++) {
 			RoomService rs = (RoomService)roomServices.get(i);
 			if(rs.getRoom().getRoomNumber().equals(roomNo)) {
-				rs.setPaid("PAID");
+				if(rs.getStatus() == "DELIVERED") {
+					rs.setPaid("PAID");
+				}
+				else {
+					rs.setPaid("EXPIRED");
+				}
 				roomServices.set(i, rs);
 			}
 		}

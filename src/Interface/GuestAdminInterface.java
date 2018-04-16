@@ -46,12 +46,13 @@ public class GuestAdminInterface {
 			System.out.println("2. CheckIn: Reservation");
 			System.out.println("3. Make a reservation");
 			System.out.println("4. Order a room service");
-			System.out.println("5. CheckOut");
-			System.out.println("6. Search Guest");
-			System.out.println("7. Update Guest Information");
-			System.out.println("8. Remove a reservation");
-			System.out.println("9. Print all reservation");
-			System.out.println("10. Exit");
+			System.out.println("5. Change a room service status");
+			System.out.println("6. CheckOut");
+			System.out.println("7. Search Guest");
+			System.out.println("8. Update Guest Information");
+			System.out.println("9. Remove a reservation");
+			System.out.println("10. Print all reservation");
+			System.out.println("11. Exit");
 			System.out.println("Please enter the number of the option that you want to select:");
 			guest_choice = sc.nextInt();
 			String dummy="";
@@ -70,28 +71,31 @@ public class GuestAdminInterface {
 				RoomServiceInterface.newRoomService();
 				break;
 			case 5:
-				PaymentInterface.printBill();
+				RoomServiceInterface.changeRoomServiceStatus();
 				break;
 			case 6:
-				GuestInterface.searchGuest();
+				PaymentInterface.printBill();
 				break;
 			case 7:
-				GuestInterface.updateGuest();
+				GuestInterface.searchGuest();
 				break;
 			case 8:
-				removeReservation();
+				GuestInterface.updateGuest();
 				break;
 			case 9:
+				removeReservation();
+				break;
+			case 10:
 				ReservationController.printAllReservations();
 				break;
 
-			case 10:
+			case 11:
 				System.out.println("Back to the Main Menu");
 				break;
 			default:
 				System.out.println("Invalid Choice! Please enter again!");
 			}
-		} while (guest_choice != 10);
+		} while (guest_choice != 11);
 	}
 	/**
 	 * Check in method for non walk-in

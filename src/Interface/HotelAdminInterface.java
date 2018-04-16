@@ -34,9 +34,8 @@ public class HotelAdminInterface {
 			System.out.println("3. Create a new room service menu item");
 			System.out.println("4. Update a room service menu item");
 			System.out.println("5. Delete a room service menu item");
-			System.out.println("6. Change a room service status");
-			System.out.println("7. Print Room Status Statistic");
-			System.out.println("8. Exit");
+			System.out.println("6. Print Room Status Statistic");
+			System.out.println("7. Exit");
 			System.out.println("Please enter the number of the option that you want to select:");
 			system_choice = sc.nextInt();
 
@@ -98,27 +97,18 @@ public class HotelAdminInterface {
 				RoomServiceInterface.deleteMenu();
 				break;
 			case 6:
-				String change_cont = "";
-				System.out.println("You have chosen 6. Change a room service status. Please proceed>>>>>");
-				do {
-					RoomServiceInterface.changeRoomServiceStatus();
-					System.out.println("Do you want to change other room service status?(Y/N)");
-					change_cont = sc.next();
-				} while (!change_cont.toUpperCase().equals("N"));
-				break;
-			case 7:
-				System.out.println("You have chosen 7. Print Room Status Statistic. Please proceed>>>>>");
+				System.out.println("You have chosen 6. Print Room Status Statistic. Please proceed>>>>>");
 				RoomController.printAvailableRoom(true);
 				RoomController.printAvailableRoom(false);
 				System.out.println("");
 				break;
-			case 8:
+			case 7:
 				System.out.println("Back to the Main Menu");
 				break;
 			default:
 				System.out.println("Invalid Choice! Please enter again!");
 			}
-		} while (system_choice != 8);
+		} while (system_choice != 7);
 	}
 	/**
 	 * Creates a new Room.
