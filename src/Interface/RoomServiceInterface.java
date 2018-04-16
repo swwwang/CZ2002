@@ -16,6 +16,13 @@ import Entity.Reservation;
 import Entity.Room;
 import Entity.RoomService;
 
+/**
+Represents the interface for Room Services
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+ */
+
 public class RoomServiceInterface {
 	/**
 	 * The formatter for date

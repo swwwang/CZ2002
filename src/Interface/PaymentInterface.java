@@ -21,7 +21,7 @@ import Entity.Room;
 import Entity.RoomService;
 
 /**
-Represents the controller for using the RoomService class
+Represents the interface for Payment
 @author TeamFour
 @version 1.0
 @since 2018-04-01
