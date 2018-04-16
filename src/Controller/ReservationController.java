@@ -368,7 +368,7 @@ public class ReservationController {
 				LocalDate checkInDate=r1.getCheckIn();
 				LocalTime scheduledTime=r1.getScheduledTime();
 
-				if(checkInDate.isEqual(nowDate)&&scheduledTime.plusHours(1).isBefore(nowTime)) {
+				if(checkInDate.isEqual(nowDate)&&scheduledTime.plusHours(1).isBefore(nowTime)||checkInDate.isBefore(nowDate)) {
 					r1.setStatus("EXPIRED");
 					for(int c=0;c<r1.getReservationRoom().getRooms().size();c++) {
 						RoomController.updateRoom(r1.getReservationRoom().getRooms().get(c).getRoomNumber(),"STATUS","VACANT");

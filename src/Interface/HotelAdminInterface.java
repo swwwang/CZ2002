@@ -238,7 +238,7 @@ public class HotelAdminInterface {
 			default:
 				System.out.println("Please select the valid choice again!");
 			}
-		} while (smoke_sel != 1 || smoke_sel != 2);
+		} while (smoke_sel != 1 && smoke_sel != 2);
 
 		do {
 			System.out.println("Room Satus:");
@@ -265,7 +265,7 @@ public class HotelAdminInterface {
 				System.out.println("Please select the valid Room Status again!");
 			}
 		} while (status_sel <= 0 || status_sel >= 5);
-
+		System.out.println("You have successfully created the room!!!!");
 		return r;
 	}
 	/**

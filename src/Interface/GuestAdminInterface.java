@@ -148,14 +148,16 @@ public class GuestAdminInterface {
 		//String roomType="";
 		String roomNo= "0";
 
-		//Print out available rooms
-		RoomController.printAvailableRoom(Boolean.valueOf(true));
-
+		
 		//Get number of rooms to be reserved
 		System.out.println();
 		System.out.println("Please enter number of Rooms: ");
 		int noOfRooms=sc.nextInt();
 		String dummy=sc.nextLine();
+		
+		//Print out available rooms
+		RoomController.printAvailableRoom(Boolean.valueOf(true));
+
 
 		//get the selected room and add it into arraylist
 		while(noOfRooms>0){
@@ -343,13 +345,15 @@ public class GuestAdminInterface {
 			for(int i=0;i<rooms.size();i++) {
 				RoomController.updateRoom(rooms.get(i).getRoomNumber(),"STATUS","RESERVED");
 			}
+			System.out.println("Reservation created successfully!");
 		}
 		else {
 			for(int i=0;i<rooms.size();i++) {
 				RoomController.updateRoom(rooms.get(i).getRoomNumber(),"STATUS","OCCUPIED");
 			}
+			System.out.println("Checked in successfully!");
 		}
-		System.out.println("Checked in successfully!");
+		
 		System.out.println();
 
 		//print receipt
