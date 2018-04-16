@@ -158,8 +158,9 @@ public class ReservationController {
 		ArrayList rr=readReservationRoom();
 
 		for(int i=0;i<rr.size();i++) {
-			r = (ReservationRoom)rr.get(i);
-			if(r.getReservationCode()==reservationCode) {
+			ReservationRoom r1 = (ReservationRoom)rr.get(i);
+			if(r1.getReservationCode()==reservationCode) {
+				r=r1;
 				break;
 			}
 		}
@@ -201,13 +202,13 @@ public class ReservationController {
 	 * @return        If it is successfully updated, the method will return 1, else it will return 0
 	 * @throws IOException
 	 */
-	public static int updateReservation(String guestID,String status,LocalDate date) throws IOException{
+	public static int updateReservation(String guestID,String status,LocalDate date,int reservationCode) throws IOException{
 		int result=0;
 		ArrayList reservations=readReservations();
 
 		for(int i=0;i<reservations.size();i++) {
 			Reservation r = (Reservation)reservations.get(i);
-			if(r.getGuest().getIdNo().equals(guestID)&&!r.getStatus().equals("CHECKEDOUT")) {
+			if(r.getReservationCode()==reservationCode&&r.getGuest().getIdNo().equals(guestID)&&!r.getStatus().equals("CHECKEDOUT")) {
 				r.setStatus(status);
 				if(status.equals("CHECKEDIN")) {
 					r.setCheckIn(LocalDate.now());
@@ -340,7 +341,7 @@ public class ReservationController {
 			}
 		}
 
-		updateReservation(guestID,"CHECKEDOUT",checkOutDate);
+		updateReservation(guestID,"CHECKEDOUT",checkOutDate,r1.getReservationCode());
 		for(int c=0;c<r1.getReservationRoom().getRooms().size();c++) {
 			RoomController.updateRoom(r1.getReservationRoom().getRooms().get(c).getRoomNumber(),"STATUS","VACANT");
 		}

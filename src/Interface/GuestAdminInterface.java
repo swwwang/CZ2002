@@ -117,7 +117,7 @@ public class GuestAdminInterface {
 			}
 			else {
 				if(r.getStatus().equals("CONFIRMED")||r.getStatus().equals("INWAITLIST")) {
-					ReservationController.updateReservation(guestID,"CHECKEDIN",null);
+					ReservationController.updateReservation(guestID,"CHECKEDIN",null,r.getReservationCode());
 					for(int i=0;i<r.getReservationRoom().getRooms().size();i++) {
 						RoomController.updateRoom(r.getReservationRoom().getRooms().get(i).getRoomNumber(),"STATUS","OCCUPIED");
 					}
@@ -154,6 +154,7 @@ public class GuestAdminInterface {
 		System.out.println("Please enter number of Rooms: ");
 		int noOfRooms=sc.nextInt();
 		String dummy=sc.nextLine();
+		System.out.println();
 		
 		//Print out available rooms
 		RoomController.printAvailableRoom(Boolean.valueOf(true));

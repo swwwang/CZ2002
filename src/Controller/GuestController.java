@@ -58,7 +58,9 @@ public class GuestController {
 			String  contact = star.nextToken().trim();
 
 			// create Guest object from file data
-			Guest g = new Guest(name, getCreditCardDetails(name,idNo),address,country,gender,identity,idNo,nationality,contact);
+			CreditCard c=new CreditCard();
+			c=getCreditCardDetails(name,idNo);
+			Guest g = new Guest(name, c,address,country,gender,identity,idNo,nationality,contact);
 
 			// add to Guests list
 			alr.add(g) ;
@@ -109,8 +111,9 @@ public class GuestController {
 		ArrayList cards=readCreditCards();
 
 		for(int i=0;i<cards.size();i++) {
-			c = (CreditCard)cards.get(i);
-			if(c.getCardName().equals(cardName)&&c.getGuestID().equals(guestID)) {
+			CreditCard c1 = (CreditCard)cards.get(i);
+			if(c1.getCardName().equals(cardName)&&c1.getGuestID().equals(guestID)) {
+				c=c1;
 				break;
 			}
 		}

@@ -67,6 +67,7 @@ public class PaymentInterface {
 				}
 				else if(res.getStatus().equals("CHECKEDIN")) {
 					System.out.println("Reservation found!");
+					System.out.println();
 					ReservationController.printReservationReceipt(res);
 					break;
 				}

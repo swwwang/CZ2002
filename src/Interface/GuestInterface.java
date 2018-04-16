@@ -61,71 +61,77 @@ public class GuestInterface {
 			Guest g = (Guest)guests.get(i);
 			int choice=0;
 			if(g.getName().equals(guestName)&&g.getIdNo().equals(guestID)) {
+				System.out.println();
+				System.out.println("Guest found!");
+				System.out.println();
+				GuestController.printGuest(g);
+				String update_cnt="Y";
 				do {
-					System.out.println("What do you want to update?");
-					System.out.println("1. Name- "+ g.getName());
-					System.out.println("2. Credit Card- "+ g.getCreditCard().getCardNumber());
-					System.out.println("3. Address- "+ g.getAddress());
-					System.out.println("4. Country- "+ g.getCountry());
-					System.out.println("5. Gender- "+ g.getGender());
-					System.out.println("6. Nationality- "+ g.getNationality());
-					System.out.println("7. Contact- "+ g.getContact());
-					System.out.println("8. Exit");
-					System.out.println("Please enter the number of the option that you want to select:");
-					choice=sc.nextInt();
-					dummy=sc.nextLine();
-					switch (choice) {
-					case 1:
-						System.out.println("Enter new Name: ");
-						g.setName(sc.nextLine());
-						break;
-					case 2:
-						g.setCreditCard(createCreditCard(guestID));
-						GuestController.updateCreditCard(g.getCreditCard());
-						break;
-					case 3:
-						System.out.println("Enter new Address: ");
-						g.setAddress(sc.nextLine());
-						break;
-					case 4:
-						System.out.println("Enter new Country: ");
-						g.setCountry(sc.nextLine());
-						break;
-					case 5:
-						System.out.println("Enter Gender (M/F): ");
-						g.setGender(sc.nextLine());
-						break;
-					case 6:
-						System.out.println("Enter new Nationality");
-						g.setNationality(sc.nextLine());
-						break;
-					case 7:
-						System.out.println("Enter new Contact No :");
-						g.setContact(sc.nextLine());
-						break;
-					case 8:
-						break;
-					default:
-						System.out.println("Invalid Choice!");
-					}
-				}while(choice != 8);
+					do {
+						System.out.println("What do you want to update?");
+						System.out.println("1. Name");
+						System.out.println("2. Credit Card");
+						System.out.println("3. Address");
+						System.out.println("4. Country");
+						System.out.println("5. Gender");
+						System.out.println("6. Nationality");
+						System.out.println("7. Contact");
+						System.out.println("8. Exit");
+						System.out.println("Please enter the number of the option that you want to select:");
+						choice=sc.nextInt();
+						dummy=sc.nextLine();
+						switch (choice) {
+						case 1:
+							System.out.println("Enter new Name: ");
+							g.setName(sc.nextLine());
+							break;
+						case 2:
+							g.setCreditCard(createCreditCard(guestID));
+							GuestController.updateCreditCard(g.getCreditCard());
+							break;
+						case 3:
+							System.out.println("Enter new Address: ");
+							g.setAddress(sc.nextLine());
+							break;
+						case 4:
+							System.out.println("Enter new Country: ");
+							g.setCountry(sc.nextLine());
+							break;
+						case 5:
+							System.out.println("Enter Gender (M/F): ");
+							g.setGender(sc.nextLine());
+							break;
+						case 6:
+							System.out.println("Enter new Nationality");
+							g.setNationality(sc.nextLine());
+							break;
+						case 7:
+							System.out.println("Enter new Contact No :");
+							g.setContact(sc.nextLine());
+							break;
+						case 8:
+							break;
+						default:
+							System.out.println("Invalid Choice!");
+						}
+					}while(choice != 1&&choice != 2&&choice != 3&&choice != 4&&choice != 5&&choice != 6&&choice != 7&&choice != 8);
+					System.out.println();
+					System.out.println("You have successfully updated the guest information!!!!");
+					System.out.println();
+					System.out.println("Do you want to update Other Catergory?(Y/N):");
+					update_cnt = sc.next();
+				}while(!update_cnt.equalsIgnoreCase("N"));
+				System.out.println();
+				System.out.println("-Printing Updated Information-");
+				System.out.println();
+				GuestController.printGuest(g);
 				guests.set(i, g);
 				result=1;
-				
-				System.out.println("--------------------------------------");
-				System.out.println("Updated Guest Information");
-				System.out.println("Name- "+ g.getName());
-				System.out.println("Credit Card- "+ g.getCreditCard().getCardNumber());
-				System.out.println("Address- "+ g.getAddress());
-				System.out.println("Country- "+ g.getCountry());
-				System.out.println("Gender- "+ g.getGender());
-				System.out.println("Nationality- "+ g.getNationality());
-				System.out.println("Contact- "+ g.getContact());
-				System.out.println("--------------------------------------");
 				break;
 			}
 		}
 		GuestController.saveGuests(guests);
+
 		return result;
 	}
 	/**
@@ -204,6 +210,7 @@ public class GuestInterface {
 		GuestController.saveGuests(guests);
 		
 		System.out.println("Guest Created!");
+		System.out.println();
 		GuestController.printGuest(g);
 
 		return g;

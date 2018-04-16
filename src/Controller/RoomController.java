@@ -249,6 +249,7 @@ public class RoomController {
 		// print by room type occupancy rate
 		if (ByRoomType) {
 			System.out.println("List of vacant room:");
+			System.out.println();
 			List<String> roomType = new ArrayList();
 			roomType.addAll(Arrays.asList("SINGLE", "DOUBLE", "DELUXE", "VIPSUITE"));
 			List vacant = checkRoom("VACANT");
@@ -266,6 +267,7 @@ public class RoomController {
 				}
 				System.out.println(roomType.get(i) + ": Number" + ": " + num + " out of " + total);
 				System.out.println("Rooms: " + print);
+				System.out.println();
 			}
 		}
 		// print by room status
