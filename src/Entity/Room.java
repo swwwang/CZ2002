@@ -149,8 +149,8 @@ public class Room {
      * Get the bed type of this room
      * @return bed type of this room
      */
-	public BedType getBedType() {
-		return bedType;
+	public String getBedType() {
+		return bedType.toString();
 	}
 	
     /**
@@ -181,8 +181,8 @@ public class Room {
      * Get the view of the place this room is facing
      * @return view of the place this room is facing
      */
-	public Facing getFacing() {
-		return facing;
+	public String getFacing() {
+		return facing.toString();
 	}
 	
     /**
@@ -197,8 +197,8 @@ public class Room {
      * Get the smoking option of this room
      * @return smoking option of this room
      */
-	public Smoke getSmoke() {
-		return smoke;
+	public String getSmoke() {
+		return smoke.toString();
 	}
 	
     /**

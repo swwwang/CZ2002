@@ -277,14 +277,18 @@ public class HotelAdminInterface {
 		Scanner sc = new Scanner(System.in);
 		int cat_sel, bed_sel, wifi_sel, facing_sel, smoke_sel, status_sel;
 		String other_cat = "Y";
+		Room r;
 		do {
 			do {
-				System.out.println("Categories");
-				System.out.println("1. Room Status");
-				System.out.println("2. Bed Type");
-				System.out.println("3. Wifi Allowance");
-				System.out.println("4. Facing");
-				System.out.println("5. Smoking Allowance");
+				System.out.println();
+				r = RoomController.searchRoom(room_number);
+				System.out.println("Information about Room: "+r.getRoomNumber());
+				System.out.println("1. Room Status- "+r.getStatus());
+				System.out.println("2. Bed Type- "+r.getBedType());
+				System.out.println("3. Wifi Allowance- "+r.isWifiEnabled());
+				System.out.println("4. Facing- "+r.getFacing());
+				System.out.println("5. Smoking Allowance- "+r.getSmoke());
+				
 				System.out.println("Please enter the number of your category that you want to update:");
 				cat_sel = sc.nextInt();
 				switch (cat_sel) {
@@ -407,6 +411,15 @@ public class HotelAdminInterface {
 			System.out.println("Do you want to update Other Catergory?(Y/N):");
 			other_cat = sc.next();
 		} while (!other_cat.toUpperCase().equals("N"));
+		
+		System.out.println("--------------------------------------------------");
+		System.out.println("Updated Information about Room: "+r.getRoomNumber());
+		System.out.println("Room Status- "+r.getStatus());
+		System.out.println("Bed Type- "+r.getBedType());
+		System.out.println("Wifi Allowance- "+r.isWifiEnabled());
+		System.out.println("Facing- "+r.getFacing());
+		System.out.println("Smoking Allowance- "+r.getSmoke());
+		System.out.println("--------------------------------------------------");
 	}
-
+	
 }

@@ -63,13 +63,13 @@ public class GuestInterface {
 			if(g.getName().equals(guestName)&&g.getIdNo().equals(guestID)) {
 				do {
 					System.out.println("What do you want to update?");
-					System.out.println("1. Name");
-					System.out.println("2. Credit Card");
-					System.out.println("3. Address");
-					System.out.println("4. Country");
-					System.out.println("5. Gender");
-					System.out.println("6. Nationality");
-					System.out.println("7. Contact");
+					System.out.println("1. Name- "+ g.getName());
+					System.out.println("2. Credit Card- "+ g.getCreditCard().getCardNumber());
+					System.out.println("3. Address- "+ g.getAddress());
+					System.out.println("4. Country- "+ g.getCountry());
+					System.out.println("5. Gender- "+ g.getGender());
+					System.out.println("6. Nationality- "+ g.getNationality());
+					System.out.println("7. Contact- "+ g.getContact());
 					System.out.println("8. Exit");
 					System.out.println("Please enter the number of the option that you want to select:");
 					choice=sc.nextInt();
@@ -111,11 +111,21 @@ public class GuestInterface {
 				}while(choice != 8);
 				guests.set(i, g);
 				result=1;
+				
+				System.out.println("--------------------------------------");
+				System.out.println("Updated Guest Information");
+				System.out.println("Name- "+ g.getName());
+				System.out.println("Credit Card- "+ g.getCreditCard().getCardNumber());
+				System.out.println("Address- "+ g.getAddress());
+				System.out.println("Country- "+ g.getCountry());
+				System.out.println("Gender- "+ g.getGender());
+				System.out.println("Nationality- "+ g.getNationality());
+				System.out.println("Contact- "+ g.getContact());
+				System.out.println("--------------------------------------");
 				break;
 			}
 		}
 		GuestController.saveGuests(guests);
-
 		return result;
 	}
 	/**
