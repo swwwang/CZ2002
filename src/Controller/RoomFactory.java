@@ -33,7 +33,7 @@ public class RoomFactory {
 	 * Gets specific room type information
 	 * @param roomType type of the room
 	 * @return	type of the room
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static RoomType getRoomType(String roomType) throws IOException{
 		ArrayList rooms;
@@ -65,7 +65,7 @@ public class RoomFactory {
 	/**
 	 * Gets rates of the rooms based on their type
 	 * @return list of type of the rooms with rate included
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList readRoomRates() throws IOException {
 		// read String from text file
@@ -111,8 +111,8 @@ public class RoomFactory {
 	/**
 	 * Add a new room type and new room rate into the roomType.txt
 	 * @param al list of types of new rooms with included rates
-	 * @throws IOException
-	 */
+	 * @throws IOException throw input/output exception
+	 */ 
 		public static void saveRoomRates(List al) throws IOException {
 			List alw = new ArrayList() ;// to store Guest data
 
@@ -136,7 +136,7 @@ public class RoomFactory {
 		 * @param roomType    Type of the room
 		 * @param rate 	      new rate of the room
 		 * @param weekendRate new weekend rate of the room
-		 * @throws IOException
+		 * @throws IOException throw input/output exception
 		 */
 		public static void updateRoomRate(String roomType,double rate,double weekendRate) throws IOException{
 			ArrayList rooms=readRoomRates();

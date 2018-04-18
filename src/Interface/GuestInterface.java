@@ -18,7 +18,7 @@ public class GuestInterface {
 
 	/**
 	 * Search for guest and print out the details
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void searchGuest() throws IOException {
 		Scanner sc=new Scanner(System.in);
@@ -43,7 +43,7 @@ public class GuestInterface {
 	/**
 	 * update information of guest based on the name and id
 	 * @return 		  return result=1 if update is successful, or else return result=0
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static int updateGuest() throws IOException{
 		Scanner sc=new Scanner(System.in);
@@ -137,7 +137,7 @@ public class GuestInterface {
 	/**
 	 * Create a guest if not found in the file
 	 * @return Guest
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static Guest createGuest() throws IOException {
 		Scanner sc=new Scanner(System.in);
@@ -219,7 +219,7 @@ public class GuestInterface {
 	 * create a new credit card 
 	 * @param guestID ID of the guest 
 	 * @return Credit Card
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static CreditCard createCreditCard(String guestID) throws IOException {
 		Scanner sc=new Scanner(System.in);

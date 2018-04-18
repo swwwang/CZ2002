@@ -36,7 +36,7 @@ public class GuestController {
 	/**
 	 * Read all the guests from guest lists
 	 * @return the entire guest lists
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList readGuests() throws IOException {
 		// read String from text file
@@ -71,7 +71,7 @@ public class GuestController {
 	/**
 	 * read all the credit cards from credit card lists
 	 * @return all credit card details
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList readCreditCards() throws IOException {
 		// read String from text file
@@ -103,7 +103,7 @@ public class GuestController {
 	 * @param cardName name on the card
 	 * @param guestID  id of the guest 
 	 * @return a credit card
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static CreditCard getCreditCardDetails(String cardName,String guestID) throws IOException {
 		// TODO Auto-generated method stub
@@ -122,7 +122,7 @@ public class GuestController {
 	/**
 	 * update the information on the credit card 
 	 * @param c credit card
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void updateCreditCard(CreditCard c) throws IOException {
 		CreditCard c1=new CreditCard();
@@ -142,7 +142,7 @@ public class GuestController {
 	/**
 	 * Save all the credit cards in the file
 	 * @param al list of credit cards
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void saveCreditCards(List al) throws IOException {
 		List alw = new ArrayList() ;// to store data
@@ -181,7 +181,7 @@ public class GuestController {
 	/**
 	 * Save all the guests in the file
 	 * @param al list of guest lists
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void saveGuests(List al) throws IOException {
 		List alw = new ArrayList() ;// to store Guest data
@@ -215,7 +215,7 @@ public class GuestController {
 	 * @param name name of the guest
 	 * @param id   id of the guest
 	 * @return 	   Guest
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static Guest searchGuest(String name,String id) throws IOException{
 		Guest g = new Guest();
@@ -234,7 +234,7 @@ public class GuestController {
 	 * Search for guest using guest id
 	 * @param id id of the guest
 	 * @return   Guest
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static Guest searchGuest(String id) throws IOException{
 		Guest g = new Guest();

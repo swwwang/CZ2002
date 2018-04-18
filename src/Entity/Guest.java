@@ -202,7 +202,7 @@ public class Guest {
 	
     /**
      * Change the identity number of this guest
-     * @param IdNo This guest's new identity number 
+     * @param idNo This guest's new identity number 
      */
 	public void setIdNo(String idNo) {
 		this.idNo = idNo;
@@ -218,7 +218,7 @@ public class Guest {
 	
     /**
      * Change the nationality of this guest
-     * @param This guest's new nationality
+     * @param nationality This guest's new nationality
      */
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
@@ -234,7 +234,7 @@ public class Guest {
 	
     /**
      * Change the contact number of this guest
-     * @param This guest's new contact number
+     * @param contact This guest's new contact number
      */
 	public void setContact(String contact) {
 		this.contact = contact;

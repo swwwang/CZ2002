@@ -43,7 +43,7 @@ public class ReservationController {
 	/**
 	 * Get all the reservations from reservation.txt and return a list of reservations
 	 * @return List of reservations
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList readReservations() throws IOException {
 		// read String from text file
@@ -77,7 +77,7 @@ public class ReservationController {
 	/**
 	 * Save the list of reservations in the reservation.txt
 	 * @param al List of reservations
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void saveReservations(List al) throws IOException {
 		List alw = new ArrayList() ;// to store Reservation data
@@ -114,8 +114,8 @@ public class ReservationController {
 	/**
 	 * Get rooms under a reservation code from the reservationRoom.txt and return lists of reserved rooms
 	 * @return Lists of reserved rooms
-	 * @throws IOException
-	 */
+	 * @throws IOException throw input/output exception
+	 */ 
 	public static ArrayList readReservationRoom() throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME1);
@@ -150,7 +150,7 @@ public class ReservationController {
 	 * Get specific ReservationRoom based on Reservation Code from reservationRoom.txt
 	 * @param reservationCode Reservation Code
 	 * @return 				  Reserved room
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ReservationRoom getReservationRoomDetails(int reservationCode) throws IOException {
 		// TODO Auto-generated method stub
@@ -171,7 +171,7 @@ public class ReservationController {
 	/**
 	 * Save ReservationRoom to the reservationRoom.txt file
 	 * @param al List of ReservationRooms
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void saveReservationRoom(List al) throws IOException {
 		List alw = new ArrayList() ;// to store ReservationRoom data
@@ -199,8 +199,9 @@ public class ReservationController {
 	 * @param guestID ID of the guest
 	 * @param status  Status of the reservation
 	 * @param date    Current Date
+	 * @param reservationCode Code of the reservation
 	 * @return        If it is successfully updated, the method will return 1, else it will return 0
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static int updateReservation(String guestID,String status,LocalDate date,int reservationCode) throws IOException{
 		int result=0;
@@ -230,7 +231,7 @@ public class ReservationController {
 	 * Remove the selected reservation from the reservation.txt file
 	 * @param guestID ID of the Guest
 	 * @return        If it is successfully updated, the method will return 1, else it will return 0
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static int removeReservation(String guestID) throws IOException{
 		int result=0;
@@ -266,7 +267,7 @@ public class ReservationController {
 	 * Search for reservation using guest ID from the reservation.txt file
 	 * @param guestID ID of the Guest
 	 * @return		  Reservation
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList<Reservation> searchReservations(String guestID) throws IOException{
 		ArrayList<Reservation> guestReservation=new ArrayList<Reservation>();
@@ -308,7 +309,7 @@ public class ReservationController {
 	}
 	/**
 	 * Print all Non Expired Reservations in the text file
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void printAllReservations() throws IOException {
 		ArrayList reservations=readReservations();
@@ -328,7 +329,7 @@ public class ReservationController {
 	 * Check out method to update status of reservation and room
 	 * @param guestID      ID of the guest
 	 * @param checkOutDate Local Date
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void checkOut(String guestID,LocalDate checkOutDate) throws IOException {
 		ArrayList<Reservation> r=searchReservations(guestID);
@@ -350,7 +351,7 @@ public class ReservationController {
 
 	/**
 	 * Check if reservation is expired and update status accordingly
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void checkExpiredReservations() throws IOException {
 		int count=0;

@@ -48,7 +48,7 @@ public class RoomServiceController {
 	/**
 	 * Get all room services from roomService.txt and return a list of room services
 	 * @return List of room services
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList readRoomServices() throws IOException {
 		ArrayList stringArray = (ArrayList)textDB.read(FILENAME);
@@ -77,7 +77,7 @@ public class RoomServiceController {
 	/**
 	 * Save the list of room services in the roomService.txt
 	 * @param al List of room services
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void saveRoomsServices(List al) throws IOException {
 		List alw = new ArrayList() ;
@@ -109,7 +109,7 @@ public class RoomServiceController {
 	 * Update the list of Room Services ordered by a room based on the room number
 	 * @param roomNo RoomNumber of the room
 	 * @return       if it is successfully updated, it will return 1 else it will return 0
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static int updateRoomService(String roomNo) throws IOException{
 		int result=0;
@@ -136,7 +136,7 @@ public class RoomServiceController {
 	 * Get the list of Room Services ordered by a room based on the room number
 	 * @param roomNo RoomNumber of the room
 	 * @return       List of Room Services
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList searchRoomServices(String roomNo) throws IOException {
 		RoomService rs = new RoomService();
@@ -157,7 +157,7 @@ public class RoomServiceController {
 	 * Display the lists of room services ordered by the a room based on the room number
 	 * @param roomNo  Room Number
 	 * @return		  Number of unpaid room services
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static int displayRoomsService(String roomNo) throws IOException {
 		System.out.println("\nNo.  Item            Price     Date & TimeStamp      Status      Remarks"); 

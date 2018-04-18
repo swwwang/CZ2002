@@ -32,7 +32,7 @@ public class MenuController {
 	/**
 	 * Reads the entire menu from the file
 	 * @return the entire room service Menu
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList readMenu() throws IOException {
 		Menu menu1 = new Menu();
@@ -43,7 +43,7 @@ public class MenuController {
 	 * Searches for the details of the menu item through the name
 	 * @param name the name of the menu item
 	 * @return the menu item object found through the name
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static MenuItem searchMenu(String name) throws IOException {
 		MenuItem m = new MenuItem();
@@ -60,10 +60,8 @@ public class MenuController {
 
 	/**
 	 * Creates a new menu item with the name, description and price given
-	 * @param name Name of the menu item created
-	 * @param description Description of the menu item created
-	 * @param price Price of the menu item created
-	 * @throws IOException
+	 * @param m MenuItem
+	 * @throws IOException throw input/output exception
 	 */
 	public static void createItem(MenuItem m) throws IOException {
 		FileWriter out = new FileWriter(FILENAME, true);
@@ -98,7 +96,7 @@ public class MenuController {
 	/**
 	 * Removes an item from the menu at the index given
 	 * @param index The index of the item to remove from the menu
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void removeItem(int index) throws IOException {
 		ArrayList list = readMenu();
@@ -109,7 +107,7 @@ public class MenuController {
 	/**
 	 * Saves the entire Menu into the file
 	 * @param list The list of menu items to be saved into the file
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void saveMenu(ArrayList list) throws IOException {
 		FileWriter out = new FileWriter(FILENAME, false);

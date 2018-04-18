@@ -35,7 +35,7 @@ public class GuestAdminInterface {
 	/**
 	 * The interface for Guest Administration System
 	 * @param args String Value
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void main(String args[]) throws IOException {
 		Scanner sc=new Scanner(System.in);
@@ -99,7 +99,7 @@ public class GuestAdminInterface {
 	}
 	/**
 	 * Check in method for non walk-in
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void checkIn() throws IOException {
 		Scanner sc=new Scanner(System.in);
@@ -141,7 +141,7 @@ public class GuestAdminInterface {
 	/**
 	 * Create new reservation for both walk-in and non walk-in
 	 * @param isWalkIn  Boolean value true for walk-in and false for non walk-in
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void createReservation(boolean isWalkIn) throws IOException {
 		Guest g=new Guest();

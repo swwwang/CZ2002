@@ -40,7 +40,7 @@ public class Menu {
 	/**
 	 * Creates a new Menu
 	 * The Menu is read from the file
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public Menu() throws IOException
 	{

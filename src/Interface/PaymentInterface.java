@@ -39,7 +39,7 @@ public class PaymentInterface {
 	/**
 	 * Calculate the bill based on the number of stays by the guest, and ordered room services and 
 	 * apply tax and promotion rate to total bill and print out the final bill
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void printBill ()  throws IOException {
 		Scanner sc = new Scanner(System.in);

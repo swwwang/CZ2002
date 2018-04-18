@@ -15,7 +15,12 @@ Represents the controller for read and write operation to textfiles
 @since 2018-04-01
 */
 public class textDB {
-	/** Write fixed content to the given file. */
+	/**
+	 * Write fixed content to the given file.
+	 * @param fileName name of the file
+	 * @param data list of data
+	 * @throws IOException throw input/output exception
+	 */
 	public static void write(String fileName,List data) throws IOException  {
 		PrintWriter out = new PrintWriter(new FileWriter(fileName));
 
@@ -29,7 +34,12 @@ public class textDB {
 		}
 	}
 
-	/** Read the contents of the given file. */
+	/**
+	 * Read the contents of the given file. 
+	 * @param fileName name of the file
+	 * @return List list of data
+ 	 * @throws IOException throw input/output exception
+	 */
 	public static List read(String fileName) throws IOException {
 		List data = new ArrayList() ;
 		Scanner scanner = new Scanner(new FileInputStream(fileName));

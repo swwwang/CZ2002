@@ -22,7 +22,7 @@ public class HotelAdminInterface {
 	/**
 	 * The interface for hotel administration system
 	 * @param args String Value
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void main(String args[]) throws IOException {
 		Scanner sc=new Scanner(System.in);
@@ -113,7 +113,7 @@ public class HotelAdminInterface {
 	/**
 	 * Creates a new Room.
 	 * @return  A new room
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static Room createRoom() throws IOException {
 		int type_sel, bed_sel, wifi_sel, facing_sel, smoke_sel, status_sel;
@@ -261,7 +261,7 @@ public class HotelAdminInterface {
 	/**
 	 * Interface for updating the properties of the selected room
 	 * @param room_number RoomNumber of the selected room
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void updateRoom(String room_number) throws IOException {
 		Scanner sc = new Scanner(System.in);

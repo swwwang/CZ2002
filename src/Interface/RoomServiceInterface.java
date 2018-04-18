@@ -35,7 +35,7 @@ public class RoomServiceInterface {
 	
 	/**
 	 * Create a new room service
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void newRoomService() throws IOException {
 		Scanner sc=new Scanner(System.in);
@@ -142,7 +142,7 @@ public class RoomServiceInterface {
 	}
 	/**
 	 * Updated the status of the ordered room services
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void changeRoomServiceStatus() throws IOException{
 		Scanner sc=new Scanner(System.in);
@@ -248,7 +248,7 @@ public class RoomServiceInterface {
 	}
 	/**
 	 * Updates the menu item
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void updateMenu() throws IOException {
 		Scanner sc = new Scanner(System.in);
@@ -314,7 +314,7 @@ public class RoomServiceInterface {
 	}
 	/**
 	 * Deleting a Menu Item
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void deleteMenu() throws IOException {
 		Scanner sc = new Scanner(System.in);

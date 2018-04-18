@@ -23,7 +23,7 @@ public class HotelApplication {
 	/**
 	 * The main user interface of the Hotel Reservation and Payment System
 	 * @param args String arguments
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void main(String args[]) throws IOException {
 		// System.out.println("");

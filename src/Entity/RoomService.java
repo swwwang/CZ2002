@@ -76,7 +76,8 @@ public class RoomService {
 	 * @param  orderTime The order time of this room service 
 	 * @param  remarks The remarks this room service 
 	 * @param  paid	 The payment status of this room service , Payment status can be "PAID" or "UNPAID"
-	 * @param  status The status of this room service 
+	 * @param  status The status of this room service
+	 * @throws IOException throw input/output exception 
 	 */
 	public RoomService(MenuItem orderedMenu,Room roomNumber,LocalDate orderDate, LocalTime orderTime, String remarks,String paid,
 			String status) throws IOException {
@@ -100,7 +101,7 @@ public class RoomService {
 	
     /**
      * Change the ordered menu of this room service
-     * @param orderedMenu This room service's new ordered menu
+     * @param orderedmenu This room service's new ordered menu
      */
 	public void setOrderedMenu(MenuItem orderedmenu) {
 		this.orderedMenu = orderedmenu;
@@ -132,7 +133,7 @@ public class RoomService {
 	
     /**
      * Change the ordered date of this room service
-     * @param orderedDate This room service's new ordered date
+     * @param orderDate This room service's new ordered date
      */
 	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
@@ -148,7 +149,7 @@ public class RoomService {
 	
     /**
      * Change the ordered time of this room service
-     * @param orderedTime This room service's new ordered time
+     * @param orderTime This room service's new ordered time
      */
 	public void setOrderTime(LocalTime orderTime) {
 		this.orderTime = orderTime;

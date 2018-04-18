@@ -95,11 +95,12 @@ public class Reservation {
 	 * @param  noAdults The number of adults in the reservation
 	 * @param  noChildren The number of children in the reservation
 	 * @param  scheduledTime The scheduled check-in time of the reservation
-	 * @param  walkInThe method used to make a reservation
+	 * @param  walkIn The method used to make a reservation
 	 *			true means guest walked in to make a reservation
 	 * 			false means guest booked online to make a reservation
 	 * @param  reservationStatus The status of the reservation reservation
 	 *			Reservation status of a guest can be confirmed, in waiting list, checked in, or expired
+	 *@throws IOException throw input/output exception
 	 */
 	public Reservation(int reservationCode, Guest guestName, ReservationRoom reservationRoom, String billing, LocalDate checkIn,
 			LocalDate checkOut, int noAdults,int noChildren, LocalTime scheduledTime,boolean walkIn,String reservationStatus ) throws IOException {

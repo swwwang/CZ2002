@@ -2,6 +2,13 @@ package RoomTypes;
 
 import Entity.RoomType;
 
+/**
+Represents the Entity Class for Deluxe Room
+@author TeamFour
+@version 1.0
+@since 2018-04-01
+ */
+
 public class DeluxeRoom  implements RoomType{
 	private double rate;
 	private double weekendRate;
@@ -32,7 +39,7 @@ public class DeluxeRoom  implements RoomType{
 
 	/**
 	 * Change the rate of Deluxe RoomType
-	 * @param Rate Deluxe roomType's new rate
+	 * @param rate Deluxe roomType's new rate
 	 */
 	public void setRate(double rate) {
 		this.rate = rate;

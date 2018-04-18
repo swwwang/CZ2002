@@ -33,7 +33,7 @@ public class RoomController {
 	/**
 	 * Gets all the rooms from room.txt files and stores them into an ArrayList and return array of rooms.
 	 * @return ArrayList of rooms
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static ArrayList readRooms() throws IOException {
 		// read String from text file
@@ -65,7 +65,7 @@ public class RoomController {
 	/**
 	 * Saves the list of rooms in the room.txt files.
 	 * @param al  list of created rooms
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void saveRooms(List al) throws IOException {
 		List alw = new ArrayList();// to store Guest data
@@ -100,7 +100,7 @@ public class RoomController {
 	 * @param catagory   Category of the room
 	 * @param value 	 The new value that will replace the existing value
 	 * @return 			 If it is successfully updated, this method will return 1 else it will return 0
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static int updateRoom(String roomNumber, String catagory, String value) throws IOException {
 		int result = 0;
@@ -151,7 +151,7 @@ public class RoomController {
 	 * Searches the specific room inside the room.txt via RoomNumber of the room
 	 * @param roomNumber RoomNumber of the room
 	 * @return 			 Searched Room
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static Room searchRoom(String roomNumber) throws IOException {
 		Room r = new Room();
@@ -172,7 +172,7 @@ public class RoomController {
 	 * Checks whether the room with given RoomNumber is available
 	 * @param roomNumber RoomNumber of the room
 	 * @return 			 This method returns true if room is available, else false
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static boolean checkRoomAvailability(String roomNumber) throws IOException {
 		boolean result = false;
@@ -198,7 +198,7 @@ public class RoomController {
 	 * Checks whether the room with given RoomNumber exists inside the room.txt
 	 * @param roomNumber RoomNumber of the room
 	 * @return 			 This method returns true if room exists, else false
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static boolean checkRoomExist(String roomNumber) throws IOException {
 		boolean result = false;
@@ -221,7 +221,7 @@ public class RoomController {
 	 * Lists all the rooms of the same condition
 	 * @param type Condition of the room
 	 * @return     Lists of rooms with same condition      
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static List checkRoom(String type) throws IOException {
 
@@ -242,7 +242,7 @@ public class RoomController {
 	/**
 	 * Prints all the vacant rooms based on the type of the room or prints all the rooms according to their room status
 	 * @param ByRoomType if true, this makes methods to print rooms by type of the room. Else, this makes methods to print rooms by room status
-	 * @throws IOException
+	 * @throws IOException throw input/output exception
 	 */
 	public static void printAvailableRoom(Boolean ByRoomType) throws IOException {
 		
