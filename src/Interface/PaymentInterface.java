@@ -39,7 +39,7 @@ public class PaymentInterface {
 	/**
 	 * Calculate the bill based on the number of stays by the guest, and ordered room services and 
 	 * apply tax and promotion rate to total bill and print out the final bill
-	 * @throws IOException throw input/output exception
+	 * @throws IOException
 	 */
 	public static void printBill ()  throws IOException {
 		Scanner sc = new Scanner(System.in);
@@ -173,14 +173,14 @@ public class PaymentInterface {
 			Room room = RoomController.searchRoom(res.getReservationRoom().getRooms().get(i).getRoomNumber());
 			System.out.println("Room		" + 
 					room.getType().getType() + " ROOM	"  +
-					String.format( "%-10.2f", room.getType().getRate() * (days - weekendNum))+
-					res.getCheckIn().format(formatter) + " " + res.getScheduledTime().format(f2));
+					String.format( "%-10.2f", room.getType().getRate() * (days - weekendNum + 1))+
+									(days - weekendNum + 1) + " (weekdays)");
 
 			if(weekendNum != 0) {
 				System.out.println("Room (Weekend)	" + 
 						room.getType().getType() + " ROOM	"  +
 						String.format( "%-10.2f", room.getType().getWeekendRate() * (weekendNum))+
-						res.getCheckIn().format(formatter) + " " + res.getScheduledTime().format(f2));
+						(weekendNum) + " (weekends)");
 			}
 
 			totalPrice += room.getType().getRate() * (days - weekendNum) + room.getType().getWeekendRate() * weekendNum;
